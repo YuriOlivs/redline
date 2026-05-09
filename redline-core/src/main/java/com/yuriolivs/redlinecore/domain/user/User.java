@@ -1,11 +1,13 @@
 package com.yuriolivs.redlinecore.domain.user;
 
+import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Getter
 @Builder
@@ -23,11 +25,21 @@ public class User {
     @Setter
     private LocalDate dateOfBirth;
 
+    @Setter
+    private List<SavedAdvertisement> savedAdvertisements;
+
     public static final String NAME_REGEX = "[\\p{L} ]{2,50}";
     public static final String EMAIL_REGEX = "((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])";
     public static final String PASSW0RD_REGEX = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){6,16}$";
 
-    public User(String name, String lastName, String email, String password, LocalDate dateOfBirth) {
+    public User(
+            String name,
+            String lastName,
+            String email,
+            String password,
+            LocalDate dateOfBirth,
+            List<SavedAdvertisement> savedAdvertisements
+    ) {
         validateName(name);
         validateLastName(lastName);
         validateEmail(email);
@@ -39,6 +51,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+        this.savedAdvertisements = savedAdvertisements;
     }
 
     private Integer calculateAge(LocalDate dateOfBirth) {
