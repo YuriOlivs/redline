@@ -13,18 +13,15 @@ import java.time.LocalDate;
 public class SavedAdvertisement {
     private Advertisement advertisement;
     private LocalDate savedDate;
-    private User user;
 
     public SavedAdvertisement(
             Advertisement advertisement,
-            LocalDate savedDate,
-            User user
+            LocalDate savedDate
     ) {
         validateSavedDate(savedDate);
 
         this.advertisement = advertisement;
         this.savedDate = savedDate;
-        this.user = user;
     }
 
     private void validateSavedDate(LocalDate savedDate) {
