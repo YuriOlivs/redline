@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -25,7 +26,6 @@ public class User {
     @Setter
     private LocalDate dateOfBirth;
 
-    @Setter
     private List<SavedAdvertisement> savedAdvertisements;
 
     public static final String NAME_REGEX = "[\\p{L} ]{2,50}";
@@ -89,13 +89,25 @@ public class User {
         return calculateAge(this.dateOfBirth);
     }
 
-    private void setEmail(String newEmail) {
+    public List<SavedAdvertisement> getSavedAdvertisements() {
+        return Collections.unmodifiableList(this.savedAdvertisements);
+    }
+
+    public void setEmail(String newEmail) {
         validateEmail(newEmail);
         this.email = newEmail;
     }
 
-    private void setPassword(String newPassword) {
+    public void setPassword(String newPassword) {
         validatePassword(newPassword);
         this.password = newPassword;
+    }
+
+    public void addSavedAdvertisement(SavedAdvertisement savedAd) {
+        this.savedAdvertisements.add(savedAd);
+    }
+
+    public void removeSavedAdvertisement(SavedAdvertisement savedAd) {
+        this.savedAdvertisements.remove(savedAd);
     }
 }

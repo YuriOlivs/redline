@@ -6,19 +6,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
-@Setter
 @Builder
 public class Advertisement {
+    @Setter
     private String url;
+    @Setter
     private LocalDate followedDate;
+    @Setter
     private String website;
+    @Setter
     private String location;
+    @Setter
     private boolean active;
+    @Setter
     private Integer mileage;
+    @Setter
     private Vehicle vehicle;
+
     private List<PriceRecord> priceHistory;
 
     public Advertisement(
@@ -75,5 +83,13 @@ public class Advertisement {
     private void validatePriceHistory(List<PriceRecord> priceHistory) {
         if (priceHistory == null || priceHistory.isEmpty())
             throw new IllegalArgumentException("Price history must contain at least one item");
+    }
+
+    public List<PriceRecord> getPriceHistory() {
+        return Collections.unmodifiableList(this.priceHistory);
+    }
+
+    public void addPriceRecord(PriceRecord record) {
+        this.priceHistory.add(record);
     }
 }
