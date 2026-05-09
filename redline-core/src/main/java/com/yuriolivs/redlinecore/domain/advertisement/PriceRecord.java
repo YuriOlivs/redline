@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Builder
 public class PriceRecord {
     private BigDecimal price;
     private LocalDate date;

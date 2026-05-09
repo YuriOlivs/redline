@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Builder
 public class SavedAdvertisement {
     private Advertisement advertisement;
     private LocalDate savedDate;

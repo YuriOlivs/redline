@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
 @Getter
-@Builder
 public class Advertisement {
     @Setter
     private String url;
@@ -89,7 +89,8 @@ public class Advertisement {
         return Collections.unmodifiableList(this.priceHistory);
     }
 
-    public void addPriceRecord(PriceRecord record) {
+    public void registerPriceChange(Double price, LocalDate changedDate) {
+        PriceRecord record = new PriceRecord(price, changedDate);
         this.priceHistory.add(record);
     }
 }

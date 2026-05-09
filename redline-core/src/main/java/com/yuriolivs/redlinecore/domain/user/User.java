@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 @Getter
-@Builder
 public class User {
     @Setter
     private String name;
