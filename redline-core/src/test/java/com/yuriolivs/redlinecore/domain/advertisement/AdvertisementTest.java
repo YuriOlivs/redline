@@ -2,6 +2,9 @@ package com.yuriolivs.redlinecore.domain.advertisement;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class AdvertisementTest {
     @Test
     void assertCreateAdvertisementSuccessfullyWithValidData() {}
