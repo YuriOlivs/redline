@@ -8,15 +8,24 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserTest {
+    public static final User VALID_USER = new User(
+            "Yuri",
+            "Oliveira",
+            "yuri@email.com",
+            "Ab1!kL9",
+            LocalDate.parse("2000-01-01"),
+            null
+    );
+
     @Test
     void shouldCreateUserSuccessfullyWithValidData() {
         assertDoesNotThrow(() ->
             new User(
-                "Yuri",
-                "Oliveira",
-                "yuri@email.com",
-                "Ab1!kL9",
-                LocalDate.parse("2000-01-01"),
+                VALID_USER.getName(),
+                VALID_USER.getLastName(),
+                VALID_USER.getEmail(),
+                VALID_USER.getPassword(),
+                VALID_USER.getDateOfBirth(),
                 null
             )
         );
