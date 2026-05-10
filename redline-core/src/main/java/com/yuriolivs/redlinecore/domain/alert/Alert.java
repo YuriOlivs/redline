@@ -24,6 +24,8 @@ public class Alert {
             LocalDateTime dateTime
     ) {
         validateDateTime(dateTime);
+        validateAdvertisement(advertisement);
+        validateUser(user);
 
         this.type = type;
         this.advertisement = advertisement;
@@ -34,6 +36,16 @@ public class Alert {
     private void validateDateTime(LocalDateTime dateTime) {
         if (dateTime.isAfter(LocalDateTime.now()))
             throw new IllegalArgumentException("Date Time must be past or present");
+    }
+
+    private void validateAdvertisement(Advertisement advertisement) {
+        if (advertisement == null)
+            throw new IllegalArgumentException("Advertisement can't be null");
+    }
+
+    private void validateUser(User user) {
+        if (user == null)
+            throw new IllegalArgumentException("User can't be null");
     }
 
     public void setDateTime(LocalDateTime dateTime) {

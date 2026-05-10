@@ -28,6 +28,11 @@ public class SavedAdvertisement {
             throw new IllegalArgumentException("Saved date must be past or present");
     }
 
+    private void validateAdvertisement(Advertisement advertisement) {
+        if (advertisement == null)
+            throw new IllegalArgumentException("Advertisement can't be null");
+    }
+
     public void setSavedDate(LocalDate savedDate) {
         validateSavedDate(savedDate);
         this.savedDate = savedDate;

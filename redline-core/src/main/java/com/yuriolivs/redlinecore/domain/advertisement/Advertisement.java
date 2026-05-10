@@ -39,6 +39,7 @@ public class Advertisement {
         validateLocation(location);
         validateMileage(mileage);
         validatePriceHistory(priceHistory);
+        validateVehicle(vehicle);
 
         this.url = url;
         this.followedDate = followedDate;
@@ -72,6 +73,11 @@ public class Advertisement {
     private void validateMileage(Integer mileage) {
         if (mileage == null || mileage <= 0)
             throw new IllegalArgumentException("Mileage must be positive and greater than 0");
+    }
+
+    private void validateVehicle(Vehicle vehicle) {
+        if (vehicle == null)
+            throw new IllegalArgumentException("Vehicle can't be null");
     }
 
     private void validatePriceHistory(List<PriceRecord> priceHistory) {
