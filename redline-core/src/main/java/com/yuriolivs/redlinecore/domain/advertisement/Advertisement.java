@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 public class Advertisement {
     private String url;
-    private LocalDate followedDate;
     private String website;
     private String location;
     private Integer mileage;
@@ -25,7 +24,6 @@ public class Advertisement {
 
     public Advertisement(
         String url,
-        LocalDate followedDate,
         String website,
         String location,
         boolean active,
@@ -34,7 +32,6 @@ public class Advertisement {
         List<PriceRecord> priceHistory
     ) {
         validateUrl(url);
-        validateFollowedDate(followedDate);
         validateWebsite(website);
         validateLocation(location);
         validateMileage(mileage);
@@ -42,7 +39,6 @@ public class Advertisement {
         validateVehicle(vehicle);
 
         this.url = url;
-        this.followedDate = followedDate;
         this.website = website;
         this.location = location;
         this.active = active;
@@ -53,11 +49,6 @@ public class Advertisement {
     private void validateUrl(String url) {
         if (url == null || url.isEmpty())
             throw new IllegalArgumentException("URL must be valid.");
-    }
-
-    private void validateFollowedDate(LocalDate followedDate) {
-        if (followedDate != null && followedDate.isAfter(LocalDate.now()))
-            throw new IllegalArgumentException("Followed date must be future or present.");
     }
 
     private void validateWebsite(String website) {
@@ -97,11 +88,6 @@ public class Advertisement {
     public void setUrl(String url) {
         validateUrl(url);
         this.url = url;
-    }
-
-    public void setFollowedDate(LocalDate followedDate) {
-        validateFollowedDate(followedDate);
-        this.followedDate = followedDate;
     }
 
     public void setWebsite(String website) {
