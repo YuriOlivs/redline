@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Getter
-@Setter
 public class Vehicle {
     private String brand;
     private String model;
@@ -42,5 +41,20 @@ public class Vehicle {
 
         if (vehicleAge > 50)
             throw new IllegalArgumentException("Vehicle must be at max 50 years old");
+    }
+
+    public void setBrand(String brand) {
+        validateBrand(brand);
+        this.brand = brand;
+    }
+
+    public void setModel(String model) {
+        validateModel(model);
+        this.model = model;
+    }
+
+    public void setYear(Integer year) {
+        validateYear(year);
+        this.year = year;
     }
 }

@@ -1,6 +1,5 @@
-package com.yuriolivs.redlinecore.domain;
+package com.yuriolivs.redlinecore.domain.user;
 
-import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

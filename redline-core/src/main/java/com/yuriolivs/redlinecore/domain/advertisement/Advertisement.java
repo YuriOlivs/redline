@@ -12,22 +12,16 @@ import java.util.List;
 
 @Getter
 public class Advertisement {
-    @Setter
     private String url;
-    @Setter
     private LocalDate followedDate;
-    @Setter
     private String website;
-    @Setter
     private String location;
+    private Integer mileage;
+    private List<PriceRecord> priceHistory;
     @Setter
     private boolean active;
     @Setter
-    private Integer mileage;
-    @Setter
     private Vehicle vehicle;
-
-    private List<PriceRecord> priceHistory;
 
     public Advertisement(
         String url,
@@ -92,5 +86,30 @@ public class Advertisement {
     public void registerPriceChange(Double price, LocalDate changedDate) {
         PriceRecord record = new PriceRecord(price, changedDate);
         this.priceHistory.add(record);
+    }
+
+    public void setUrl(String url) {
+        validateUrl(url);
+        this.url = url;
+    }
+
+    public void setFollowedDate(LocalDate followedDate) {
+        validateFollowedDate(followedDate);
+        this.followedDate = followedDate;
+    }
+
+    public void setWebsite(String website) {
+        validateWebsite(website);
+        this.website = website;
+    }
+
+    public void setLocation(String location) {
+        validateLocation(location);
+        this.location = location;
+    }
+
+    public void setMileage(Integer mileage) {
+        validateMileage(mileage);
+        this.mileage = mileage;
     }
 }

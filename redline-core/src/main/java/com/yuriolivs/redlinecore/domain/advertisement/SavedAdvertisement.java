@@ -8,8 +8,8 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Getter
-@Setter
 public class SavedAdvertisement {
+    @Setter
     private Advertisement advertisement;
     private LocalDate savedDate;
 
@@ -26,5 +26,10 @@ public class SavedAdvertisement {
     private void validateSavedDate(LocalDate savedDate) {
         if (savedDate.isAfter(LocalDate.now()))
             throw new IllegalArgumentException("Saved date must be past or present");
+    }
+
+    public void setSavedDate(LocalDate savedDate) {
+        validateSavedDate(savedDate);
+        this.savedDate = savedDate;
     }
 }

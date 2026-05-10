@@ -9,7 +9,6 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @Getter
-@Setter
 public class PriceRecord {
     private BigDecimal price;
     private LocalDate date;
@@ -32,5 +31,15 @@ public class PriceRecord {
     private void validateDate(LocalDate date) {
         if (date.isAfter(LocalDate.now()))
             throw new IllegalArgumentException("Date must be future or present");
+    }
+
+    public void setPrice(BigDecimal price) {
+        validatePrice(Double.parseDouble(String.valueOf(price)));
+        this.price = price;
+    }
+
+    public void setDate(LocalDate date) {
+        validateDate(date);
+        this.date = date;
     }
 }
