@@ -12,17 +12,14 @@ import java.util.List;
 
 @Getter
 public class User {
-    @Setter
     private String name;
 
-    @Setter
     private String lastName;
 
     private String email;
 
     private String password;
 
-    @Setter
     private LocalDate dateOfBirth;
 
     private List<SavedAdvertisement> savedAdvertisements;
@@ -100,6 +97,21 @@ public class User {
     public void setPassword(String newPassword) {
         validatePassword(newPassword);
         this.password = newPassword;
+    }
+
+    public void setName(String name) {
+        validateName(name);
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        validateLastName(lastName);
+        this.lastName = lastName;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        validateAge(dateOfBirth);
+        this.dateOfBirth = dateOfBirth;
     }
 
     public void addSavedAdvertisement(SavedAdvertisement savedAd) {
