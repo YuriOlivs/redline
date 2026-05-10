@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface AlertRepositoryInterface {
     Alert save(Alert alert);
-    Optional<List<Alert>> findAllByType(AlertType type);
-    Optional<List<Alert>> findAllByAdvertisement(Advertisement ad);
-    Optional<List<Alert>> findAllByUser(User user);
-    Optional<List<Alert>> findAllByDateTime(LocalDateTime dateTime);
+    List<Alert> findAllByType(AlertType type);
+    List<Alert> findAllByAdvertisement(Advertisement ad);
+    List<Alert> findAllByUser(User user);
+    List<Alert> findAllByDateTime(LocalDateTime dateTime);
     void remove(Alert alert);
 }

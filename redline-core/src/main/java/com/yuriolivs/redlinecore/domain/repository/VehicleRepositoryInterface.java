@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface VehicleRepositoryInterface {
     Vehicle save(Vehicle vehicle);
-    Optional<List<Vehicle>> findAllByModel();
-    Optional<List<Vehicle>> findAllByBrand();
-    Optional<List<Vehicle>> findAllByYear();
+    List<Vehicle> findAllByModel();
+    List<Vehicle> findAllByBrand();
+    List<Vehicle> findAllByYear();
     Optional<Vehicle> findByBrandAndModelAndYear(String brand, String model, Integer year);
     void remove(Vehicle vehicle);
 }
