@@ -28,7 +28,7 @@ public class SavedAdvertisement {
     }
 
     private void validateSavedDate(LocalDate savedDate) {
-        if (savedDate.isAfter(LocalDate.now()))
+        if (savedDate == null || savedDate.isAfter(LocalDate.now()))
             throw new IllegalArgumentException("Saved date must be past or present");
     }
 
@@ -45,5 +45,15 @@ public class SavedAdvertisement {
     public void setSavedDate(LocalDate savedDate) {
         validateSavedDate(savedDate);
         this.savedDate = savedDate;
+    }
+
+    public void setAdvertisement(Advertisement advertisement) {
+        validateAdvertisement(advertisement);
+        this.advertisement = advertisement;
+    }
+
+    public void setUser(User user) {
+        validateUser(user);
+        this.user = user;
     }
 }
