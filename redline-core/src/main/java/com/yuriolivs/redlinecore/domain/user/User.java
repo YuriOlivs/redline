@@ -33,8 +33,7 @@ public class User {
             String lastName,
             String email,
             String password,
-            LocalDate dateOfBirth,
-            List<SavedAdvertisement> savedAdvertisements
+            LocalDate dateOfBirth
     ) {
         validateName(name);
         validateLastName(lastName);
@@ -47,7 +46,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-        this.savedAdvertisements = savedAdvertisements;
     }
 
     private Integer calculateAge(LocalDate dateOfBirth) {
@@ -112,13 +110,5 @@ public class User {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         validateAge(dateOfBirth);
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public void addSavedAdvertisement(SavedAdvertisement savedAd) {
-        this.savedAdvertisements.add(savedAd);
-    }
-
-    public void removeSavedAdvertisement(SavedAdvertisement savedAd) {
-        this.savedAdvertisements.remove(savedAd);
     }
 }

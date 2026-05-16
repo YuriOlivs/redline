@@ -9,17 +9,21 @@ import java.time.LocalDate;
 
 @Getter
 public class SavedAdvertisement {
-    @Setter
     private Advertisement advertisement;
+    private User user;
     private LocalDate savedDate;
 
     public SavedAdvertisement(
             Advertisement advertisement,
+            User user,
             LocalDate savedDate
     ) {
         validateSavedDate(savedDate);
+        validateAdvertisement(advertisement);
+        validateUser(user);
 
         this.advertisement = advertisement;
+        this.user = user;
         this.savedDate = savedDate;
     }
 
@@ -31,6 +35,11 @@ public class SavedAdvertisement {
     private void validateAdvertisement(Advertisement advertisement) {
         if (advertisement == null)
             throw new IllegalArgumentException("Advertisement can't be null");
+    }
+
+    private void validateUser(User user) {
+        if (user == null)
+            throw new IllegalArgumentException("User can't be null");
     }
 
     public void setSavedDate(LocalDate savedDate) {

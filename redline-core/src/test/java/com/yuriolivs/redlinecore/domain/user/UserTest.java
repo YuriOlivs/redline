@@ -13,8 +13,7 @@ public class UserTest {
             "Oliveira",
             "yuri@email.com",
             "Ab1!kL9",
-            LocalDate.parse("2000-01-01"),
-            null
+            LocalDate.parse("2000-01-01")
     );
 
     @Test
@@ -25,8 +24,7 @@ public class UserTest {
                 VALID_USER.getLastName(),
                 VALID_USER.getEmail(),
                 VALID_USER.getPassword(),
-                VALID_USER.getDateOfBirth(),
-                null
+                VALID_USER.getDateOfBirth()
             )
         );
     }
@@ -39,8 +37,7 @@ public class UserTest {
                 "Oliveira",
                 "yuri@email.com",
                 "Ab1!kL9",
-                LocalDate.parse("2000-01-01"),
-                null
+                LocalDate.parse("2000-01-01")
             );
         });
     }
@@ -53,8 +50,7 @@ public class UserTest {
                 "O",
                 "yuri@email.com",
                 "Ab1!kL9",
-                LocalDate.parse("2000-01-01"),
-                null
+                LocalDate.parse("2000-01-01")
             );
         });
     }
@@ -67,8 +63,7 @@ public class UserTest {
                 "Oliveira",
                 "yuri@email.com",
                 "Ab1!kL9",
-                LocalDate.parse("2000-01-01"),
-                null
+                LocalDate.parse("2000-01-01")
             );
         });
     }
@@ -81,8 +76,7 @@ public class UserTest {
                 "0l1v31r4",
                 "yuri@email.com",
                 "Ab1!kL9",
-                LocalDate.parse("2000-01-01"),
-                null
+                LocalDate.parse("2000-01-01")
             );
         });
     }
@@ -95,8 +89,7 @@ public class UserTest {
                 "Oliveira",
                 "yuri@email",
                 "Ab1!kL9",
-                LocalDate.parse("2000-01-01"),
-                null
+                LocalDate.parse("2000-01-01")
             );
         });
     }
@@ -109,8 +102,7 @@ public class UserTest {
                 "Oliveira",
                 "yuri@email.com",
                 "senha123",
-                LocalDate.parse("2000-01-01"),
-                null
+                LocalDate.parse("2000-01-01")
             );
         });
     }
@@ -118,15 +110,12 @@ public class UserTest {
     @Test
     void shouldThrowExceptionWhenIsUnderage() {
         assertThrows(IllegalArgumentException.class, () -> {
-                LocalDate dateOfBirth = LocalDate.parse("2010-01-01");
-
                 new User(
                     "Yuri",
                     "Oliveira",
                     "yuri@email.com",
                     "Ab1!kL9",
-                    dateOfBirth,
-                    null
+                        LocalDate.parse("2010-01-01")
                 );
 
             }
@@ -141,8 +130,7 @@ public class UserTest {
                     "Oliveira",
                     "yuri@email.com",
                     "Ab1!kL9",
-                    LocalDate.parse("2000-01-01"),
-                    null
+                    LocalDate.parse("2000-01-01")
             );
 
             user.setName("Y");
@@ -157,8 +145,7 @@ public class UserTest {
                     "Oliveira",
                     "yuri@email.com",
                     "Ab1!kL9",
-                    LocalDate.parse("2000-01-01"),
-                    null
+                    LocalDate.parse("2000-01-01")
             );
 
             user.setLastName("O1");
@@ -173,8 +160,7 @@ public class UserTest {
                     "Oliveira",
                     "yuri@email.com",
                     "Ab1!kL9",
-                    LocalDate.parse("2000-01-01"),
-                    null
+                    LocalDate.parse("2000-01-01")
             );
 
             user.setDateOfBirth(LocalDate.parse("2010-01-01"));
@@ -189,8 +175,7 @@ public class UserTest {
                     "Oliveira",
                     "yuri@email.com",
                     "Ab1!kL9",
-                    LocalDate.parse("2000-01-01"),
-                    null
+                    LocalDate.parse("2000-01-01")
             );
 
             user.setEmail("yuri.com");
@@ -205,8 +190,7 @@ public class UserTest {
                     "Oliveira",
                     "yuri@email.com",
                     "Ab1!kL9",
-                    LocalDate.parse("2000-01-01"),
-                    null
+                    LocalDate.parse("2000-01-01")
             );
 
             user.setPassword("senha123");
