@@ -1,16 +1,19 @@
 package com.yuriolivs.redlinecore.usecase.user;
 
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.security.PasswordEncrypter;
 import com.yuriolivs.redlinecore.domain.user.User;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class CreateUserUseCase {
     private final UserRepositoryInterface userRepository;
+    private final PasswordEncrypter encrypter;
+    public static final String PASSW0RD_REGEX = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){6,16}$";
 
-    public CreateUserUseCase(UserRepositoryInterface userRepository) {
+    public CreateUserUseCase(UserRepositoryInterface userRepository, PasswordEncrypter encrypter) {
         this.userRepository = userRepository;
+        this.encrypter = encrypter;
     }
 
     public User execute(
@@ -20,12 +23,20 @@ public class CreateUserUseCase {
             String password,
             LocalDate dateOfBirth
     ) {
-        Optional<User> alreadyExists = userRepository.findByEmail(email);
+        boolean alreadyExists = userRepository.findByEmail(email).isPresent();
 
-        if (alreadyExists.isPresent())
+        if (alreadyExists)
             throw new IllegalArgumentException("Email already exists. Please enter a new email");
 
-        User newUser = new User(name, lastName, email, password, dateOfBirth);
+        validatePassword(password);
+        String hashPassword = encrypter.encrypt(password);
+
+        User newUser = new User(name, lastName, email, hashPassword, dateOfBirth);
         return userRepository.save(newUser);
+    }
+
+    private void validatePassword(String password) {
+        if (!password.trim().matches(PASSW0RD_REGEX))
+            throw new IllegalArgumentException("Password must be valid");
     }
 }
