@@ -18,6 +18,7 @@ public class User {
 
     private String email;
 
+    @Setter
     private String password;
 
     private LocalDate dateOfBirth;
@@ -26,7 +27,6 @@ public class User {
 
     public static final String NAME_REGEX = "[\\p{L} ]{2,50}";
     public static final String EMAIL_REGEX = "((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])";
-    public static final String PASSW0RD_REGEX = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){6,16}$";
 
     public User(
             String name,
@@ -38,7 +38,6 @@ public class User {
         validateName(name);
         validateLastName(lastName);
         validateEmail(email);
-        validatePassword(password);
         validateAge(dateOfBirth);
 
         this.name = name;
@@ -69,11 +68,6 @@ public class User {
             throw new IllegalArgumentException("Email must be valid");
     }
 
-    private void validatePassword(String password) {
-        if (!password.trim().matches(PASSW0RD_REGEX))
-            throw new IllegalArgumentException("Password must be valid");
-    }
-
     private void validateAge(LocalDate dateOfBirth) {
         if (calculateAge(dateOfBirth) < 18)
             throw new IllegalArgumentException("User must be 18 or older");
@@ -90,11 +84,6 @@ public class User {
     public void setEmail(String newEmail) {
         validateEmail(newEmail);
         this.email = newEmail;
-    }
-
-    public void setPassword(String newPassword) {
-        validatePassword(newPassword);
-        this.password = newPassword;
     }
 
     public void setName(String name) {
