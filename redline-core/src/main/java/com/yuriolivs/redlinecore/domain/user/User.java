@@ -9,9 +9,12 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class User {
+    private UUID id;
+
     private String name;
 
     private String lastName;
@@ -40,6 +43,28 @@ public class User {
         validateEmail(email);
         validateAge(dateOfBirth);
 
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public User(
+            UUID id,
+            String name,
+            String lastName,
+            String email,
+            String password,
+            LocalDate dateOfBirth
+    ) {
+        validateName(name);
+        validateLastName(lastName);
+        validateEmail(email);
+        validateAge(dateOfBirth);
+
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;

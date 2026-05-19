@@ -4,6 +4,7 @@ import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.user.User;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class UpdateUserInfoUseCase {
     private final UserRepositoryInterface userRepository;
@@ -13,10 +14,9 @@ public class UpdateUserInfoUseCase {
     }
 
     User execute(
+            UUID id,
             String name,
-            String lastName,
-            String email,
-            LocalDate dateOfBirth
+            String lastName
     ) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
