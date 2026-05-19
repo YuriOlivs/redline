@@ -47,7 +47,7 @@ public class UpdateUserPasswordUseCaseTest {
         Mockito.when(userRepository.save(Mockito.any(User.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+        boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
 
         assertTrue(updatedSuccessfully);
         assertEquals(hashedNewPassword, user.getPassword());
@@ -76,7 +76,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, wrongOldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), wrongOldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());
@@ -100,7 +100,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());
@@ -124,7 +124,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());
@@ -148,7 +148,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());
@@ -172,7 +172,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());
@@ -196,7 +196,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());
@@ -220,7 +220,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());
@@ -244,7 +244,7 @@ public class UpdateUserPasswordUseCaseTest {
                 .thenReturn(false);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            boolean updatedSuccessfully = useCase.execute(user, oldPassword, newPassword);
+            boolean updatedSuccessfully = useCase.execute(user.getId(), oldPassword, newPassword);
         });
 
         Mockito.verify(userRepository, Mockito.never()).save(Mockito.any());

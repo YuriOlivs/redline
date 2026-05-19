@@ -21,7 +21,7 @@ public class CreateUserUseCaseTest {
     void setUp() {
         userRepository = Mockito.mock(UserRepositoryInterface.class);
         encrypter = Mockito.mock(PasswordEncrypter.class);
-        useCase = new CreateUserUseCase(userRepository, encrypter); //ajustar essa parte implementando o password encrypter
+        useCase = new CreateUserUseCase(userRepository, encrypter);
     }
 
     @Test

@@ -4,6 +4,8 @@ import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.security.PasswordEncrypter;
 import com.yuriolivs.redlinecore.domain.user.User;
 
+import java.util.UUID;
+
 public class UpdateUserPasswordUseCase {
     private final UserRepositoryInterface userRepository;
     private final PasswordEncrypter encrypter;
@@ -14,7 +16,7 @@ public class UpdateUserPasswordUseCase {
     }
 
     public boolean execute(
-            User user,
+            UUID id,
             String oldPassword,
             String newPassword
     ) {
