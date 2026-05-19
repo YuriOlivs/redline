@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface SavedAdvertisementRepository {
     SavedAdvertisement save(SavedAdvertisement savedAd);
-    Optional<List<SavedAdvertisement>> findByUser(User user);
-    SavedAdvertisement remove(SavedAdvertisement savedAd);
+    List<SavedAdvertisement> findByUser(User user);
+    void remove(SavedAdvertisement savedAd);
+    void removeAllByUser(User user);
 }

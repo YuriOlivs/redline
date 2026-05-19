@@ -64,15 +64,6 @@ public class UpdateUserInfoUseCaseTest {
         UUID wrongUserId = UUID.randomUUID();
         String newName = "Nino";
 
-        User user = new User(
-                UUID.randomUUID(),
-                "Yuri",
-                "Oliveira",
-                "yuri@email.com",
-                "Senha@123456",
-                LocalDate.now().minusYears(20)
-        );
-
         Mockito.when(userRepository.findById(wrongUserId))
                 .thenReturn(Optional.empty());
 
