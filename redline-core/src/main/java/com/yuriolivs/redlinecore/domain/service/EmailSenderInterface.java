@@ -1,5 +1,5 @@
 package com.yuriolivs.redlinecore.domain.service;
 
-public interface EmailSender {
+public interface EmailSenderInterface {
     boolean send(String recipient, String subject, String body);
 }
