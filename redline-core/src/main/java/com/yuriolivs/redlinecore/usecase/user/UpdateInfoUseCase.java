@@ -3,13 +3,12 @@ package com.yuriolivs.redlinecore.usecase.user;
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.user.User;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
-public class UpdateUserInfoUseCase {
+public class UpdateInfoUseCase {
     private final UserRepositoryInterface userRepository;
 
-    public UpdateUserInfoUseCase(UserRepositoryInterface userRepository) {
+    public UpdateInfoUseCase(UserRepositoryInterface userRepository) {
         this.userRepository = userRepository;
     }
 

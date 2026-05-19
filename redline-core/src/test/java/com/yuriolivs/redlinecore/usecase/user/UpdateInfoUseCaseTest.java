@@ -13,14 +13,14 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UpdateUserInfoUseCaseTest {
+public class UpdateInfoUseCaseTest {
     private UserRepositoryInterface userRepository;
-    private UpdateUserInfoUseCase useCase;
+    private UpdateInfoUseCase useCase;
 
     @BeforeEach
     void setUp() {
         userRepository = Mockito.mock(UserRepositoryInterface.class);
-        useCase = new UpdateUserInfoUseCase(userRepository);
+        useCase = new UpdateInfoUseCase(userRepository);
     }
 
     @Test

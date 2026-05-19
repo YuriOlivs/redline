@@ -11,16 +11,16 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UpdateUserPasswordUseCaseTest {
+public class UpdatePasswordUseCaseTest {
     private UserRepositoryInterface userRepository;
     private PasswordEncrypter encrypter;
-    private UpdateUserPasswordUseCase useCase;
+    private UpdatePasswordUseCase useCase;
 
     @BeforeEach
     void setUp() {
         userRepository = Mockito.mock(UserRepositoryInterface.class);
         encrypter = Mockito.mock(PasswordEncrypter.class);
-        useCase = new UpdateUserPasswordUseCase(userRepository, encrypter);
+        useCase = new UpdatePasswordUseCase(userRepository, encrypter);
     }
 
     @Test
