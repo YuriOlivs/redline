@@ -1,5 +1,6 @@
 package com.yuriolivs.redlinecore.usecase.user;
 
+import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.security.PasswordEncrypter;
 import com.yuriolivs.redlinecore.domain.user.User;
@@ -39,6 +40,9 @@ public class ResetPasswordUseCaseTest {
                 LocalDate.now().minusYears(20)
         );
 
+        Mockito.when(userRepository.findById(user.getId()))
+                .thenReturn(Optional.of(user));
+
         Mockito.when(encrypter.encrypt(newPassword))
                 .thenReturn(hashedNewPassword);
 
@@ -58,7 +62,7 @@ public class ResetPasswordUseCaseTest {
         Mockito.when(userRepository.findById(wrongId))
                 .thenReturn(Optional.empty());
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        assertThrows(NotFoundException.class, () -> {
             useCase.execute(wrongId, newPassword);
         });
 
@@ -69,7 +73,7 @@ public class ResetPasswordUseCaseTest {
     void assertThrowsExceptionWhenPasswordIsTooShort() {
         String newPassword = "S@1";
 
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             useCase.execute(UUID.randomUUID(), newPassword);
         });
 
@@ -80,7 +84,7 @@ public class ResetPasswordUseCaseTest {
     void assertThrowsExceptionWhenPasswordIsTooBig() {
         String newPassword = "Senha@123456akjdsflksdjf";
 
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             useCase.execute(UUID.randomUUID(), newPassword);
         });
 
@@ -91,7 +95,7 @@ public class ResetPasswordUseCaseTest {
     void assertThrowsExceptionWhenPasswordDoesNotHaveLetters() {
         String newPassword = "12345678910";
 
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             useCase.execute(UUID.randomUUID(), newPassword);
         });
 
@@ -102,7 +106,7 @@ public class ResetPasswordUseCaseTest {
     void assertThrowsExceptionWhenPasswordDoesNotHaveNumbers() {
         String newPassword = "Senha@Senha!";
 
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             useCase.execute(UUID.randomUUID(), newPassword);
         });
 
@@ -113,7 +117,7 @@ public class ResetPasswordUseCaseTest {
     void assertThrowsExceptionWhenPasswordDoesNotHaveSpecialCharacters() {
         String newPassword = "Senha1234567";
 
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             useCase.execute(UUID.randomUUID(), newPassword);
         });
 
@@ -124,7 +128,7 @@ public class ResetPasswordUseCaseTest {
     void assertThrowsExceptionWhenPasswordDoesNotHaveUppercaseLetters() {
         String newPassword = "senha@123456";
 
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             useCase.execute(UUID.randomUUID(), newPassword);
         });
 
@@ -135,7 +139,7 @@ public class ResetPasswordUseCaseTest {
     void assertThrowsExceptionWhenPasswordDoesNotHaveLowercaseLetters() {
         String newPassword = "SENHA@123456";
 
-        assertThrows(IllegalAccessError.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             useCase.execute(UUID.randomUUID(), newPassword);
         });
 
