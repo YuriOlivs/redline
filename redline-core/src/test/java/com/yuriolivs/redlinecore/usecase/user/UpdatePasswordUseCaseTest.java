@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,6 +33,7 @@ public class UpdatePasswordUseCaseTest {
         String hashedNewPassword = "hashed_123456@Senha";
 
         User user = new User(
+                UUID.randomUUID(),
                 "Yuri",
                 "Oliveira",
                 "yuri@email.com",
@@ -43,6 +46,9 @@ public class UpdatePasswordUseCaseTest {
 
         Mockito.when(encrypter.encrypt(newPassword))
                 .thenReturn(hashedNewPassword);
+
+        Mockito.when(userRepository.findById(user.getId()))
+                .thenReturn(Optional.of(user));
 
         Mockito.when(userRepository.save(Mockito.any(User.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
@@ -65,12 +71,16 @@ public class UpdatePasswordUseCaseTest {
         String newPassword = "123456@Senha";
 
         User user = new User(
+                UUID.randomUUID(),
                 "Yuri",
                 "Oliveira",
                 "yuri@email.com",
                 hashedOldPassword,
                 LocalDate.now().minusYears(20)
         );
+
+        Mockito.when(userRepository.findById(user.getId()))
+                .thenReturn(Optional.of(user));
 
         Mockito.when(encrypter.matches(hashedOldPassword, wrongOldPassword))
                 .thenReturn(false);
