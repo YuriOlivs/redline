@@ -50,6 +50,9 @@ public class RequestPasswordResetUseCaseTest {
         Mockito.when(codeGenerator.generate())
                 .thenReturn(code);
 
+        Mockito.when(cacheService.put(code, user.getId().toString(), 30))
+                .thenReturn(code);
+
         String generatedCode = useCase.execute(email);
 
         assertNotNull(generatedCode);
