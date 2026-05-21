@@ -1,0 +1,269 @@
+package com.yuriolivs.redlinecore.domain.advertisement;
+
+import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class AdvertisementTest {
+    private static final Vehicle validVehicle = new Vehicle("Nissan", "Sentra", 2015);
+    private static final List<PriceRecord> validPriceHistory = List.of(
+            new PriceRecord(60000.0, LocalDate.parse("2026-05-01")),
+            new PriceRecord(50000.0, LocalDate.parse("2026-05-05"))
+    );
+
+    public static final Advertisement VALID_ADVERTISEMENT = new Advertisement(
+            "https://webmotors.com.br/anuncio",
+            "webmotors",
+            "São Paulo, SP",
+            true,
+            90000,
+            validVehicle,
+            validPriceHistory
+    );
+
+    @Test
+    void assertCreateAdvertisementSuccessfullyWithValidData() {
+        assertDoesNotThrow(() -> {
+            new Advertisement(
+                    VALID_ADVERTISEMENT.getUrl(),
+                    VALID_ADVERTISEMENT.getWebsite(),
+                    VALID_ADVERTISEMENT.getLocation(),
+                    VALID_ADVERTISEMENT.isActive(),
+                    VALID_ADVERTISEMENT.getMileage(),
+                    VALID_ADVERTISEMENT.getVehicle(),
+                    validPriceHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenUrlIsEmptyOrNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    null,
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenWebsiteIsEmptyOrNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenLocationIsEmptyOrNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    null,
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenMileageIsNullOrNegative() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    -90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenVehicleIsNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    null,
+                    validPriceHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenPriceHistoryIsNullOrEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    List.of()
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenUrlUpdateIsEmptyOrNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.setUrl(null);
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenWebsiteUpdateIsEmptyOrNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.setWebsite("");
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenLocationUpdateIsEmptyOrNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.setLocation(null);
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenMileageUpdateIsNullOrNegative() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.setMileage(-10);
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenPriceRecordPriceIsNegative() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.registerPriceChange(-1.0, LocalDate.now());
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenPriceRecordPriceIsNaN() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.registerPriceChange(Double.parseDouble("one"), LocalDate.now());
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenPriceRecordPriceIsInfinite() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.registerPriceChange(Double.POSITIVE_INFINITY, LocalDate.now());
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenPriceRecordDateIsFuture() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Advertisement ad = new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory
+            );
+
+            ad.registerPriceChange(48000.0, LocalDate.parse("2030-01-01"));
+        });
+    }
+}

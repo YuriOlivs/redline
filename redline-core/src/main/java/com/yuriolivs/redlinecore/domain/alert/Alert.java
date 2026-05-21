@@ -2,20 +2,20 @@ package com.yuriolivs.redlinecore.domain.alert;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.user.User;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 public class Alert {
-    private AlertType type;
-    private Advertisement advertisement;
-    private User user;
     private LocalDateTime dateTime;
+    @Setter
+    private AlertType type;
+    @Setter
+    private Advertisement advertisement;
+    @Setter
+    private User user;
 
     public Alert(
             AlertType type,
@@ -24,6 +24,8 @@ public class Alert {
             LocalDateTime dateTime
     ) {
         validateDateTime(dateTime);
+        validateAdvertisement(advertisement);
+        validateUser(user);
 
         this.type = type;
         this.advertisement = advertisement;
@@ -34,5 +36,20 @@ public class Alert {
     private void validateDateTime(LocalDateTime dateTime) {
         if (dateTime.isAfter(LocalDateTime.now()))
             throw new IllegalArgumentException("Date Time must be past or present");
+    }
+
+    private void validateAdvertisement(Advertisement advertisement) {
+        if (advertisement == null)
+            throw new IllegalArgumentException("Advertisement can't be null");
+    }
+
+    private void validateUser(User user) {
+        if (user == null)
+            throw new IllegalArgumentException("User can't be null");
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        validateDateTime(dateTime);
+        this.dateTime = dateTime;
     }
 }

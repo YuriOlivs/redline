@@ -12,26 +12,18 @@ import java.util.List;
 
 @Getter
 public class Advertisement {
-    @Setter
     private String url;
-    @Setter
-    private LocalDate followedDate;
-    @Setter
     private String website;
-    @Setter
     private String location;
+    private Integer mileage;
+    private List<PriceRecord> priceHistory;
     @Setter
     private boolean active;
     @Setter
-    private Integer mileage;
-    @Setter
     private Vehicle vehicle;
-
-    private List<PriceRecord> priceHistory;
 
     public Advertisement(
         String url,
-        LocalDate followedDate,
         String website,
         String location,
         boolean active,
@@ -40,14 +32,13 @@ public class Advertisement {
         List<PriceRecord> priceHistory
     ) {
         validateUrl(url);
-        validateFollowedDate(followedDate);
         validateWebsite(website);
         validateLocation(location);
         validateMileage(mileage);
         validatePriceHistory(priceHistory);
+        validateVehicle(vehicle);
 
         this.url = url;
-        this.followedDate = followedDate;
         this.website = website;
         this.location = location;
         this.active = active;
@@ -58,11 +49,6 @@ public class Advertisement {
     private void validateUrl(String url) {
         if (url == null || url.isEmpty())
             throw new IllegalArgumentException("URL must be valid.");
-    }
-
-    private void validateFollowedDate(LocalDate followedDate) {
-        if (followedDate != null && followedDate.isAfter(LocalDate.now()))
-            throw new IllegalArgumentException("Followed date must be future or present.");
     }
 
     private void validateWebsite(String website) {
@@ -80,6 +66,11 @@ public class Advertisement {
             throw new IllegalArgumentException("Mileage must be positive and greater than 0");
     }
 
+    private void validateVehicle(Vehicle vehicle) {
+        if (vehicle == null)
+            throw new IllegalArgumentException("Vehicle can't be null");
+    }
+
     private void validatePriceHistory(List<PriceRecord> priceHistory) {
         if (priceHistory == null || priceHistory.isEmpty())
             throw new IllegalArgumentException("Price history must contain at least one item");
@@ -92,5 +83,25 @@ public class Advertisement {
     public void registerPriceChange(Double price, LocalDate changedDate) {
         PriceRecord record = new PriceRecord(price, changedDate);
         this.priceHistory.add(record);
+    }
+
+    public void setUrl(String url) {
+        validateUrl(url);
+        this.url = url;
+    }
+
+    public void setWebsite(String website) {
+        validateWebsite(website);
+        this.website = website;
+    }
+
+    public void setLocation(String location) {
+        validateLocation(location);
+        this.location = location;
+    }
+
+    public void setMileage(Integer mileage) {
+        validateMileage(mileage);
+        this.mileage = mileage;
     }
 }

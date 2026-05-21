@@ -9,48 +9,67 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class User {
-    @Setter
+    private UUID id;
+
     private String name;
 
-    @Setter
     private String lastName;
 
     private String email;
 
+    @Setter
     private String password;
 
-    @Setter
     private LocalDate dateOfBirth;
 
     private List<SavedAdvertisement> savedAdvertisements;
 
     public static final String NAME_REGEX = "[\\p{L} ]{2,50}";
     public static final String EMAIL_REGEX = "((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])";
-    public static final String PASSW0RD_REGEX = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){6,16}$";
 
     public User(
             String name,
             String lastName,
             String email,
             String password,
-            LocalDate dateOfBirth,
-            List<SavedAdvertisement> savedAdvertisements
+            LocalDate dateOfBirth
     ) {
         validateName(name);
         validateLastName(lastName);
         validateEmail(email);
-        validatePassword(password);
         validateAge(dateOfBirth);
 
+        this.id = UUID.randomUUID();
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-        this.savedAdvertisements = savedAdvertisements;
+    }
+
+    public User(
+            UUID id,
+            String name,
+            String lastName,
+            String email,
+            String password,
+            LocalDate dateOfBirth
+    ) {
+        validateName(name);
+        validateLastName(lastName);
+        validateEmail(email);
+        validateAge(dateOfBirth);
+
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
     }
 
     private Integer calculateAge(LocalDate dateOfBirth) {
@@ -74,11 +93,6 @@ public class User {
             throw new IllegalArgumentException("Email must be valid");
     }
 
-    private void validatePassword(String password) {
-        if (!password.trim().matches(PASSW0RD_REGEX))
-            throw new IllegalArgumentException("Password must be valid");
-    }
-
     private void validateAge(LocalDate dateOfBirth) {
         if (calculateAge(dateOfBirth) < 18)
             throw new IllegalArgumentException("User must be 18 or older");
@@ -97,16 +111,18 @@ public class User {
         this.email = newEmail;
     }
 
-    public void setPassword(String newPassword) {
-        validatePassword(newPassword);
-        this.password = newPassword;
+    public void setName(String name) {
+        validateName(name);
+        this.name = name;
     }
 
-    public void addSavedAdvertisement(SavedAdvertisement savedAd) {
-        this.savedAdvertisements.add(savedAd);
+    public void setLastName(String lastName) {
+        validateLastName(lastName);
+        this.lastName = lastName;
     }
 
-    public void removeSavedAdvertisement(SavedAdvertisement savedAd) {
-        this.savedAdvertisements.remove(savedAd);
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        validateAge(dateOfBirth);
+        this.dateOfBirth = dateOfBirth;
     }
 }
