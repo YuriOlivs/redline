@@ -22,8 +22,8 @@ public class DeleteUserUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        userRepository = Mockito.mock(userRepository);
-        savedAdRepository = Mockito.mock(savedAdRepository);
+        userRepository = Mockito.mock(UserRepositoryInterface.class);
+        savedAdRepository = Mockito.mock(SavedAdvertisementRepository.class);
         useCase = new DeleteUserUseCase(userRepository, savedAdRepository);
     }
 
@@ -42,6 +42,10 @@ public class DeleteUserUseCaseTest {
                 .thenReturn(Optional.of(user));
 
         useCase.execute(user.getId());
+
+        Mockito.when(userRepository.findById(user.getId()))
+                .thenReturn(Optional.empty());
+
 
         Mockito.verify(savedAdRepository).removeAllByUser(user);
         Mockito.verify(userRepository).remove(user);
