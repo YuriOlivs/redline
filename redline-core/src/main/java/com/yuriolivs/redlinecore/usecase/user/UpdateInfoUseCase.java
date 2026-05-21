@@ -1,8 +1,10 @@
 package com.yuriolivs.redlinecore.usecase.user;
 
+import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.user.User;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class UpdateInfoUseCase {
@@ -17,6 +19,17 @@ public class UpdateInfoUseCase {
             String name,
             String lastName
     ) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if(name == null && lastName == null || name.isEmpty() && lastName.isEmpty())
+            throw new IllegalArgumentException("One of the following fields must be filled: name, lastName");
+
+        Optional<User> userFound = userRepository.findById(id);
+        if(userFound.isEmpty())
+            throw new NotFoundException("User");
+
+        User user = userFound.get();
+        user.setName(name);
+        user.setLastName(lastName);
+
+        return userRepository.save(user);
     }
 }

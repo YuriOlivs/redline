@@ -98,7 +98,7 @@ public class UpdateInfoUseCaseTest {
         assertThrows(IllegalArgumentException.class, () ->{
             User updatedUser = useCase.execute(
                     userId,
-                    newName,
+                    null,
                     null
             );
         });
