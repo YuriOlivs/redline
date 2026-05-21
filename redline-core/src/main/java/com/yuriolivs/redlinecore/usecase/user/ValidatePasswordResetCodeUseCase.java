@@ -12,6 +12,14 @@ public class ValidatePasswordResetCodeUseCase {
     }
 
     UUID execute(String code) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        if (code == null || code.isEmpty())
+            throw new IllegalArgumentException("Code can't be null");
+
+        String stringId = cacheService.get(code);
+
+        if (stringId != null)
+            return UUID.fromString(stringId);
+
+        return null;
     }
 }
