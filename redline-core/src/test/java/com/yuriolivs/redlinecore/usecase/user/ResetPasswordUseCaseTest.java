@@ -45,10 +45,9 @@ public class ResetPasswordUseCaseTest {
         Mockito.when(userRepository.save(Mockito.any(User.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        User updatedUser = useCase.execute(user.getId(), newPassword);
+        boolean userUpdated = useCase.execute(user.getId(), newPassword);
 
-        assertNotNull(updatedUser);
-        assertEquals(newPassword, updatedUser.getPassword());
+        assertTrue(userUpdated);
     }
 
     @Test
