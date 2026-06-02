@@ -21,7 +21,6 @@ public class User {
 
     private String email;
 
-    @Setter
     private String password;
 
     private LocalDate dateOfBirth;
@@ -42,6 +41,7 @@ public class User {
         validateLastName(lastName);
         validateEmail(email);
         validateAge(dateOfBirth);
+        validatePassword(password);
 
         this.id = UUID.randomUUID();
         this.name = name;
@@ -63,6 +63,7 @@ public class User {
         validateLastName(lastName);
         validateEmail(email);
         validateAge(dateOfBirth);
+        validatePassword(password);
 
         this.id = id;
         this.name = name;
@@ -98,6 +99,11 @@ public class User {
             throw new IllegalArgumentException("User must be 18 or older");
     }
 
+    private void validatePassword(String password) {
+        if (password == null || password.isEmpty())
+            throw new IllegalArgumentException("Password can't be null or empty");
+    }
+
     private Integer getAge() {
         return calculateAge(this.dateOfBirth);
     }
@@ -124,5 +130,10 @@ public class User {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         validateAge(dateOfBirth);
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setPassword(String password) {
+        validatePassword(password);
+        this.password = password;
     }
 }
