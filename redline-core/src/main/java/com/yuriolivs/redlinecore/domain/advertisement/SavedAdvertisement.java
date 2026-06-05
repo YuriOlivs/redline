@@ -6,9 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 public class SavedAdvertisement {
+    private UUID id;
     private Advertisement advertisement;
     private User user;
     private LocalDate savedDate;

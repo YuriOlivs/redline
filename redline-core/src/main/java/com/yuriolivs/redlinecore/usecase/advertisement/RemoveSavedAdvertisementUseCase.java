@@ -2,6 +2,8 @@ package com.yuriolivs.redlinecore.usecase.advertisement;
 
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
 
+import java.util.UUID;
+
 public class RemoveSavedAdvertisementUseCase {
     private SavedAdvertisementRepositoryInterface savedAdRepository;
 
@@ -11,7 +13,10 @@ public class RemoveSavedAdvertisementUseCase {
         this.savedAdRepository = savedAdRepository;
     }
 
-    public boolean execute() {
+    public boolean execute(
+            UUID savedAdId,
+            UUID userId
+    ) {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 }
