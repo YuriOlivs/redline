@@ -1,6 +1,7 @@
 package com.yuriolivs.redlinecore.domain.repository;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
+import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteria;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 public interface AdvertisementRepositoryInterface {
     Advertisement save(Advertisement ad);
+    List<Advertisement> saveAll(List<Advertisement> ads);
     Optional<Advertisement> findByUrl(String url);
     List<Advertisement> findByWebsite(String website);
     List<Advertisement> findByLocation(String location);
@@ -20,5 +22,6 @@ public interface AdvertisementRepositoryInterface {
     List<Advertisement> findByVehicleBrandAndVehicleYear(String brand, String year);
     List<Advertisement> findByVehicleBrandAndVehicleModelAndVehicleYear(String brand, String model, String year);
     List<Advertisement> findUnsavedOlderThan(LocalDate date, List<String> savedUrls);
+    List<Advertisement> findBySearchCriteria(AdvertisementSearchCriteria searchCriteria);
     void remove(Advertisement ad);
 }

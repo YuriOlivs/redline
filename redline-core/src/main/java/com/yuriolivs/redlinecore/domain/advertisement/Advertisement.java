@@ -64,8 +64,8 @@ public class Advertisement {
     }
 
     private void validateMileage(Integer mileage) {
-        if (mileage == null || mileage <= 0)
-            throw new IllegalArgumentException("Mileage must be positive and greater than 0");
+        if (mileage == null || mileage < 0)
+            throw new IllegalArgumentException("Mileage must be a positive value");
     }
 
     private void validateVehicle(Vehicle vehicle) {
