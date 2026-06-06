@@ -1,4 +1,4 @@
 package com.yuriolivs.redlinecore.usecase.advertisement;
 
-public class UpdateAdvertisementUseCaseTest {
+public class UpdateAdPriceUseCaseTest {
 }
