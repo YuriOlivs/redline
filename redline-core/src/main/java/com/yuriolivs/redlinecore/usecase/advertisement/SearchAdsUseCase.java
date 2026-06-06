@@ -27,7 +27,9 @@ public class SearchAdsUseCase {
             String model,
             Integer year,
             String website,
-            Integer mileage
+            Integer mileage,
+            Integer page,
+            Integer size
     ) {
         throw new UnsupportedOperationException("Not implemented yet.");
     }

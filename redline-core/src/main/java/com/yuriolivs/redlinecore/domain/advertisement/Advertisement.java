@@ -22,6 +22,7 @@ public class Advertisement {
     private boolean active;
     @Setter
     private Vehicle vehicle;
+    private LocalDate lastUpdate;
 
     public Advertisement(
             String url,
@@ -30,7 +31,8 @@ public class Advertisement {
             boolean active,
             Integer mileage,
             Vehicle vehicle,
-            List<PriceRecord> priceHistory
+            List<PriceRecord> priceHistory,
+            LocalDate lastUpdate
     ) {
         validateUrl(url);
         validateWebsite(website);
@@ -38,6 +40,7 @@ public class Advertisement {
         validateMileage(mileage);
         validatePriceHistory(priceHistory);
         validateVehicle(vehicle);
+        validateLastUpdate(lastUpdate);
 
         this.url = url;
         this.website = website;
@@ -45,8 +48,8 @@ public class Advertisement {
         this.active = active;
         this.mileage = mileage;
         this.vehicle = vehicle;
+        this.lastUpdate = lastUpdate;
     }
-
 
     private void validateUrl(String url) {
         if (url == null || url.isEmpty())
@@ -78,8 +81,17 @@ public class Advertisement {
             throw new IllegalArgumentException("Price history must contain at least one item");
     }
 
+    private void validateLastUpdate(LocalDate lastUpdate) {
+        if (lastUpdate.isAfter(LocalDate.now()))
+            throw new IllegalArgumentException("Last Update must be past or present");
+    }
+
     public List<PriceRecord> getPriceHistory() {
         return Collections.unmodifiableList(this.priceHistory);
+    }
+
+    public boolean isOutdated() {
+        return lastUpdate.isBefore(LocalDate.now().minusWeeks(1));
     }
 
     public void registerPriceChange(Double price, LocalDate changedDate) {
@@ -105,5 +117,10 @@ public class Advertisement {
     public void setMileage(Integer mileage) {
         validateMileage(mileage);
         this.mileage = mileage;
+    }
+
+    public void setLastUpdate(LocalDate lastUpdate) {
+        validateLastUpdate(lastUpdate);
+        this.lastUpdate = lastUpdate;
     }
 }
