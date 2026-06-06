@@ -16,6 +16,23 @@ public class SavedAdvertisement {
     private LocalDate savedDate;
 
     public SavedAdvertisement(
+            UUID id,
+            Advertisement advertisement,
+            User user,
+            LocalDate savedDate
+    ) {
+        validateId(id);
+        validateSavedDate(savedDate);
+        validateAdvertisement(advertisement);
+        validateUser(user);
+
+        this.id = id;
+        this.advertisement = advertisement;
+        this.user = user;
+        this.savedDate = savedDate;
+    }
+
+    public SavedAdvertisement(
             Advertisement advertisement,
             User user,
             LocalDate savedDate
@@ -24,9 +41,15 @@ public class SavedAdvertisement {
         validateAdvertisement(advertisement);
         validateUser(user);
 
+        this.id = UUID.randomUUID();
         this.advertisement = advertisement;
         this.user = user;
         this.savedDate = savedDate;
+    }
+
+    private void validateId(UUID id) {
+        if (id == null)
+            throw new IllegalArgumentException("ID can't be null");
     }
 
     private void validateSavedDate(LocalDate savedDate) {
@@ -42,6 +65,11 @@ public class SavedAdvertisement {
     private void validateUser(User user) {
         if (user == null)
             throw new IllegalArgumentException("User can't be null");
+    }
+
+    public void setId(UUID id) {
+        validateId(id);
+        this.id = id;
     }
 
     public void setSavedDate(LocalDate savedDate) {

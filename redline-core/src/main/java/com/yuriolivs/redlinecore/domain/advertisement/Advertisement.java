@@ -13,8 +13,6 @@ import java.util.UUID;
 
 @Getter
 public class Advertisement {
-    @Setter
-    private UUID id;
     private String url;
     private String website;
     private String location;
@@ -26,7 +24,6 @@ public class Advertisement {
     private Vehicle vehicle;
 
     public Advertisement(
-            UUID id,
             String url,
             String website,
             String location,
@@ -42,7 +39,6 @@ public class Advertisement {
         validatePriceHistory(priceHistory);
         validateVehicle(vehicle);
 
-        this.id = id;
         this.url = url;
         this.website = website;
         this.location = location;
@@ -51,30 +47,6 @@ public class Advertisement {
         this.vehicle = vehicle;
     }
 
-    public Advertisement(
-        String url,
-        String website,
-        String location,
-        boolean active,
-        Integer mileage,
-        Vehicle vehicle,
-        List<PriceRecord> priceHistory
-    ) {
-        validateUrl(url);
-        validateWebsite(website);
-        validateLocation(location);
-        validateMileage(mileage);
-        validatePriceHistory(priceHistory);
-        validateVehicle(vehicle);
-
-        this.id = UUID.randomUUID();
-        this.url = url;
-        this.website = website;
-        this.location = location;
-        this.active = active;
-        this.mileage = mileage;
-        this.vehicle = vehicle;
-    }
 
     private void validateUrl(String url) {
         if (url == null || url.isEmpty())

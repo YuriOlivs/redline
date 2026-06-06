@@ -19,9 +19,8 @@ public class DeleteOldUnsavedAdvertisementsUseCaseTest {
     private SavedAdvertisementRepositoryInterface savedAdRepository;
     private DeleteOldUnsavedAdvertisementsUseCase useCase;
 
-    private Advertisement advertisement;
     private SavedAdvertisement savedAdvertisement;
-    private UUID savedAdId;
+    private String savedAdId;
 
     @BeforeEach
     void setUp() {
@@ -29,19 +28,19 @@ public class DeleteOldUnsavedAdvertisementsUseCaseTest {
         savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
         useCase = new DeleteOldUnsavedAdvertisementsUseCase(advertisementRepository, savedAdRepository);
 
-        savedAdId = UUID.randomUUID();
-        advertisement = Mockito.mock(Advertisement.class);
+        savedAdId = "https://webmotors.com.br/anuncio/123";
+        Advertisement advertisement = Mockito.mock(Advertisement.class);
         savedAdvertisement = Mockito.mock(SavedAdvertisement.class);
 
         Mockito.when(savedAdvertisement.getAdvertisement()).thenReturn(advertisement);
-        Mockito.when(advertisement.getId()).thenReturn(savedAdId);
+        Mockito.when(advertisement.getUrl()).thenReturn(savedAdId);
     }
 
     @Test
     void shouldDeleteOldUnsavedAdvertisementsSuccessfully() {
-        UUID unsavedAdId = UUID.randomUUID();
+        String unsavedAdId = "https://webmotors.com.br/anuncio/456";
         Advertisement unsavedAdvertisement = Mockito.mock(Advertisement.class);
-        Mockito.when(unsavedAdvertisement.getId()).thenReturn(unsavedAdId);
+        Mockito.when(unsavedAdvertisement.getUrl()).thenReturn(unsavedAdId);
 
         Mockito.when(savedAdRepository.findAllAdvertisements())
                 .thenReturn(List.of(savedAdvertisement));
