@@ -1,21 +1,22 @@
 package com.yuriolivs.redlinecore.usecase.advertisement;
 
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
 
-public class DeleteOldUnsavedAdvertisementsUseCase {
-    private AdvertisementRepositoryInterface advertisementRepository;
+import java.util.UUID;
+
+public class RemoveSavedAdUseCase {
     private SavedAdvertisementRepositoryInterface savedAdRepository;
 
-    public DeleteOldUnsavedAdvertisementsUseCase(
-            AdvertisementRepositoryInterface advertisementRepository,
+    public RemoveSavedAdUseCase(
             SavedAdvertisementRepositoryInterface savedAdRepository
     ) {
-        this.advertisementRepository = advertisementRepository;
         this.savedAdRepository = savedAdRepository;
     }
 
-    public void execute() {
+    public boolean execute(
+            UUID savedAdId,
+            UUID userId
+    ) {
         throw new UnsupportedOperationException("Not implemented yet.");
     }
 }

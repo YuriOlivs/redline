@@ -6,12 +6,12 @@ import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryI
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 
 
-public class SaveAdvertisementUseCase {
+public class SaveAdUseCase {
     private SavedAdvertisementRepositoryInterface savedAdRepository;
     private AdvertisementRepositoryInterface advertisementRepository;
     private UserRepositoryInterface userRepository;
 
-    public SaveAdvertisementUseCase(
+    public SaveAdUseCase(
             SavedAdvertisementRepositoryInterface savedAdRepository,
             AdvertisementRepositoryInterface advertisementRepository,
             UserRepositoryInterface userRepository

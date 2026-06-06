@@ -13,10 +13,10 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CreateAdvertisementUseCaseTest {
+public class CreateAdUseCaseTest {
     private AdvertisementRepositoryInterface advertisementRepository;
     private VehicleRepositoryInterface vehicleRepository;
-    private CreateAdvertisementUseCase useCase;
+    private CreateAdUseCase useCase;
 
     private Vehicle vehicle;
 
@@ -24,7 +24,7 @@ public class CreateAdvertisementUseCaseTest {
     void setUp() {
         advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
         vehicleRepository = Mockito.mock(VehicleRepositoryInterface.class);
-        useCase = new CreateAdvertisementUseCase(advertisementRepository, vehicleRepository);
+        useCase = new CreateAdUseCase(advertisementRepository, vehicleRepository);
 
         vehicle = new Vehicle("Toyota", "Corolla", 2020);
     }

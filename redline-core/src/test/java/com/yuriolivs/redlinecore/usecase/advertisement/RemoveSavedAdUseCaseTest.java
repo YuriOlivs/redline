@@ -12,9 +12,9 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RemoveSavedAdvertisementUseCaseTest {
+public class RemoveSavedAdUseCaseTest {
     private SavedAdvertisementRepositoryInterface savedAdRepository;
-    private RemoveSavedAdvertisementUseCase useCase;
+    private RemoveSavedAdUseCase useCase;
 
     private UUID userId;
     private UUID savedAdId;
@@ -23,7 +23,7 @@ public class RemoveSavedAdvertisementUseCaseTest {
     @BeforeEach
     void setUp() {
         savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
-        useCase = new RemoveSavedAdvertisementUseCase(savedAdRepository);
+        useCase = new RemoveSavedAdUseCase(savedAdRepository);
 
         userId = UUID.randomUUID();
         savedAdId = UUID.randomUUID();

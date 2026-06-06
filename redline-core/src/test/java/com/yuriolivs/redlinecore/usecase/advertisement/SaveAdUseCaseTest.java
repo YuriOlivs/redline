@@ -16,11 +16,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SaveAdvertisementUseCaseTest {
+public class SaveAdUseCaseTest {
     private SavedAdvertisementRepositoryInterface savedAdRepository;
     private AdvertisementRepositoryInterface advertisementRepository;
     private UserRepositoryInterface userRepository;
-    private SaveAdvertisementUseCase useCase;
+    private SaveAdUseCase useCase;
 
     private UUID userId;
     private String url;
@@ -32,7 +32,7 @@ public class SaveAdvertisementUseCaseTest {
         savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
         advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
         userRepository = Mockito.mock(UserRepositoryInterface.class);
-        useCase = new SaveAdvertisementUseCase(savedAdRepository, advertisementRepository, userRepository);
+        useCase = new SaveAdUseCase(savedAdRepository, advertisementRepository, userRepository);
 
         userId = UUID.randomUUID();
         url = "https://webmotors.com.br/anuncio/123";

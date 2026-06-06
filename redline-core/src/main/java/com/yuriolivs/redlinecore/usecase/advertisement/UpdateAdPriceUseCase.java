@@ -5,10 +5,10 @@ import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterf
 
 import java.math.BigDecimal;
 
-public class UpdatePriceAdvertisementUseCase {
+public class UpdateAdPriceUseCase {
     private AdvertisementRepositoryInterface advertisementRepository;
 
-    public UpdatePriceAdvertisementUseCase(
+    public UpdateAdPriceUseCase(
             AdvertisementRepositoryInterface advertisementRepository
     ) {
         this.advertisementRepository = advertisementRepository;

@@ -10,14 +10,13 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DeleteOldUnsavedAdvertisementsUseCaseTest {
+public class DeleteOldUnsavedAdsUseCaseTest {
     private AdvertisementRepositoryInterface advertisementRepository;
     private SavedAdvertisementRepositoryInterface savedAdRepository;
-    private DeleteOldUnsavedAdvertisementsUseCase useCase;
+    private DeleteOldUnsavedAdsUseCase useCase;
 
     private SavedAdvertisement savedAdvertisement;
     private String savedAdId;
@@ -26,7 +25,7 @@ public class DeleteOldUnsavedAdvertisementsUseCaseTest {
     void setUp() {
         advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
         savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
-        useCase = new DeleteOldUnsavedAdvertisementsUseCase(advertisementRepository, savedAdRepository);
+        useCase = new DeleteOldUnsavedAdsUseCase(advertisementRepository, savedAdRepository);
 
         savedAdId = "https://webmotors.com.br/anuncio/123";
         Advertisement advertisement = Mockito.mock(Advertisement.class);

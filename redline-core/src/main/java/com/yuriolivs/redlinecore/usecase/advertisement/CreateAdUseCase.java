@@ -7,11 +7,11 @@ import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 
 import java.math.BigDecimal;
 
-public class CreateAdvertisementUseCase {
+public class CreateAdUseCase {
     private AdvertisementRepositoryInterface advertisementRepository;
     private VehicleRepositoryInterface vehicleRepository;
 
-    public CreateAdvertisementUseCase(
+    public CreateAdUseCase(
         AdvertisementRepositoryInterface advertisementRepository,
         VehicleRepositoryInterface vehicleRepository
     ) {
