@@ -1,15 +1,14 @@
 package com.yuriolivs.redlinecore.domain.advertisement;
 
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 public class Advertisement {
@@ -17,13 +16,40 @@ public class Advertisement {
     private String website;
     private String location;
     private Integer mileage;
-    private List<PriceRecord> priceHistory;
+    private final List<PriceRecord> priceHistory;
     @Setter
     private boolean active;
     @Setter
     private Vehicle vehicle;
     private LocalDate lastUpdate;
-    private List<ScoreRecord> scoreHistory;
+    private final List<ScoreRecord> scoreHistory;
+
+    public Advertisement(
+            String url,
+            String website,
+            String location,
+            boolean active,
+            Integer mileage,
+            Vehicle vehicle,
+            LocalDate lastUpdate
+    ) {
+        validateUrl(url);
+        validateWebsite(website);
+        validateLocation(location);
+        validateMileage(mileage);
+        validateVehicle(vehicle);
+        validateLastUpdate(lastUpdate);
+
+        this.url = url;
+        this.website = website;
+        this.location = location;
+        this.active = active;
+        this.mileage = mileage;
+        this.vehicle = vehicle;
+        this.lastUpdate = lastUpdate;
+        this.priceHistory = new ArrayList<>();
+        this.scoreHistory = new ArrayList<>();
+    }
 
     public Advertisement(
             String url,
