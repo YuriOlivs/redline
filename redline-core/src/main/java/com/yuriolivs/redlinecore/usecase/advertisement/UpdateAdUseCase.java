@@ -2,16 +2,20 @@ package com.yuriolivs.redlinecore.usecase.advertisement;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
 
 import java.math.BigDecimal;
 
-public class UpdateAdPriceUseCase {
+public class UpdateAdUseCase {
     private AdvertisementRepositoryInterface advertisementRepository;
+    private ScoreCalculatorInterface scoreCalculator;
 
-    public UpdateAdPriceUseCase(
-            AdvertisementRepositoryInterface advertisementRepository
+    public UpdateAdUseCase(
+            AdvertisementRepositoryInterface advertisementRepository,
+            ScoreCalculatorInterface scoreCalculator
     ) {
         this.advertisementRepository = advertisementRepository;
+        this.scoreCalculator = scoreCalculator;
     }
 
     public Advertisement execute(
