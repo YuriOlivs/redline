@@ -18,8 +18,8 @@ public class ScoreRecord {
     }
 
     private void validateScoreValue(Integer value) {
-        if (value < 0)
-            throw new IllegalArgumentException("The score value must be positive greater than 0");
+        if (value < 0 || value > 1000)
+            throw new IllegalArgumentException("The score value must greater than 0 and lesser then 1000");
     }
 
     private void validateDateTime(LocalDate dateTime) {

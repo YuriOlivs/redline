@@ -20,7 +20,7 @@ public class UpdateAdUseCase {
 
     public Advertisement execute(
             String url,
-            BigDecimal price
+            Double price
     ) {
         throw new UnsupportedOperationException("Not implemented yet.");
     }

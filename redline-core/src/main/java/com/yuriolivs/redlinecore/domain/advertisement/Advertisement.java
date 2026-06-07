@@ -126,6 +126,10 @@ public class Advertisement {
         this.scoreHistory.add(record);
     }
 
+    public void registerScoreChange(ScoreRecord scoreRecord) {
+        this.scoreHistory.add(scoreRecord);
+    }
+
     public void setUrl(String url) {
         validateUrl(url);
         this.url = url;
