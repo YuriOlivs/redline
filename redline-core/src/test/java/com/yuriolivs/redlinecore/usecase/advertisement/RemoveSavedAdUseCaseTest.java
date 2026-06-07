@@ -3,6 +3,7 @@ package com.yuriolivs.redlinecore.usecase.advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,7 +24,8 @@ public class RemoveSavedAdUseCaseTest {
     @BeforeEach
     void setUp() {
         savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
-        useCase = new RemoveSavedAdUseCase(savedAdRepository);
+        UserRepositoryInterface userRepository = Mockito.mock(UserRepositoryInterface.class);
+        useCase = new RemoveSavedAdUseCase(savedAdRepository, userRepository);
 
         userId = UUID.randomUUID();
         savedAdId = UUID.randomUUID();
