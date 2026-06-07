@@ -23,6 +23,7 @@ public class Advertisement {
     @Setter
     private Vehicle vehicle;
     private LocalDate lastUpdate;
+    private List<ScoreRecord> scoreHistory;
 
     public Advertisement(
             String url,
@@ -32,7 +33,8 @@ public class Advertisement {
             Integer mileage,
             Vehicle vehicle,
             List<PriceRecord> priceHistory,
-            LocalDate lastUpdate
+            LocalDate lastUpdate,
+            List<ScoreRecord> scoreHistory
     ) {
         validateUrl(url);
         validateWebsite(website);
@@ -41,6 +43,7 @@ public class Advertisement {
         validatePriceHistory(priceHistory);
         validateVehicle(vehicle);
         validateLastUpdate(lastUpdate);
+        validateScoreHistory(scoreHistory);
 
         this.url = url;
         this.website = website;
@@ -49,6 +52,8 @@ public class Advertisement {
         this.mileage = mileage;
         this.vehicle = vehicle;
         this.lastUpdate = lastUpdate;
+        this.priceHistory = priceHistory;
+        this.scoreHistory = scoreHistory;
     }
 
     private void validateUrl(String url) {
@@ -81,6 +86,11 @@ public class Advertisement {
             throw new IllegalArgumentException("Price history must contain at least one item");
     }
 
+    private void validateScoreHistory(List<ScoreRecord> scoreHistory) {
+        if (scoreHistory == null || scoreHistory.isEmpty())
+            throw new IllegalArgumentException("Price history must contain at least one item");
+    }
+
     private void validateLastUpdate(LocalDate lastUpdate) {
         if (lastUpdate.isAfter(LocalDate.now()))
             throw new IllegalArgumentException("Last Update must be past or present");
@@ -90,6 +100,18 @@ public class Advertisement {
         return Collections.unmodifiableList(this.priceHistory);
     }
 
+    public List<ScoreRecord> getScoreHistory() {
+        return Collections.unmodifiableList(this.scoreHistory);
+    }
+
+    public Integer getScore() {
+        return scoreHistory.get(scoreHistory.size() - 1).getValue();
+    }
+
+    public BigDecimal getPrice() {
+        return priceHistory.get(priceHistory.size() - 1).getPrice();
+    }
+
     public boolean isOutdated() {
         return lastUpdate.isBefore(LocalDate.now().minusWeeks(1));
     }
@@ -97,6 +119,11 @@ public class Advertisement {
     public void registerPriceChange(Double price, LocalDate changedDate) {
         PriceRecord record = new PriceRecord(price, changedDate);
         this.priceHistory.add(record);
+    }
+
+    public void registerScoreChange(Integer value, LocalDate changedDate) {
+        ScoreRecord record = new ScoreRecord(value, changedDate);
+        this.scoreHistory.add(record);
     }
 
     public void setUrl(String url) {
