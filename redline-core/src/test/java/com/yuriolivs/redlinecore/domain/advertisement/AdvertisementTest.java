@@ -15,6 +15,10 @@ public class AdvertisementTest {
             new PriceRecord(60000.0, LocalDate.parse("2026-05-01")),
             new PriceRecord(50000.0, LocalDate.parse("2026-05-05"))
     );
+    private static final List<ScoreRecord> validScoreHistory = List.of(
+            new ScoreRecord(500, LocalDate.parse("2026-05-01")),
+            new ScoreRecord(600, LocalDate.parse("2026-05-05"))
+    );
 
     public static final Advertisement VALID_ADVERTISEMENT = new Advertisement(
             "https://webmotors.com.br/anuncio",
@@ -23,7 +27,9 @@ public class AdvertisementTest {
             true,
             90000,
             validVehicle,
-            validPriceHistory
+            validPriceHistory,
+            LocalDate.now(),
+            validScoreHistory
     );
 
     @Test
@@ -36,7 +42,9 @@ public class AdvertisementTest {
                     VALID_ADVERTISEMENT.isActive(),
                     VALID_ADVERTISEMENT.getMileage(),
                     VALID_ADVERTISEMENT.getVehicle(),
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
         });
     }
@@ -51,7 +59,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
         });
     }
@@ -66,7 +76,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
         });
     }
@@ -81,7 +93,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
         });
     }
@@ -96,7 +110,9 @@ public class AdvertisementTest {
                     true,
                     -90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
         });
     }
@@ -111,13 +127,15 @@ public class AdvertisementTest {
                     true,
                     90000,
                     null,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
         });
     }
 
     @Test
-    void assertThrowsExceptionWhenPriceHistoryIsNullOrEmpty() {
+    void assertThrowsExceptionWhenPriceHistoryIsEmpty() {
         assertThrows(IllegalArgumentException.class, () -> {
             new Advertisement(
                     "https://webmotors.com.br/anuncio",
@@ -126,7 +144,60 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
+                    List.of(),
+                    LocalDate.now(),
+                    validScoreHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenPriceHistoryIsNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    null,
+                    LocalDate.now(),
+                    validScoreHistory
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenScoreHistoryIsEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory,
+                    LocalDate.now(),
                     List.of()
+            );
+        });
+    }
+
+    @Test
+    void assertThrowsExceptionWhenScoreHistoryIsNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Advertisement(
+                    "https://webmotors.com.br/anuncio",
+                    "webmotors",
+                    "São Paulo, SP",
+                    true,
+                    90000,
+                    validVehicle,
+                    validPriceHistory,
+                    LocalDate.now(),
+                    null
             );
         });
     }
@@ -141,7 +212,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.setUrl(null);
@@ -158,7 +231,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.setWebsite("");
@@ -175,7 +250,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.setLocation(null);
@@ -192,7 +269,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.setMileage(-10);
@@ -209,7 +288,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.registerPriceChange(-1.0, LocalDate.now());
@@ -226,7 +307,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.registerPriceChange(Double.parseDouble("one"), LocalDate.now());
@@ -243,7 +326,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.registerPriceChange(Double.POSITIVE_INFINITY, LocalDate.now());
@@ -260,7 +345,9 @@ public class AdvertisementTest {
                     true,
                     90000,
                     validVehicle,
-                    validPriceHistory
+                    validPriceHistory,
+                    LocalDate.now(),
+                    validScoreHistory
             );
 
             ad.registerPriceChange(48000.0, LocalDate.parse("2030-01-01"));

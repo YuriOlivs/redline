@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class Advertisement {
@@ -21,15 +22,19 @@ public class Advertisement {
     private boolean active;
     @Setter
     private Vehicle vehicle;
+    private LocalDate lastUpdate;
+    private List<ScoreRecord> scoreHistory;
 
     public Advertisement(
-        String url,
-        String website,
-        String location,
-        boolean active,
-        Integer mileage,
-        Vehicle vehicle,
-        List<PriceRecord> priceHistory
+            String url,
+            String website,
+            String location,
+            boolean active,
+            Integer mileage,
+            Vehicle vehicle,
+            List<PriceRecord> priceHistory,
+            LocalDate lastUpdate,
+            List<ScoreRecord> scoreHistory
     ) {
         validateUrl(url);
         validateWebsite(website);
@@ -37,6 +42,8 @@ public class Advertisement {
         validateMileage(mileage);
         validatePriceHistory(priceHistory);
         validateVehicle(vehicle);
+        validateLastUpdate(lastUpdate);
+        validateScoreHistory(scoreHistory);
 
         this.url = url;
         this.website = website;
@@ -44,6 +51,9 @@ public class Advertisement {
         this.active = active;
         this.mileage = mileage;
         this.vehicle = vehicle;
+        this.lastUpdate = lastUpdate;
+        this.priceHistory = priceHistory;
+        this.scoreHistory = scoreHistory;
     }
 
     private void validateUrl(String url) {
@@ -62,8 +72,8 @@ public class Advertisement {
     }
 
     private void validateMileage(Integer mileage) {
-        if (mileage == null || mileage <= 0)
-            throw new IllegalArgumentException("Mileage must be positive and greater than 0");
+        if (mileage == null || mileage < 0)
+            throw new IllegalArgumentException("Mileage must be a positive value");
     }
 
     private void validateVehicle(Vehicle vehicle) {
@@ -76,13 +86,48 @@ public class Advertisement {
             throw new IllegalArgumentException("Price history must contain at least one item");
     }
 
+    private void validateScoreHistory(List<ScoreRecord> scoreHistory) {
+        if (scoreHistory == null || scoreHistory.isEmpty())
+            throw new IllegalArgumentException("Price history must contain at least one item");
+    }
+
+    private void validateLastUpdate(LocalDate lastUpdate) {
+        if (lastUpdate.isAfter(LocalDate.now()))
+            throw new IllegalArgumentException("Last Update must be past or present");
+    }
+
     public List<PriceRecord> getPriceHistory() {
         return Collections.unmodifiableList(this.priceHistory);
+    }
+
+    public List<ScoreRecord> getScoreHistory() {
+        return Collections.unmodifiableList(this.scoreHistory);
+    }
+
+    public Integer getScore() {
+        return scoreHistory.get(scoreHistory.size() - 1).getValue();
+    }
+
+    public BigDecimal getPrice() {
+        return priceHistory.get(priceHistory.size() - 1).getPrice();
+    }
+
+    public boolean isOutdated() {
+        return lastUpdate.isBefore(LocalDate.now().minusWeeks(1));
     }
 
     public void registerPriceChange(Double price, LocalDate changedDate) {
         PriceRecord record = new PriceRecord(price, changedDate);
         this.priceHistory.add(record);
+    }
+
+    public void registerScoreChange(Integer value, LocalDate changedDate) {
+        ScoreRecord record = new ScoreRecord(value, changedDate);
+        this.scoreHistory.add(record);
+    }
+
+    public void registerScoreChange(ScoreRecord scoreRecord) {
+        this.scoreHistory.add(scoreRecord);
     }
 
     public void setUrl(String url) {
@@ -103,5 +148,10 @@ public class Advertisement {
     public void setMileage(Integer mileage) {
         validateMileage(mileage);
         this.mileage = mileage;
+    }
+
+    public void setLastUpdate(LocalDate lastUpdate) {
+        validateLastUpdate(lastUpdate);
+        this.lastUpdate = lastUpdate;
     }
 }

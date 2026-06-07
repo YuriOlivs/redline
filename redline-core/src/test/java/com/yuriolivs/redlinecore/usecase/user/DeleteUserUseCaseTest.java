@@ -1,7 +1,7 @@
 package com.yuriolivs.redlinecore.usecase.user;
 
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteUserUseCaseTest {
     private UserRepositoryInterface userRepository;
-    private SavedAdvertisementRepository savedAdRepository;
+    private SavedAdvertisementRepositoryInterface savedAdRepository;
     private DeleteUserUseCase useCase;
 
     @BeforeEach
     void setUp() {
         userRepository = Mockito.mock(UserRepositoryInterface.class);
-        savedAdRepository = Mockito.mock(SavedAdvertisementRepository.class);
+        savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
         useCase = new DeleteUserUseCase(userRepository, savedAdRepository);
     }
 

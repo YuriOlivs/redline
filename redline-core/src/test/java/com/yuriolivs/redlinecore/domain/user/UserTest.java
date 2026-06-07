@@ -95,14 +95,27 @@ public class UserTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenPasswordIsInvalid() {
+    void shouldThrowExceptionWhenPasswordIsNull() {
         assertThrows(IllegalArgumentException.class, () -> {
             new User(
                 "Yuri",
                 "Oliveira",
                 "yuri@email.com",
-                "senha123",
+                null,
                 LocalDate.parse("2000-01-01")
+            );
+        });
+    }
+
+    @Test
+    void shouldThrowExceptionWhenPasswordIsEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new User(
+                    "Yuri",
+                    "Oliveira",
+                    "yuri@email.com",
+                    "",
+                    LocalDate.parse("2000-01-01")
             );
         });
     }
@@ -183,7 +196,7 @@ public class UserTest {
     }
 
     @Test
-    void shouldThrowExceptionWhenPasswordUpdateIsInvalid() {
+    void shouldThrowExceptionWhenPasswordUpdateIsNull() {
         assertThrows(IllegalArgumentException.class, () -> {
             User user = new User(
                     "Yuri",
@@ -193,7 +206,22 @@ public class UserTest {
                     LocalDate.parse("2000-01-01")
             );
 
-            user.setPassword("senha123");
+            user.setPassword(null);
+        });
+    }
+
+    @Test
+    void shouldThrowExceptionWhenPasswordUpdateIsEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            User user = new User(
+                    "Yuri",
+                    "Oliveira",
+                    "yuri@email.com",
+                    "Ab1!kL9",
+                    LocalDate.parse("2000-01-01")
+            );
+
+            user.setPassword("");
         });
     }
 }
