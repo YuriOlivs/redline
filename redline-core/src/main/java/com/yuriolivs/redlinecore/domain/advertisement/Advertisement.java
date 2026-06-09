@@ -134,7 +134,7 @@ public class Advertisement {
         return scoreHistory.get(scoreHistory.size() - 1).getValue();
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return priceHistory.get(priceHistory.size() - 1).getPrice();
     }
 

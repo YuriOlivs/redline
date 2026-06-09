@@ -60,8 +60,10 @@ public class CreateAdUseCase {
                 now
         );
 
+        ScoreRecord scoreRecord = new ScoreRecord(0, now);
+
         ad.registerPriceChange(price, now);
-        ad.registerScoreChange(0, now);
+        ad.registerScoreChange(scoreRecord);
 
         return advertisementRepository.save(ad);
     }

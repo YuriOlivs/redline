@@ -51,7 +51,7 @@ public class SaveAdUseCaseTest {
         Mockito.when(savedAdRepository.save(Mockito.any(SavedAdvertisement.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        SavedAdvertisement result = useCase.execute(url, userId.toString());
+        SavedAdvertisement result = useCase.execute(url, userId);
 
         assertNotNull(result);
         Mockito.verify(savedAdRepository).save(Mockito.any(SavedAdvertisement.class));
@@ -61,7 +61,7 @@ public class SaveAdUseCaseTest {
     void shouldThrowNotFoundExceptionWhenUserDoesNotExist() {
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> useCase.execute(url, userId.toString()));
+        assertThrows(NotFoundException.class, () -> useCase.execute(url, userId));
 
         Mockito.verify(savedAdRepository, Mockito.never()).save(Mockito.any());
     }
@@ -71,7 +71,7 @@ public class SaveAdUseCaseTest {
         Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         Mockito.when(advertisementRepository.findByUrl(url)).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> useCase.execute(url, userId.toString()));
+        assertThrows(NotFoundException.class, () -> useCase.execute(url, userId));
 
         Mockito.verify(savedAdRepository, Mockito.never()).save(Mockito.any());
     }
@@ -82,7 +82,7 @@ public class SaveAdUseCaseTest {
         Mockito.when(advertisementRepository.findByUrl(url)).thenReturn(Optional.of(advertisement));
         Mockito.when(advertisement.isActive()).thenReturn(false);
 
-        assertThrows(IllegalStateException.class, () -> useCase.execute(url, userId.toString()));
+        assertThrows(IllegalStateException.class, () -> useCase.execute(url, userId));
 
         Mockito.verify(savedAdRepository, Mockito.never()).save(Mockito.any());
     }

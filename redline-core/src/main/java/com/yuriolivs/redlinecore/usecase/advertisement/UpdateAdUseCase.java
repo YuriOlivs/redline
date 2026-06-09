@@ -4,22 +4,27 @@ import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.service.FIPEClientInterface;
 import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
+import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateAdUseCase {
-    private AdvertisementRepositoryInterface advertisementRepository;
-    private ScoreCalculatorInterface scoreCalculator;
+    private final AdvertisementRepositoryInterface advertisementRepository;
+    private final ScoreCalculatorInterface scoreCalculator;
+    private final FIPEClientInterface fipeClient;
 
     public UpdateAdUseCase(
             AdvertisementRepositoryInterface advertisementRepository,
-            ScoreCalculatorInterface scoreCalculator
+            ScoreCalculatorInterface scoreCalculator,
+            FIPEClientInterface fipeClient
     ) {
         this.advertisementRepository = advertisementRepository;
         this.scoreCalculator = scoreCalculator;
+        this.fipeClient = fipeClient;
     }
 
     public Advertisement execute(
@@ -34,8 +39,14 @@ public class UpdateAdUseCase {
 
         Advertisement ad = adFound.get();
 
-        ad.registerPriceChange(price, now);
-        ScoreRecord scoreRecord = scoreCalculator.calculate(ad);
+        if (!Objects.equals(ad.getPrice(), price)) {
+            ad.registerPriceChange(price, now);
+        }
+
+        Vehicle vehicle = ad.getVehicle();
+        Double fipeValue = fipeClient.findVehicleValue(vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
+
+        ScoreRecord scoreRecord = scoreCalculator.calculate(ad, fipeValue);
 
         ad.registerScoreChange(scoreRecord);
 

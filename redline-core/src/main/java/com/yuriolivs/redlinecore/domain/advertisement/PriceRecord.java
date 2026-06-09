@@ -10,16 +10,14 @@ import java.time.LocalDate;
 
 @Getter
 public class PriceRecord {
-    private BigDecimal price;
+    private Double price;
     private LocalDate date;
 
     public PriceRecord(Double price, LocalDate date) {
         validatePrice(price);
         validateDate(date);
 
-        BigDecimal bd = new BigDecimal(String.valueOf(price));
-
-        this.price = bd.setScale(2, RoundingMode.DOWN);
+        this.price = price;
         this.date = date;
     }
 
@@ -36,8 +34,7 @@ public class PriceRecord {
     public void setPrice(Double price) {
         validatePrice(price);
 
-        BigDecimal bd = new BigDecimal(String.valueOf(price));
-        this.price = bd.setScale(2, RoundingMode.DOWN);
+        this.price = price;
     }
 
     public void setDate(LocalDate date) {
