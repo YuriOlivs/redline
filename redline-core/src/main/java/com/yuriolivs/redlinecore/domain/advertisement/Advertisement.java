@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Advertisement {
     private Vehicle vehicle;
     private LocalDate lastUpdate;
     private final List<ScoreRecord> scoreHistory;
+    private LocalDateTime createdAt;
 
     public Advertisement(
             String url,
@@ -49,6 +51,7 @@ public class Advertisement {
         this.lastUpdate = lastUpdate;
         this.priceHistory = new ArrayList<>();
         this.scoreHistory = new ArrayList<>();
+        this.createdAt = LocalDateTime.now();
     }
 
     public Advertisement(
@@ -60,7 +63,8 @@ public class Advertisement {
             Vehicle vehicle,
             List<PriceRecord> priceHistory,
             LocalDate lastUpdate,
-            List<ScoreRecord> scoreHistory
+            List<ScoreRecord> scoreHistory,
+            LocalDateTime createdAt
     ) {
         validateUrl(url);
         validateWebsite(website);
@@ -80,6 +84,7 @@ public class Advertisement {
         this.lastUpdate = lastUpdate;
         this.priceHistory = priceHistory;
         this.scoreHistory = scoreHistory;
+        this.createdAt = createdAt;
     }
 
     private void validateUrl(String url) {
@@ -120,6 +125,11 @@ public class Advertisement {
     private void validateLastUpdate(LocalDate lastUpdate) {
         if (lastUpdate.isAfter(LocalDate.now()))
             throw new IllegalArgumentException("Last Update must be past or present");
+    }
+
+    private void validateCreatedAt(LocalDateTime createdAt) {
+        if (createdAt.isAfter(LocalDateTime.now()))
+            throw new IllegalArgumentException("Created at must be past or present");
     }
 
     public List<PriceRecord> getPriceHistory() {
