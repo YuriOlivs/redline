@@ -1,28 +1,19 @@
 package com.yuriolivs.redlinecore.usecase.advertisement;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
-import com.yuriolivs.redlinecore.domain.advertisement.PriceRecord;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.repository.VehicleRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
+import lombok.RequiredArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class CreateAdUseCase {
     private final AdvertisementRepositoryInterface advertisementRepository;
     private final VehicleRepositoryInterface vehicleRepository;
-
-    public CreateAdUseCase(
-        AdvertisementRepositoryInterface advertisementRepository,
-        VehicleRepositoryInterface vehicleRepository
-    ) {
-        this.advertisementRepository = advertisementRepository;
-        this.vehicleRepository = vehicleRepository;
-    }
 
     public Advertisement execute(
             String url,

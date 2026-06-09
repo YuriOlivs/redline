@@ -7,25 +7,17 @@ import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterf
 import com.yuriolivs.redlinecore.domain.service.FIPEClientInterface;
 import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class UpdateAdUseCase {
     private final AdvertisementRepositoryInterface advertisementRepository;
     private final ScoreCalculatorInterface scoreCalculator;
     private final FIPEClientInterface fipeClient;
-
-    public UpdateAdUseCase(
-            AdvertisementRepositoryInterface advertisementRepository,
-            ScoreCalculatorInterface scoreCalculator,
-            FIPEClientInterface fipeClient
-    ) {
-        this.advertisementRepository = advertisementRepository;
-        this.scoreCalculator = scoreCalculator;
-        this.fipeClient = fipeClient;
-    }
 
     public Advertisement execute(
             String url,

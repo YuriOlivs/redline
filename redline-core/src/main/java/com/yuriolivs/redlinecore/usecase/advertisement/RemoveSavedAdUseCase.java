@@ -5,18 +5,15 @@ import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.user.User;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 public class RemoveSavedAdUseCase {
     private final SavedAdvertisementRepositoryInterface savedAdRepository;
     private final UserRepositoryInterface userRepository;
-
-    public RemoveSavedAdUseCase(SavedAdvertisementRepositoryInterface savedAdRepository, UserRepositoryInterface userRepository) {
-        this.savedAdRepository = savedAdRepository;
-        this.userRepository = userRepository;
-    }
 
     public boolean execute(
             UUID savedAdId,

@@ -7,26 +7,17 @@ import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterf
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.user.User;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
-
+@RequiredArgsConstructor
 public class SaveAdUseCase {
     private final SavedAdvertisementRepositoryInterface savedAdRepository;
     private final AdvertisementRepositoryInterface advertisementRepository;
     private final UserRepositoryInterface userRepository;
-
-    public SaveAdUseCase(
-            SavedAdvertisementRepositoryInterface savedAdRepository,
-            AdvertisementRepositoryInterface advertisementRepository,
-            UserRepositoryInterface userRepository
-    ) {
-        this.savedAdRepository = savedAdRepository;
-        this.advertisementRepository = advertisementRepository;
-        this.userRepository = userRepository;
-    }
 
     public SavedAdvertisement execute(
             String url,
