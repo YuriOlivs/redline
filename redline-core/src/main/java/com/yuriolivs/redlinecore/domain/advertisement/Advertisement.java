@@ -147,11 +147,6 @@ public class Advertisement {
         this.priceHistory.add(record);
     }
 
-    public void registerScoreChange(Integer value, LocalDate changedDate) {
-        ScoreRecord record = new ScoreRecord(value, changedDate);
-        this.scoreHistory.add(record);
-    }
-
     public void registerScoreChange(ScoreRecord scoreRecord) {
         this.scoreHistory.add(scoreRecord);
     }
