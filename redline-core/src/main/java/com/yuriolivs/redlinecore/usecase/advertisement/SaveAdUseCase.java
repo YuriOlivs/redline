@@ -29,8 +29,12 @@ public class SaveAdUseCase {
         if (adFound.isEmpty())
             throw new NotFoundException("Advertisement not found");
 
+        if (!adFound.get().isActive())
+            throw new IllegalArgumentException("Advertisement is not active");
+
         if (userFound.isEmpty())
             throw new NotFoundException("User not found");
+
 
         SavedAdvertisement savedAd = new SavedAdvertisement(
                 adFound.get(),

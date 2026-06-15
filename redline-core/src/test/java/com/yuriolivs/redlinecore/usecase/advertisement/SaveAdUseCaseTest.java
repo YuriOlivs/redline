@@ -82,7 +82,7 @@ public class SaveAdUseCaseTest {
         Mockito.when(advertisementRepository.findByUrl(url)).thenReturn(Optional.of(advertisement));
         Mockito.when(advertisement.isActive()).thenReturn(false);
 
-        assertThrows(IllegalStateException.class, () -> useCase.execute(url, userId));
+        assertThrows(IllegalArgumentException.class, () -> useCase.execute(url, userId));
 
         Mockito.verify(savedAdRepository, Mockito.never()).save(Mockito.any());
     }
