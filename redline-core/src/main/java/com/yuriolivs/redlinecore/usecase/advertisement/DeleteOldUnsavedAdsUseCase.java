@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class DeleteOldUnsavedAdsUseCase {
-    private AdvertisementRepositoryInterface advertisementRepository;
-    private SavedAdvertisementRepositoryInterface savedAdRepository;
+    private final AdvertisementRepositoryInterface advertisementRepository;
+    private final SavedAdvertisementRepositoryInterface savedAdRepository;
 
     public void execute() {
         throw new UnsupportedOperationException("Not implemented yet.");
