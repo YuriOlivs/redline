@@ -56,6 +56,6 @@ public class DeleteOldUnsavedAdsUseCaseTest {
 
     @Test
     void shouldLogErrorWhenExceptionOccurs() {
-        // TODO: definir estratégia de log antes de implementar
+        assertNotEquals(1, 1);
     }
 }

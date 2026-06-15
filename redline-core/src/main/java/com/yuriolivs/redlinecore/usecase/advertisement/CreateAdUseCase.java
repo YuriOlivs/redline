@@ -25,6 +25,9 @@ public class CreateAdUseCase {
     ) {
         LocalDate now = LocalDate.now();
 
+        if (vehicle == null)
+            throw new IllegalArgumentException("Vehicle can't be null");
+
         boolean alreadyExists = advertisementRepository.findByUrl(url).isPresent();
 
         if (alreadyExists)

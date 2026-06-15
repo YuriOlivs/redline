@@ -15,7 +15,7 @@ public class RemoveSavedAdUseCase {
     private final SavedAdvertisementRepositoryInterface savedAdRepository;
     private final UserRepositoryInterface userRepository;
 
-    public boolean execute(
+    public void execute(
             UUID savedAdId,
             UUID userId
     ) {
@@ -29,6 +29,5 @@ public class RemoveSavedAdUseCase {
             throw new NotFoundException("User not found");
 
         savedAdRepository.remove(savedAdFound.get());
-        return savedAdRepository.findById(savedAdId).isEmpty();
     }
 }

@@ -4,6 +4,7 @@ import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RemoveSavedAdUseCaseTest {
     private SavedAdvertisementRepositoryInterface savedAdRepository;
+    private UserRepositoryInterface userRepository;
     private RemoveSavedAdUseCase useCase;
 
     private UUID userId;
@@ -24,6 +26,7 @@ public class RemoveSavedAdUseCaseTest {
     @BeforeEach
     void setUp() {
         savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
+        userRepository = Mockito.mock(UserRepositoryInterface.class);
         UserRepositoryInterface userRepository = Mockito.mock(UserRepositoryInterface.class);
         useCase = new RemoveSavedAdUseCase(savedAdRepository, userRepository);
 
@@ -31,7 +34,11 @@ public class RemoveSavedAdUseCaseTest {
         savedAdId = UUID.randomUUID();
         savedAdvertisement = Mockito.mock(SavedAdvertisement.class);
 
-        Mockito.when(savedAdvertisement.getUser().getId()).thenReturn(userId);
+        User user = Mockito.mock(User.class);
+        Mockito.when(user.getId()).thenReturn(userId);
+        Mockito.when(savedAdvertisement.getUser()).thenReturn(user);
+
+        Mockito.when(userRepository.findById(userId)).thenReturn(Optional.of(user));
     }
 
     @Test
@@ -39,9 +46,8 @@ public class RemoveSavedAdUseCaseTest {
         Mockito.when(savedAdRepository.findById(savedAdId))
                 .thenReturn(Optional.of(savedAdvertisement));
 
-        boolean result = useCase.execute(savedAdId, userId);
+        useCase.execute(savedAdId, userId);
 
-        assertTrue(result);
         Mockito.verify(savedAdRepository).remove(savedAdvertisement);
     }
 
