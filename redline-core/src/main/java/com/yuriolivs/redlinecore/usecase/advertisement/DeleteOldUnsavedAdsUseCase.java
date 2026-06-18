@@ -1,8 +1,12 @@
 package com.yuriolivs.redlinecore.usecase.advertisement;
 
+import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
 import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class DeleteOldUnsavedAdsUseCase {
@@ -10,6 +14,9 @@ public class DeleteOldUnsavedAdsUseCase {
     private final SavedAdvertisementRepositoryInterface savedAdRepository;
 
     public void execute() {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        LocalDate threshold = LocalDate.now().minusWeeks(2);
+        List<Advertisement> foundAds = advertisementRepository.findUnsavedOlderThan(threshold);
+
+        advertisementRepository.removeAll(foundAds);
     }
 }

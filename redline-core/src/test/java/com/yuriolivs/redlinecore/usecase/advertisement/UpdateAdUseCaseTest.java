@@ -94,8 +94,8 @@ public class UpdateAdUseCaseTest {
                 useCase.execute("https://webmotors.com.br/anuncio/123", 85000.0)
         );
 
-        Mockito.verify(fipeClient, Mockito.never()).findVehicleValue(Mockito.any(), Mockito.any(), Mockito.any());
-        Mockito.verify(scoreCalculator, Mockito.never()).calculate(Mockito.any(), Mockito.any());
+        Mockito.verify(fipeClient, Mockito.never()).findVehicleValue(Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+        Mockito.verify(scoreCalculator, Mockito.never()).calculate(Mockito.any(), Mockito.anyDouble());
         Mockito.verify(advertisementRepository, Mockito.never()).save(Mockito.any());
     }
 }
