@@ -4,23 +4,16 @@ import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.service.EventPublisherInterface;
 import com.yuriolivs.redlinecore.domain.service.ScraperClientInterface;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class SearchAdsUseCase {
-    private ScraperClientInterface scraperClient;
-    private AdvertisementRepositoryInterface advertisementRepository;
-    private EventPublisherInterface eventPublisher;
+    private final ScraperClientInterface scraperClient;
+    private final AdvertisementRepositoryInterface advertisementRepository;
+    private final EventPublisherInterface eventPublisher;
 
-    public SearchAdsUseCase(
-            ScraperClientInterface scraperClient,
-            AdvertisementRepositoryInterface advertisementRepository,
-            EventPublisherInterface eventPublisher
-    ) {
-        this.scraperClient = scraperClient;
-        this.advertisementRepository = advertisementRepository;
-        this.eventPublisher = eventPublisher;
-    }
 
     public List<Advertisement> execute(
             String brand,

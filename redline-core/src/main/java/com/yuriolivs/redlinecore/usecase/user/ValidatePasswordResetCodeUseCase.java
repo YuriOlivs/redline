@@ -1,15 +1,13 @@
 package com.yuriolivs.redlinecore.usecase.user;
 
 import com.yuriolivs.redlinecore.domain.service.CacheServiceInterface;
+import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 
+@RequiredArgsConstructor
 public class ValidatePasswordResetCodeUseCase {
     private final CacheServiceInterface cacheService;
-
-    public ValidatePasswordResetCodeUseCase(CacheServiceInterface cacheService) {
-        this.cacheService = cacheService;
-    }
 
     UUID execute(String code) {
         if (code == null || code.isEmpty())

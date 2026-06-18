@@ -1,22 +1,33 @@
 package com.yuriolivs.redlinecore.usecase.advertisement;
 
+import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
+import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.user.User;
+import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 public class RemoveSavedAdUseCase {
-    private SavedAdvertisementRepositoryInterface savedAdRepository;
+    private final SavedAdvertisementRepositoryInterface savedAdRepository;
+    private final UserRepositoryInterface userRepository;
 
-    public RemoveSavedAdUseCase(
-            SavedAdvertisementRepositoryInterface savedAdRepository
-    ) {
-        this.savedAdRepository = savedAdRepository;
-    }
-
-    public boolean execute(
+    public void execute(
             UUID savedAdId,
             UUID userId
     ) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        Optional<SavedAdvertisement> savedAdFound = savedAdRepository.findById(savedAdId);
+        Optional<User> userFound = userRepository.findById(userId);
+
+        if (savedAdFound.isEmpty())
+            throw new NotFoundException("Saved advertisement not found");
+
+        if (userFound.isEmpty())
+            throw new NotFoundException("User not found");
+
+        savedAdRepository.remove(savedAdFound.get());
     }
 }

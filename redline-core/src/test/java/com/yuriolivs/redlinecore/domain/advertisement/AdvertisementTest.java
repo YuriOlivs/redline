@@ -4,6 +4,7 @@ import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -29,7 +30,8 @@ public class AdvertisementTest {
             validVehicle,
             validPriceHistory,
             LocalDate.now(),
-            validScoreHistory
+            validScoreHistory,
+            LocalDateTime.now()
     );
 
     @Test
@@ -44,7 +46,8 @@ public class AdvertisementTest {
                     VALID_ADVERTISEMENT.getVehicle(),
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -61,7 +64,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -78,7 +82,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -95,7 +100,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -112,7 +118,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -129,7 +136,8 @@ public class AdvertisementTest {
                     null,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -146,7 +154,8 @@ public class AdvertisementTest {
                     validVehicle,
                     List.of(),
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -163,7 +172,8 @@ public class AdvertisementTest {
                     validVehicle,
                     null,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
         });
     }
@@ -180,7 +190,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    List.of()
+                    List.of(),
+                    LocalDateTime.now()
             );
         });
     }
@@ -197,7 +208,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    null
+                    null,
+                    LocalDateTime.now()
             );
         });
     }
@@ -214,7 +226,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.setUrl(null);
@@ -233,7 +246,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.setWebsite("");
@@ -252,7 +266,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.setLocation(null);
@@ -271,7 +286,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.setMileage(-10);
@@ -290,7 +306,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.registerPriceChange(-1.0, LocalDate.now());
@@ -309,7 +326,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.registerPriceChange(Double.parseDouble("one"), LocalDate.now());
@@ -328,7 +346,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.registerPriceChange(Double.POSITIVE_INFINITY, LocalDate.now());
@@ -347,7 +366,8 @@ public class AdvertisementTest {
                     validVehicle,
                     validPriceHistory,
                     LocalDate.now(),
-                    validScoreHistory
+                    validScoreHistory,
+                    LocalDateTime.now()
             );
 
             ad.registerPriceChange(48000.0, LocalDate.parse("2030-01-01"));

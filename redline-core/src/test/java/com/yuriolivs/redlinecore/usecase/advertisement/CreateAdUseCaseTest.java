@@ -42,7 +42,7 @@ public class CreateAdUseCaseTest {
                 "Webmotors",
                 "São Paulo",
                 45000,
-                new BigDecimal("85000.00"),
+                85000.00,
                 vehicle
         );
 
@@ -68,7 +68,7 @@ public class CreateAdUseCaseTest {
                 "Webmotors",
                 "São Paulo",
                 45000,
-                new BigDecimal("85000.00"),
+                85000.00,
                 vehicle
         );
 
@@ -85,7 +85,7 @@ public class CreateAdUseCaseTest {
                 "Webmotors",
                 "São Paulo",
                 45000,
-                new BigDecimal("85000.00"),
+                85000.00,
                 null
         ));
 

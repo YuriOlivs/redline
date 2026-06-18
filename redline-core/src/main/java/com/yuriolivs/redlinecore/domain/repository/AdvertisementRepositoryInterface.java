@@ -21,7 +21,8 @@ public interface AdvertisementRepositoryInterface {
     List<Advertisement> findByVehicleBrandAndVehicleModel(String brand, String model);
     List<Advertisement> findByVehicleBrandAndVehicleYear(String brand, String year);
     List<Advertisement> findByVehicleBrandAndVehicleModelAndVehicleYear(String brand, String model, String year);
-    List<Advertisement> findUnsavedOlderThan(LocalDate date, List<String> savedUrls);
+    List<Advertisement> findUnsavedOlderThan(LocalDate date);
     List<Advertisement> findBySearchCriteria(AdvertisementSearchCriteria searchCriteria);
     void remove(Advertisement ad);
+    void removeAll(List<Advertisement> ads);
 }

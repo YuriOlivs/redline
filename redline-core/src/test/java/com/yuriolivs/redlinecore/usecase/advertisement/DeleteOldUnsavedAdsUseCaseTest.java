@@ -45,17 +45,16 @@ public class DeleteOldUnsavedAdsUseCaseTest {
                 .thenReturn(List.of(savedAdvertisement));
 
         Mockito.when(advertisementRepository.findUnsavedOlderThan(
-                Mockito.any(LocalDate.class),
-                Mockito.eq(List.of(savedAdId))
+                Mockito.any(LocalDate.class)
         )).thenReturn(List.of(unsavedAdvertisement));
 
         assertDoesNotThrow(() -> useCase.execute());
 
-        Mockito.verify(advertisementRepository).remove(unsavedAdvertisement);
+        Mockito.verify(advertisementRepository).removeAll(List.of(unsavedAdvertisement));
     }
 
     @Test
     void shouldLogErrorWhenExceptionOccurs() {
-        // TODO: definir estratégia de log antes de implementar
+        assertNotEquals(1, 1);
     }
 }

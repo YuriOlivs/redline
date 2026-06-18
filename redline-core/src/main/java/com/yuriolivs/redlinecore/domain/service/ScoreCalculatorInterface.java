@@ -4,5 +4,5 @@ import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 
 public interface ScoreCalculatorInterface {
-    ScoreRecord calculate(Advertisement advertisement);
+    ScoreRecord calculate(Advertisement advertisement, double fipeValue);
 }

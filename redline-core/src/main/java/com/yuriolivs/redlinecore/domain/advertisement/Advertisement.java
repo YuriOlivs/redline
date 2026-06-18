@@ -1,15 +1,15 @@
 package com.yuriolivs.redlinecore.domain.advertisement;
 
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 public class Advertisement {
@@ -17,13 +17,42 @@ public class Advertisement {
     private String website;
     private String location;
     private Integer mileage;
-    private List<PriceRecord> priceHistory;
+    private final List<PriceRecord> priceHistory;
     @Setter
     private boolean active;
     @Setter
     private Vehicle vehicle;
     private LocalDate lastUpdate;
-    private List<ScoreRecord> scoreHistory;
+    private final List<ScoreRecord> scoreHistory;
+    private LocalDateTime createdAt;
+
+    public Advertisement(
+            String url,
+            String website,
+            String location,
+            boolean active,
+            Integer mileage,
+            Vehicle vehicle,
+            LocalDate lastUpdate
+    ) {
+        validateUrl(url);
+        validateWebsite(website);
+        validateLocation(location);
+        validateMileage(mileage);
+        validateVehicle(vehicle);
+        validateLastUpdate(lastUpdate);
+
+        this.url = url;
+        this.website = website;
+        this.location = location;
+        this.active = active;
+        this.mileage = mileage;
+        this.vehicle = vehicle;
+        this.lastUpdate = lastUpdate;
+        this.priceHistory = new ArrayList<>();
+        this.scoreHistory = new ArrayList<>();
+        this.createdAt = LocalDateTime.now();
+    }
 
     public Advertisement(
             String url,
@@ -34,7 +63,8 @@ public class Advertisement {
             Vehicle vehicle,
             List<PriceRecord> priceHistory,
             LocalDate lastUpdate,
-            List<ScoreRecord> scoreHistory
+            List<ScoreRecord> scoreHistory,
+            LocalDateTime createdAt
     ) {
         validateUrl(url);
         validateWebsite(website);
@@ -54,6 +84,7 @@ public class Advertisement {
         this.lastUpdate = lastUpdate;
         this.priceHistory = priceHistory;
         this.scoreHistory = scoreHistory;
+        this.createdAt = createdAt;
     }
 
     private void validateUrl(String url) {
@@ -96,6 +127,11 @@ public class Advertisement {
             throw new IllegalArgumentException("Last Update must be past or present");
     }
 
+    private void validateCreatedAt(LocalDateTime createdAt) {
+        if (createdAt.isAfter(LocalDateTime.now()))
+            throw new IllegalArgumentException("Created at must be past or present");
+    }
+
     public List<PriceRecord> getPriceHistory() {
         return Collections.unmodifiableList(this.priceHistory);
     }
@@ -108,7 +144,7 @@ public class Advertisement {
         return scoreHistory.get(scoreHistory.size() - 1).getValue();
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return priceHistory.get(priceHistory.size() - 1).getPrice();
     }
 
@@ -119,11 +155,6 @@ public class Advertisement {
     public void registerPriceChange(Double price, LocalDate changedDate) {
         PriceRecord record = new PriceRecord(price, changedDate);
         this.priceHistory.add(record);
-    }
-
-    public void registerScoreChange(Integer value, LocalDate changedDate) {
-        ScoreRecord record = new ScoreRecord(value, changedDate);
-        this.scoreHistory.add(record);
     }
 
     public void registerScoreChange(ScoreRecord scoreRecord) {
