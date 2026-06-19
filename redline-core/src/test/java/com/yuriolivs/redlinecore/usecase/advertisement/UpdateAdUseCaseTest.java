@@ -40,9 +40,7 @@ public class UpdateAdUseCaseTest {
         useCase = new UpdateAdUseCase(
                 advertisementRepository,
                 scoreCalculator,
-                fipeClient,
-                eventPublisher,
-                alertPreferencesRepository
+                fipeClient
         );
 
         advertisement = Mockito.mock(Advertisement.class);

@@ -31,6 +31,9 @@ public class UpdateAdUseCase {
 
         Advertisement ad = adFound.get();
 
+        if (!ad.isActive())
+            throw new IllegalArgumentException("Advertisement is inactive");
+
         if (!Objects.equals(ad.getPrice(), price)) {
             ad.registerPriceChange(price, now);
         }
