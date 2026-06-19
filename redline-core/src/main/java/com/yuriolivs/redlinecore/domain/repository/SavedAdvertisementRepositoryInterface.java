@@ -12,6 +12,7 @@ public interface SavedAdvertisementRepositoryInterface {
     Optional<SavedAdvertisement> findById(UUID id);
     List<SavedAdvertisement> findByUser(User user);
     List<SavedAdvertisement> findAllAdvertisements();
+    List<User> findUsersByAdvertisement(String url);
     void remove(SavedAdvertisement savedAd);
     void removeAllByUser(User user);
 }
