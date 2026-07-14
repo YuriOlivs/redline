@@ -1,7 +1,6 @@
 package com.yuriolivs.redlinecore.domain.alert;
 
 
-import com.yuriolivs.redlinecore.domain.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,5 +49,9 @@ public class AlertPreferences {
     public void setUser(UUID user) {
         validateUser(user);
         this.user = user;
+    }
+
+    public boolean isOff() {
+        return !sendForPriceIncrease && !sendForDescriptionChange && !sendForPriceDecrease && !sendForScoreChange;
     }
 }

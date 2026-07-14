@@ -5,11 +5,11 @@ import com.yuriolivs.redlinecore.domain.alert.AlertType;
 import lombok.Getter;
 
 @Getter
-public class AdvertisementUpdateEvent {
+public class UpdatedAdvertisementEvent {
     private final Advertisement advertisement;
     private final AlertType type;
 
-    public AdvertisementUpdateEvent(
+    public UpdatedAdvertisementEvent(
             Advertisement advertisement,
             AlertType type
     ) {
