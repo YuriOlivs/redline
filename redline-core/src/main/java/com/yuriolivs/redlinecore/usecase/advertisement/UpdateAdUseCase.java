@@ -41,7 +41,7 @@ public class UpdateAdUseCase {
         Vehicle vehicle = ad.getVehicle();
         Double fipeValue = fipeClient.findVehicleValue(vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
 
-        ScoreRecord scoreRecord = scoreCalculator.calculate(ad, fipeValue);
+        ScoreRecord scoreRecord = scoreCalculator.calculate(ad, fipeValue, LocalDate.now());
 
         ad.registerScoreChange(scoreRecord);
 

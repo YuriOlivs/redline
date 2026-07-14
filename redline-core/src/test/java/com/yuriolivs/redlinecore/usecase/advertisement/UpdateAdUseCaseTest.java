@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,7 +53,7 @@ public class UpdateAdUseCaseTest {
         Mockito.when(vehicle.getModel()).thenReturn("Corolla");
         Mockito.when(vehicle.getYear()).thenReturn(2020);
         Mockito.when(fipeClient.findVehicleValue("Toyota", "Corolla", 2020)).thenReturn(80000.0);
-        Mockito.when(scoreCalculator.calculate(advertisement, 80000.0)).thenReturn(scoreRecord);
+        Mockito.when(scoreCalculator.calculate(advertisement, 80000.0, LocalDate.now())).thenReturn(scoreRecord);
         Mockito.when(advertisementRepository.save(Mockito.any(Advertisement.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
     }
@@ -72,7 +73,7 @@ public class UpdateAdUseCaseTest {
         assertNotNull(result);
         Mockito.verify(advertisement).registerPriceChange(Mockito.eq(newPrice), Mockito.any());
         Mockito.verify(fipeClient).findVehicleValue("Toyota", "Corolla", 2020);
-        Mockito.verify(scoreCalculator).calculate(advertisement, 80000.0);
+        Mockito.verify(scoreCalculator).calculate(advertisement, 80000.0, LocalDate.now());
         Mockito.verify(advertisement).registerScoreChange(scoreRecord);
         Mockito.verify(advertisementRepository).save(advertisement);
     }
@@ -91,7 +92,7 @@ public class UpdateAdUseCaseTest {
         assertNotNull(result);
         Mockito.verify(advertisement, Mockito.never()).registerPriceChange(Mockito.any(), Mockito.any());
         Mockito.verify(fipeClient).findVehicleValue("Toyota", "Corolla", 2020);
-        Mockito.verify(scoreCalculator).calculate(advertisement, 80000.0);
+        Mockito.verify(scoreCalculator).calculate(advertisement, 80000.0, LocalDate.now());
         Mockito.verify(advertisement).registerScoreChange(scoreRecord);
         Mockito.verify(advertisementRepository).save(advertisement);
     }
@@ -106,7 +107,7 @@ public class UpdateAdUseCaseTest {
         );
 
         Mockito.verify(fipeClient, Mockito.never()).findVehicleValue(Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
-        Mockito.verify(scoreCalculator, Mockito.never()).calculate(Mockito.any(), Mockito.anyDouble());
+        Mockito.verify(scoreCalculator, Mockito.never()).calculate(Mockito.any(), Mockito.anyDouble(), LocalDate.now());
         Mockito.verify(advertisementRepository, Mockito.never()).save(Mockito.any());
     }
 }

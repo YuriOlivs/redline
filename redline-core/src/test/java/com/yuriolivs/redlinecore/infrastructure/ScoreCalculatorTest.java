@@ -1,7 +1,6 @@
 package com.yuriolivs.redlinecore.infrastructure;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
-import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementTest;
 import com.yuriolivs.redlinecore.domain.advertisement.PriceRecord;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
@@ -38,7 +37,7 @@ public class ScoreCalculatorTest {
 
     @Test
     void shouldCalculateScoreSuccessfullyWhenTimeFactorIsZero() {
-        ScoreRecord score = scoreCalculator.calculate(advertisement, 57000.00);
+        ScoreRecord score = scoreCalculator.calculate(advertisement, 57000.00, LocalDate.now());
 
         assertNotNull(score);
         assertNotEquals(0, score.getValue());
@@ -60,7 +59,7 @@ public class ScoreCalculatorTest {
                 LocalDateTime.parse("2026-05-15T20:15:30")
         );
 
-        ScoreRecord score = scoreCalculator.calculate(advertisement2, 57000.00);
+        ScoreRecord score = scoreCalculator.calculate(advertisement2, 57000.00, LocalDate.now());
 
         assertNotNull(score);
         assertNotEquals(0, score.getValue());
@@ -70,21 +69,21 @@ public class ScoreCalculatorTest {
     @Test
     void shouldThrowExceptionWhenAdvertisementIsNull() {
         assertThrows(IllegalArgumentException.class, () -> {
-            scoreCalculator.calculate(null, 57000.00);
+            scoreCalculator.calculate(null, 57000.00, LocalDate.now());
         });
     }
 
     @Test
     void shouldThrowExceptionWhenFipeValueIsEqualToZero() {
         assertThrows(IllegalArgumentException.class, () -> {
-            scoreCalculator.calculate(advertisement, 0.0);
+            scoreCalculator.calculate(advertisement, 0.0, LocalDate.now());
         });
     }
 
     @Test
     void shouldThrowExceptionWhenFipeValueIsLessThanZero() {
         assertThrows(IllegalArgumentException.class, () -> {
-            scoreCalculator.calculate(advertisement, -57000.0);
+            scoreCalculator.calculate(advertisement, -57000.0, LocalDate.now());
         });
     }
 }
