@@ -59,11 +59,11 @@ public class ScoreCalculatorTest {
                 LocalDateTime.parse("2026-05-15T20:15:30")
         );
 
-        ScoreRecord score = scoreCalculator.calculate(advertisement2, 57000.00, LocalDate.now());
+        ScoreRecord score = scoreCalculator.calculate(advertisement2, 57000.00, LocalDate.parse("2026-07-14"));
 
         assertNotNull(score);
         assertNotEquals(0, score.getValue());
-        assertEquals(688, score.getValue());
+        assertEquals(708, score.getValue());
     }
 
     @Test
