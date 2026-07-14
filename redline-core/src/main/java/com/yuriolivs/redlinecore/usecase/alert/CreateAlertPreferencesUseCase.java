@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-public class CreateAlertPreferences {
+public class CreateAlertPreferencesUseCase {
     private final AlertPreferencesRepository preferencesRepository;
 
     public AlertPreferences execute(UUID userId) {
