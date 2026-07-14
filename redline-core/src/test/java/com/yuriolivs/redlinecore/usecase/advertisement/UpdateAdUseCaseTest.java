@@ -45,6 +45,8 @@ public class UpdateAdUseCaseTest {
         );
 
         advertisement = Mockito.mock(Advertisement.class);
+        Mockito.when(advertisement.isActive()).thenReturn(true);
+
         scoreRecord = Mockito.mock(ScoreRecord.class);
         vehicle = Mockito.mock(Vehicle.class);
 
@@ -107,7 +109,7 @@ public class UpdateAdUseCaseTest {
         );
 
         Mockito.verify(fipeClient, Mockito.never()).findVehicleValue(Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
-        Mockito.verify(scoreCalculator, Mockito.never()).calculate(Mockito.any(), Mockito.anyDouble(), LocalDate.now());
+        Mockito.verify(scoreCalculator, Mockito.never()).calculate(Mockito.any(), Mockito.anyDouble(), Mockito.any(LocalDate.class));
         Mockito.verify(advertisementRepository, Mockito.never()).save(Mockito.any());
     }
 }

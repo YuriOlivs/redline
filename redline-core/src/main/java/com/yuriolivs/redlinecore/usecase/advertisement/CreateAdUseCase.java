@@ -48,7 +48,6 @@ public class CreateAdUseCase {
                 url,
                 website,
                 location,
-                true,
                 mileage,
                 vehicle,
                 now
