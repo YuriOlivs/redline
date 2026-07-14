@@ -1,7 +1,6 @@
 package com.yuriolivs.redlinecore.infrastructure;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
-import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementTest;
 import com.yuriolivs.redlinecore.domain.advertisement.PriceRecord;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
@@ -26,7 +25,6 @@ public class ScoreCalculatorTest {
                 "https://webmotors.com.br/anuncio",
                 "webmotors",
                 "São Paulo, SP",
-                true,
                 90000,
                 new Vehicle("Nissan", "Sentra", 2015),
                 List.of(new PriceRecord(60000.0, LocalDate.parse("2026-05-01"))),
@@ -38,7 +36,7 @@ public class ScoreCalculatorTest {
 
     @Test
     void shouldCalculateScoreSuccessfullyWhenTimeFactorIsZero() {
-        ScoreRecord score = scoreCalculator.calculate(advertisement, 57000.00);
+        ScoreRecord score = scoreCalculator.calculate(advertisement, 57000.00, LocalDate.now());
 
         assertNotNull(score);
         assertNotEquals(0, score.getValue());
@@ -51,7 +49,6 @@ public class ScoreCalculatorTest {
                 "https://webmotors.com.br/anuncio",
                 "webmotors",
                 "São Paulo, SP",
-                true,
                 90000,
                 new Vehicle("Nissan", "Sentra", 2015),
                 List.of(new PriceRecord(60000.0, LocalDate.parse("2026-05-01"))),
@@ -60,31 +57,31 @@ public class ScoreCalculatorTest {
                 LocalDateTime.parse("2026-05-15T20:15:30")
         );
 
-        ScoreRecord score = scoreCalculator.calculate(advertisement2, 57000.00);
+        ScoreRecord score = scoreCalculator.calculate(advertisement2, 57000.00, LocalDate.parse("2026-07-14"));
 
         assertNotNull(score);
         assertNotEquals(0, score.getValue());
-        assertEquals(688, score.getValue());
+        assertEquals(708, score.getValue());
     }
 
     @Test
     void shouldThrowExceptionWhenAdvertisementIsNull() {
         assertThrows(IllegalArgumentException.class, () -> {
-            scoreCalculator.calculate(null, 57000.00);
+            scoreCalculator.calculate(null, 57000.00, LocalDate.now());
         });
     }
 
     @Test
     void shouldThrowExceptionWhenFipeValueIsEqualToZero() {
         assertThrows(IllegalArgumentException.class, () -> {
-            scoreCalculator.calculate(advertisement, 0.0);
+            scoreCalculator.calculate(advertisement, 0.0, LocalDate.now());
         });
     }
 
     @Test
     void shouldThrowExceptionWhenFipeValueIsLessThanZero() {
         assertThrows(IllegalArgumentException.class, () -> {
-            scoreCalculator.calculate(advertisement, -57000.0);
+            scoreCalculator.calculate(advertisement, -57000.0, LocalDate.now());
         });
     }
 }

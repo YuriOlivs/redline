@@ -10,12 +10,12 @@ import java.time.temporal.ChronoUnit;
 
 public class ScoreCalculator implements ScoreCalculatorInterface {
     @Override
-    public ScoreRecord calculate(Advertisement ad, double fipeValue) {
+    public ScoreRecord calculate(Advertisement ad, double fipeValue, LocalDate referenceDate) {
         validateAdvertisement(ad);
         validateFipeValue(fipeValue);
         
         double fipeFactor = calculateFipeFactor(ad.getPrice(), fipeValue);
-        double timeFactor = calculateTimeFactor(ad.getCreatedAt().toLocalDate());
+        double timeFactor = calculateTimeFactor(ad.getCreatedAt().toLocalDate(), referenceDate);
         double priceChangeFactor = calculatePriceChangeFactor(ad.getPriceHistory().size());
 
         double score = (fipeFactor * .40) + (priceChangeFactor * .35) + (timeFactor * .25);
@@ -28,8 +28,8 @@ public class ScoreCalculator implements ScoreCalculatorInterface {
         return 1000 * Math.exp(-Math.pow(distance - .05, 2) / (2 * Math.pow(.15, 2)));
     }
 
-    private double calculateTimeFactor(LocalDate followedDate) {
-        long daysOnAir = ChronoUnit.DAYS.between(followedDate, LocalDate.now());;
+    private double calculateTimeFactor(LocalDate followedDate, LocalDate referenceDate) {
+        long daysOnAir = ChronoUnit.DAYS.between(followedDate, referenceDate);
         double normalized = Math.min(daysOnAir, 180) / 180.0;
         return 1000 * Math.pow(normalized, 2);
     }

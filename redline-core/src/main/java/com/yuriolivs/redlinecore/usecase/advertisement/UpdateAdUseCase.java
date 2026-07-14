@@ -31,6 +31,9 @@ public class UpdateAdUseCase {
 
         Advertisement ad = adFound.get();
 
+        if (!ad.isActive())
+            throw new IllegalArgumentException("Advertisement is inactive");
+
         if (!Objects.equals(ad.getPrice(), price)) {
             ad.registerPriceChange(price, now);
         }
@@ -38,7 +41,7 @@ public class UpdateAdUseCase {
         Vehicle vehicle = ad.getVehicle();
         Double fipeValue = fipeClient.findVehicleValue(vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
 
-        ScoreRecord scoreRecord = scoreCalculator.calculate(ad, fipeValue);
+        ScoreRecord scoreRecord = scoreCalculator.calculate(ad, fipeValue, LocalDate.now());
 
         ad.registerScoreChange(scoreRecord);
 

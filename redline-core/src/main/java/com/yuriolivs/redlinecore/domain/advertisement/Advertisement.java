@@ -30,7 +30,6 @@ public class Advertisement {
             String url,
             String website,
             String location,
-            boolean active,
             Integer mileage,
             Vehicle vehicle,
             LocalDate lastUpdate
@@ -45,7 +44,7 @@ public class Advertisement {
         this.url = url;
         this.website = website;
         this.location = location;
-        this.active = active;
+        this.active = true;
         this.mileage = mileage;
         this.vehicle = vehicle;
         this.lastUpdate = lastUpdate;
@@ -58,7 +57,6 @@ public class Advertisement {
             String url,
             String website,
             String location,
-            boolean active,
             Integer mileage,
             Vehicle vehicle,
             List<PriceRecord> priceHistory,
@@ -78,7 +76,7 @@ public class Advertisement {
         this.url = url;
         this.website = website;
         this.location = location;
-        this.active = active;
+        this.active = true;
         this.mileage = mileage;
         this.vehicle = vehicle;
         this.lastUpdate = lastUpdate;

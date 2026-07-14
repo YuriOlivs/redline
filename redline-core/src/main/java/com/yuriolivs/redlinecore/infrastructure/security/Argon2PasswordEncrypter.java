@@ -1,4 +1,4 @@
-package com.yuriolivs.redlinecore.infrastructure;
+package com.yuriolivs.redlinecore.infrastructure.security;
 
 import com.yuriolivs.redlinecore.domain.security.PasswordEncrypter;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
