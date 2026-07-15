@@ -112,7 +112,7 @@ def scrape(
             except Exception as e:
                 print(f"Erro: {e}")
 
-        input("Pressione Enter para fechar...")
         browser.close()
 
-scrape(brand="nissan", model="march")
+        unique_advertisements = {ad.url: ad for ad in advertisements}
+        return list(unique_advertisements.values())
