@@ -45,9 +45,10 @@ def scrape(
         km: Optional[int] = None,
         location: Optional[str] = None,
 ):
-
+    website_name = "NaPista"
+    basic_url = "https://napista.com.br"
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=True)
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
             viewport={"width": 1280, "height": 800},
@@ -101,11 +102,9 @@ def scrape(
                     year=year_int,
                     km=km_int,
                     location=scraper_location.inner_text() if scraper_location else "not found",
-                    url=scraper_href if scraper_href else "not found",
-                    website="NaPista"
+                    url=basic_url + scraper_href if scraper_href else "not found",
+                    website=website_name
                 )
-
-                print(advertisement)
 
                 advertisements.append(advertisement)
 
