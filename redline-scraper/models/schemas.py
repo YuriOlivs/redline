@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 class Advertisement(BaseModel):
@@ -9,3 +11,8 @@ class Advertisement(BaseModel):
     km: int
     location: str
     url: str
+
+class SearchResults(BaseModel):
+    total_found: int
+    advertisements: list[Advertisement]
+    date: str
