@@ -38,7 +38,6 @@ public class Advertisement {
         validateLocation(location);
         validateMileage(mileage);
         validateVehicle(vehicle);
-        validateLastUpdate(lastUpdate);
 
         this.url = url;
         this.website = website;
