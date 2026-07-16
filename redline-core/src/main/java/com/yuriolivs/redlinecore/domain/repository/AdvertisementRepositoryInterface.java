@@ -12,15 +12,6 @@ public interface AdvertisementRepositoryInterface {
     Advertisement save(Advertisement ad);
     List<Advertisement> saveAll(List<Advertisement> ads);
     Optional<Advertisement> findByUrl(String url);
-    List<Advertisement> findByWebsite(String website);
-    List<Advertisement> findByLocation(String location);
-    List<Advertisement> findByActive(boolean active);
-    List<Advertisement> findByMileage(Integer mileage);
-    List<Advertisement> findByVehicleBrand(String brand);
-    List<Advertisement> findByVehicleYear(String year);
-    List<Advertisement> findByVehicleBrandAndVehicleModel(String brand, String model);
-    List<Advertisement> findByVehicleBrandAndVehicleYear(String brand, String year);
-    List<Advertisement> findByVehicleBrandAndVehicleModelAndVehicleYear(String brand, String model, String year);
     List<Advertisement> findUnsavedOlderThan(LocalDate date);
     List<Advertisement> findBySearchCriteria(AdvertisementSearchCriteria searchCriteria);
     void remove(Advertisement ad);

@@ -24,15 +24,14 @@ public class Advertisement {
     private Vehicle vehicle;
     private LocalDate lastUpdate;
     private final List<ScoreRecord> scoreHistory;
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
 
     public Advertisement(
             String url,
             String website,
             String location,
             Integer mileage,
-            Vehicle vehicle,
-            LocalDate lastUpdate
+            Vehicle vehicle
     ) {
         validateUrl(url);
         validateWebsite(website);
@@ -47,7 +46,7 @@ public class Advertisement {
         this.active = true;
         this.mileage = mileage;
         this.vehicle = vehicle;
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = LocalDate.now();
         this.priceHistory = new ArrayList<>();
         this.scoreHistory = new ArrayList<>();
         this.createdAt = LocalDateTime.now();
