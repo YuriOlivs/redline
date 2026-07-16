@@ -49,8 +49,7 @@ public class CreateAdUseCase {
                 website,
                 location,
                 mileage,
-                vehicle,
-                now
+                vehicle
         );
 
         ScoreRecord scoreRecord = new ScoreRecord(0, now);

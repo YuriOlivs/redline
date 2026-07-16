@@ -1,37 +1,39 @@
 package com.yuriolivs.redlinecore.application.advertisement.usecase;
 
-import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperAdvertisementDto;
 import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperResultDto;
 import com.yuriolivs.redlinecore.application.advertisement.mapper.AdvertisementMapper;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteria;
-import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.event.AdsScrapedEvent;
-import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
 import com.yuriolivs.redlinecore.domain.service.EventPublisherInterface;
-import com.yuriolivs.redlinecore.domain.service.FIPEClientInterface;
 import com.yuriolivs.redlinecore.domain.service.ScraperClientInterface;
-import com.yuriolivs.redlinecore.infrastructure.ScoreCalculator;
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class SearchAdsUseCase {
     private final ScraperClientInterface scraperClient;
+    private final AdvertisementRepositoryInterface advertisementRepository;
     private final EventPublisherInterface eventPublisher;
 
-    public List<Advertisement> execute(
+    public Set<Advertisement> execute(
             AdvertisementSearchCriteria searchCriteria
     ) {
+        Set<Advertisement> ads = new HashSet<>();
+
+        List<Advertisement> databaseAds = advertisementRepository.findBySearchCriteria(searchCriteria);
         ScraperResultDto scraperResponse = scraperClient.scrapeAdsBySearchCriteria(searchCriteria);
 
-        if (scraperResponse.advertisementDtos().isEmpty())
-            throw new NotFoundException("Advertisements");
+        List<Advertisement> scraperAds = scraperResponse.advertisementDtos().stream().map(AdvertisementMapper::toDomain).toList();
 
-        List<Advertisement> ads = scraperResponse.advertisementDtos().stream().map(AdvertisementMapper::toDomain).toList();
-        eventPublisher.publish(new AdsScrapedEvent(ads));
+        ads.addAll(databaseAds);
+        ads.addAll(scraperAds);
+
+        eventPublisher.publish(new AdsScrapedEvent(scraperAds));
 
         return ads;
     }

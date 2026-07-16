@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +24,6 @@ public class SearchAdsUseCaseTest {
     private SearchAdsUseCase useCase;
 
     private Advertisement advertisement;
-    private ScraperAdvertisementDto dto;
     private ScraperResultDto resultDto;
     private AdvertisementSearchCriteria criteria;
 
@@ -45,85 +45,40 @@ public class SearchAdsUseCaseTest {
                 .build();
 
         advertisement = Mockito.mock(Advertisement.class);
-        dto = Mockito.mock(ScraperAdvertisementDto.class);
         resultDto = Mockito.mock(ScraperResultDto.class);
     }
 
     @Test
-    void shouldReturnAdsFromDatabaseWhenResultsAreFound() {
-        Mockito.when(advertisementRepository.findBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class)))
+    void shouldReturnMergedAdsFromDatabaseAndScraper() {
+        Mockito.when(advertisementRepository.findBySearchCriteria(criteria))
                 .thenReturn(List.of(advertisement));
 
-        List<Advertisement> result = useCase.execute(criteria);
-
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        Mockito.verify(advertisementRepository).findBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class));
-        Mockito.verify(scraperClient, Mockito.never()).scrapeAdsBySearchCriteria(Mockito.any());
-    }
-
-    @Test
-    void shouldCallScraperWhenNoDatabaseResultsAreFound() {
-        Mockito.when(advertisementRepository.findBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class)))
-                .thenReturn(List.of());
-
-        Mockito.when(scraperClient.scrapeAdsBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class)))
+        Mockito.when(scraperClient.scrapeAdsBySearchCriteria(criteria))
                 .thenReturn(resultDto);
 
-        Mockito.when(advertisementRepository.saveAll(Mockito.anyList()))
-                .thenReturn(List.of(advertisement));
-
-        List<Advertisement> result = useCase.execute(criteria);
-
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        Mockito.verify(scraperClient).scrapeAdsBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class));
-        Mockito.verify(advertisementRepository).saveAll(Mockito.anyList());
-    }
-
-    @Test
-    void shouldReturnDatabaseResultsAndPublishEventWhenResultsAreOutdated() {
-        Mockito.when(advertisementRepository.findBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class)))
-                .thenReturn(List.of(advertisement));
-
-        Mockito.when(advertisement.isOutdated()).thenReturn(true);
-
-        List<Advertisement> result = useCase.execute(criteria);
-
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        Mockito.verify(eventPublisher).publish(Mockito.any());
-        Mockito.verify(scraperClient, Mockito.never()).scrapeAdsBySearchCriteria(Mockito.any());
-    }
-
-    @Test
-    void shouldReturnDatabaseResultsWhenScraperFails() {
-        Mockito.when(advertisementRepository.findBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class)))
-                .thenReturn(List.of(advertisement));
-
-        Mockito.when(advertisement.isOutdated()).thenReturn(true);
-
-        Mockito.doThrow(new RuntimeException("Scraper unavailable"))
-                .when(eventPublisher).publish(Mockito.any());
-
-        List<Advertisement> result = useCase.execute(criteria);
-
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-    }
-
-    @Test
-    void shouldReturnEmptyListWhenDatabaseIsEmptyAndScraperFails() {
-        Mockito.when(advertisementRepository.findBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class)))
+        Mockito.when(resultDto.advertisementDtos())
                 .thenReturn(List.of());
 
-        Mockito.when(scraperClient.scrapeAdsBySearchCriteria(Mockito.any(AdvertisementSearchCriteria.class)))
-                .thenThrow(new RuntimeException("Scraper unavailable"));
-
-        List<Advertisement> result = useCase.execute(criteria);
+        Set<Advertisement> result = useCase.execute(criteria);
 
         assertNotNull(result);
-        assertTrue(result.isEmpty());
-        Mockito.verify(advertisementRepository, Mockito.never()).saveAll(Mockito.anyList());
+        assertFalse(result.isEmpty());
+
+        Mockito.verify(advertisementRepository).findBySearchCriteria(criteria);
+        Mockito.verify(scraperClient).scrapeAdsBySearchCriteria(criteria);
+        Mockito.verify(eventPublisher).publish(Mockito.any());
+    }
+
+    @Test
+    void shouldReturnOnlyDatabaseResultsWhenScraperFails() {
+        Mockito.when(advertisementRepository.findBySearchCriteria(criteria))
+                .thenReturn(List.of(advertisement));
+
+        Mockito.when(scraperClient.scrapeAdsBySearchCriteria(criteria))
+                .thenThrow(new RuntimeException("Scraper offline"));
+
+        assertThrows(RuntimeException.class, () -> {
+            useCase.execute(criteria);
+        });
     }
 }
