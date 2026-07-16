@@ -1,6 +1,6 @@
 package com.yuriolivs.redlinecore.application.advertisement;
 
-import com.yuriolivs.redlinecore.application.advertisement.usecase.DeleteOldUnsavedAdsUseCase;
+import com.yuriolivs.redlinecore.application.advertisement.usecase.DeleteOutdatedAdsUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
@@ -14,10 +14,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DeleteOldUnsavedAdsUseCaseTest {
+public class DeleteOutdatedAdsUseCaseTest {
     private AdvertisementRepositoryInterface advertisementRepository;
     private SavedAdvertisementRepositoryInterface savedAdRepository;
-    private DeleteOldUnsavedAdsUseCase useCase;
+    private DeleteOutdatedAdsUseCase useCase;
 
     private SavedAdvertisement savedAdvertisement;
     private String savedAdId;
@@ -26,7 +26,7 @@ public class DeleteOldUnsavedAdsUseCaseTest {
     void setUp() {
         advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
         savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
-        useCase = new DeleteOldUnsavedAdsUseCase(advertisementRepository, savedAdRepository);
+        useCase = new DeleteOutdatedAdsUseCase(advertisementRepository, savedAdRepository);
 
         savedAdId = "https://webmotors.com.br/anuncio/123";
         Advertisement advertisement = Mockito.mock(Advertisement.class);

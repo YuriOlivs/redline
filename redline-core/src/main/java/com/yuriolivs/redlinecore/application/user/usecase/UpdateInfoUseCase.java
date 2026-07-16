@@ -17,7 +17,7 @@ public class UpdateInfoUseCase {
             String name,
             String lastName
     ) {
-        if(name == null && lastName == null || name.isEmpty() && lastName.isEmpty())
+        if(name == null || name.isEmpty() && lastName == null || lastName.isEmpty())
             throw new IllegalArgumentException("One of the following fields must be filled: name, lastName");
 
         Optional<User> userFound = userRepository.findById(id);

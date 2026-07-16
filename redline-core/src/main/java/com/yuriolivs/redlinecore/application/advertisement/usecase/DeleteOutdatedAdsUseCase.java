@@ -9,12 +9,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class DeleteOldUnsavedAdsUseCase {
+public class DeleteOutdatedAdsUseCase {
     private final AdvertisementRepositoryInterface advertisementRepository;
     private final SavedAdvertisementRepositoryInterface savedAdRepository;
+    private final Integer DAYS_THRESHOLD = 4;
 
     public void execute() {
-        LocalDate threshold = LocalDate.now().minusWeeks(2);
+        LocalDate threshold = LocalDate.now().minusDays(DAYS_THRESHOLD);
         List<Advertisement> foundAds = advertisementRepository.findUnsavedOlderThan(threshold);
 
         advertisementRepository.removeAll(foundAds);
