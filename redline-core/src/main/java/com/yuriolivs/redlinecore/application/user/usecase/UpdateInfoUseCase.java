@@ -12,7 +12,7 @@ import java.util.UUID;
 public class UpdateInfoUseCase {
     private final UserRepositoryInterface userRepository;
 
-    User execute(
+    public User execute(
             UUID id,
             String name,
             String lastName

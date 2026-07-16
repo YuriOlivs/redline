@@ -16,7 +16,7 @@ public class RequestPasswordResetUseCase {
     private final CodeGeneratorInterface codeGenerator;
     private final CacheServiceInterface cacheService;
 
-    String execute(String email) {
+    public String execute(String email) {
         Optional<User> userFound = userRepository.findByEmail(email);
 
         if (userFound.isEmpty())

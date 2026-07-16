@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ValidatePasswordResetCodeUseCase {
     private final CacheServiceInterface cacheService;
 
-    UUID execute(String code) {
+    public UUID execute(String code) {
         if (code == null || code.isEmpty())
             throw new IllegalArgumentException("Code can't be null");
 

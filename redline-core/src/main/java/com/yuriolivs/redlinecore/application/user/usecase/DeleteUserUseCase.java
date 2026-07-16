@@ -14,7 +14,7 @@ public class DeleteUserUseCase {
     private final UserRepositoryInterface userRepository;
     private final SavedAdvertisementRepositoryInterface savedAdRepository;
 
-    void execute(UUID id) {
+    public void execute(UUID id) {
         Optional<User> userFound = userRepository.findById(id);
         if (userFound.isEmpty())
             throw new NotFoundException("User");
