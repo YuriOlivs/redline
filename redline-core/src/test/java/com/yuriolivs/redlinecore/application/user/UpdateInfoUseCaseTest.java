@@ -64,6 +64,7 @@ public class UpdateInfoUseCaseTest {
     void assertThrowsExceptionWhenUserIsNotFound() {
         UUID wrongUserId = UUID.randomUUID();
         String newName = "Nino";
+        String newLastName = "Silva";
 
         Mockito.when(userRepository.findById(wrongUserId))
                 .thenReturn(Optional.empty());
@@ -72,7 +73,7 @@ public class UpdateInfoUseCaseTest {
             User updatedUser = useCase.execute(
                     wrongUserId,
                     newName,
-                    null
+                    newLastName
             );
         });
 

@@ -53,9 +53,4 @@ public class DeleteOutdatedAdsUseCaseTest {
 
         Mockito.verify(advertisementRepository).removeAll(List.of(unsavedAdvertisement));
     }
-
-    @Test
-    void shouldLogErrorWhenExceptionOccurs() {
-        assertNotEquals(1, 1);
-    }
 }
