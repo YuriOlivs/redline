@@ -2,15 +2,13 @@ package com.yuriolivs.redlinecore.application.advertisement.mapper;
 
 import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperAdvertisementDto;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
-import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 
 import java.time.LocalDate;
 
 public class AdvertisementMapper {
-    public Advertisement toDomain(
-            ScraperAdvertisementDto dto,
-            ScoreRecord scoreRecord
+    public static Advertisement toDomain(
+            ScraperAdvertisementDto dto
     ) {
         Vehicle vehicle = new Vehicle(
                 extractBrand(dto.brandModel()),
@@ -30,7 +28,6 @@ public class AdvertisementMapper {
         );
 
         advertisement.registerPriceChange(dto.price().doubleValue(), LocalDate.now());
-        advertisement.registerScoreChange(scoreRecord);
 
         return advertisement;
     }

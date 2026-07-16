@@ -5,7 +5,6 @@ import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 public class ScoreCalculator implements ScoreCalculatorInterface {
