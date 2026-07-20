@@ -31,10 +31,10 @@ public class AdAlertTriggeredEvent {
     }
 
     private void validateAdvertisement(Advertisement ad) {
-        if (advertisement == null)
+        if (ad == null)
             throw new IllegalArgumentException("Advertisement can't be null");
 
-        if (!advertisement.isActive())
+        if (!ad.isActive())
             throw new IllegalArgumentException("Advertisement can't be inactive");
     }
 
