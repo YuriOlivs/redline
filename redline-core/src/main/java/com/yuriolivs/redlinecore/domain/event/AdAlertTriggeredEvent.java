@@ -12,6 +12,7 @@ public class AdAlertTriggeredEvent {
     private final Advertisement advertisement;
     private final AlertType type;
     private final LocalDateTime triggeredAt;
+    private final UUID targetUser;
 
     public AdAlertTriggeredEvent(
             Advertisement advertisement,
@@ -20,10 +21,12 @@ public class AdAlertTriggeredEvent {
             LocalDateTime triggeredAt
     ) {
         validateAdvertisement(advertisement);
+        validateTargetUser(targetUser);
         validateType(type);
 
         this.advertisement = advertisement;
         this.type = type;
+        this.targetUser = targetUser;
         this.triggeredAt = triggeredAt;
     }
 
