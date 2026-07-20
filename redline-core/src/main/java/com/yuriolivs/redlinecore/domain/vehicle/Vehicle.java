@@ -10,16 +10,24 @@ import java.time.LocalDate;
 public class Vehicle {
     private String brand;
     private String model;
+    private String version;
     private Integer year;
 
 
-    public Vehicle(String brand, String model, Integer year) {
+    public Vehicle(
+            String brand,
+            String model,
+            String version,
+            Integer year
+    ) {
         validateBrand(brand);
         validateModel(model);
+        validateVersion(version);
         validateYear(year);
 
         this.brand = brand;
         this.model = model;
+        this.version = version;
         this.year = year;
     }
 
@@ -31,6 +39,11 @@ public class Vehicle {
     private void validateModel(String model) {
         if (model == null || model.isEmpty())
             throw new IllegalArgumentException("Model must be valid");
+    }
+
+    private void validateVersion(String version) {
+        if (version == null || version.isEmpty())
+            throw new IllegalArgumentException("Version must be valid");
     }
 
     private void validateYear(Integer year) {
@@ -56,5 +69,10 @@ public class Vehicle {
     public void setYear(Integer year) {
         validateYear(year);
         this.year = year;
+    }
+
+    public void setVersion(String version) {
+        validateVersion(version);
+        this.version = version;
     }
 }

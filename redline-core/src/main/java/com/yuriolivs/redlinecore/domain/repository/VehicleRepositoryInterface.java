@@ -7,9 +7,11 @@ import java.util.Optional;
 
 public interface VehicleRepositoryInterface {
     Vehicle save(Vehicle vehicle);
-    List<Vehicle> findAllByModel();
-    List<Vehicle> findAllByBrand();
-    List<Vehicle> findAllByYear();
+    List<String> findAllBrands();
+    List<String> findAllModelsByBrand(String brand);
+    List<String> findAllVersionsByModel(String brand, String model);
+    List<Integer> findAllYearsByModelAndVersion(String brand, String model, String version);
     Optional<Vehicle> findByBrandAndModelAndYear(String brand, String model, Integer year);
+    Optional<Vehicle> findVehicle(Vehicle vehicle);
     void remove(Vehicle vehicle);
 }
