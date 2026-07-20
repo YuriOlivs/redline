@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-public class AdUpdatedEvent {
+public class AdAlertTriggeredEvent {
     private final Advertisement advertisement;
     private final AlertType type;
     private final LocalDateTime triggeredAt;
 
-    public AdUpdatedEvent(
+    public AdAlertTriggeredEvent(
             Advertisement advertisement,
             AlertType type,
             UUID targetUser,
@@ -38,5 +38,11 @@ public class AdUpdatedEvent {
     private void validateType(AlertType type) {
         if (type == null)
             throw new IllegalArgumentException("Alert type can't be null");
+    }
+
+    private void validateTargetUser(UUID targetUser) {
+        if (targetUser == null) {
+            throw new IllegalArgumentException("Target user can't be null");
+        }
     }
 }

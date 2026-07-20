@@ -1,7 +1,7 @@
 package com.yuriolivs.redlinecore.application.alert.usecase;
 
 import com.yuriolivs.redlinecore.domain.alert.Alert;
-import com.yuriolivs.redlinecore.domain.event.AdUpdatedEvent;
+import com.yuriolivs.redlinecore.domain.event.AdAlertTriggeredEvent;
 import com.yuriolivs.redlinecore.domain.service.EventPublisherInterface;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +16,7 @@ public class SendAdUpdatedAlertUseCase {
             Alert alert,
             UUID targetUser
     ) {
-        AdUpdatedEvent event = new AdUpdatedEvent(
+        AdAlertTriggeredEvent event = new AdAlertTriggeredEvent(
                 alert.getAdvertisement(),
                 alert.getType(),
                 targetUser,
