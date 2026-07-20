@@ -5,7 +5,7 @@ import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 import java.util.List;
 import java.util.Optional;
 
-public interface VehicleRepositoryInterface {
+public interface IVehicleRepository {
     Vehicle save(Vehicle vehicle);
     List<String> findAllBrands();
     List<String> findAllModelsByBrand(String brand);

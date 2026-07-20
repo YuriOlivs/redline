@@ -2,8 +2,8 @@ package com.yuriolivs.redlinecore.application.advertisement;
 
 import com.yuriolivs.redlinecore.application.advertisement.usecase.CreateAdUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.VehicleRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.IVehicleRepository;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,16 +14,16 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateAdUseCaseTest {
-    private AdvertisementRepositoryInterface advertisementRepository;
-    private VehicleRepositoryInterface vehicleRepository;
+    private IAdvertisementRepository advertisementRepository;
+    private IVehicleRepository vehicleRepository;
     private CreateAdUseCase useCase;
 
     private Vehicle vehicle;
 
     @BeforeEach
     void setUp() {
-        advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
-        vehicleRepository = Mockito.mock(VehicleRepositoryInterface.class);
+        advertisementRepository = Mockito.mock(IAdvertisementRepository.class);
+        vehicleRepository = Mockito.mock(IVehicleRepository.class);
         useCase = new CreateAdUseCase(advertisementRepository, vehicleRepository);
 
         vehicle = new Vehicle("Toyota", "Corolla", 2020);

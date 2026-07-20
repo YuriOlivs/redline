@@ -2,16 +2,16 @@ package com.yuriolivs.redlinecore.application.alert.usecase;
 
 import com.yuriolivs.redlinecore.domain.alert.AlertPreferences;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.AlertPreferencesRepository;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAlertPreferencesRepository;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.UUID;
 
 @RequiredArgsConstructor
 public class ResetAlertPreferencesToDefaultUseCase {
-    private final UserRepositoryInterface userRepository;
-    private final AlertPreferencesRepository alertPreferencesRepository;
+    private final IUserRepository userRepository;
+    private final IAlertPreferencesRepository alertPreferencesRepository;
 
     public AlertPreferences execute(
             UUID userId

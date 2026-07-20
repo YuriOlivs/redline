@@ -2,7 +2,7 @@ package com.yuriolivs.redlinecore.application.user;
 
 import com.yuriolivs.redlinecore.application.user.usecase.UpdateInfoUseCase;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
 import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,12 +15,12 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdateInfoUseCaseTest {
-    private UserRepositoryInterface userRepository;
+    private IUserRepository userRepository;
     private UpdateInfoUseCase useCase;
 
     @BeforeEach
     void setUp() {
-        userRepository = Mockito.mock(UserRepositoryInterface.class);
+        userRepository = Mockito.mock(IUserRepository.class);
         useCase = new UpdateInfoUseCase(userRepository);
     }
 

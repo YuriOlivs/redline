@@ -1,7 +1,7 @@
 package com.yuriolivs.redlinecore.application.user;
 
 import com.yuriolivs.redlinecore.application.user.usecase.ValidatePasswordResetCodeUseCase;
-import com.yuriolivs.redlinecore.domain.service.CacheServiceInterface;
+import com.yuriolivs.redlinecore.domain.service.ICacheService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,12 +11,12 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidatePasswordResetCodeUseCaseTest {
-    private CacheServiceInterface cacheService;
+    private ICacheService cacheService;
     private ValidatePasswordResetCodeUseCase useCase;
 
     @BeforeEach
     void setUp() {
-        cacheService = Mockito.mock(CacheServiceInterface.class);
+        cacheService = Mockito.mock(ICacheService.class);
         useCase = new ValidatePasswordResetCodeUseCase(cacheService);
     }
 

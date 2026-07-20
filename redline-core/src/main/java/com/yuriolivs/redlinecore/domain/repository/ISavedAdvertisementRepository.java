@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface SavedAdvertisementRepositoryInterface {
+public interface ISavedAdvertisementRepository {
     SavedAdvertisement save(SavedAdvertisement savedAd);
     Optional<SavedAdvertisement> findById(UUID id);
     List<SavedAdvertisement> findByUser(User user);

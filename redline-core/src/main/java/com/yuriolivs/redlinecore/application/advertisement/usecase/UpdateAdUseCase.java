@@ -5,9 +5,9 @@ import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.alert.AlertType;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.service.FIPEClientInterface;
-import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.service.IFIPEClient;
+import com.yuriolivs.redlinecore.domain.service.IScoreCalculator;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 import lombok.RequiredArgsConstructor;
 
@@ -18,9 +18,9 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class UpdateAdUseCase {
-    private final AdvertisementRepositoryInterface advertisementRepository;
-    private final ScoreCalculatorInterface scoreCalculator;
-    private final FIPEClientInterface fipeClient;
+    private final IAdvertisementRepository advertisementRepository;
+    private final IScoreCalculator scoreCalculator;
+    private final IFIPEClient fipeClient;
     private final TriggerAdUpdatedEventUseCase triggerAdUpdatedEventUseCase;
 
     public Advertisement execute(

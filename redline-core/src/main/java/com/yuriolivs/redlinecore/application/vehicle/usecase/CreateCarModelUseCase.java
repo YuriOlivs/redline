@@ -1,12 +1,12 @@
 package com.yuriolivs.redlinecore.application.vehicle.usecase;
 
-import com.yuriolivs.redlinecore.domain.repository.VehicleRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IVehicleRepository;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CreateCarModelUseCase {
-    private final VehicleRepositoryInterface vehicleRepository;
+    private final IVehicleRepository vehicleRepository;
 
     public Vehicle execute(
             String brand,

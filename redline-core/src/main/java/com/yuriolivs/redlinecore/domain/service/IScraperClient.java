@@ -5,7 +5,7 @@ import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteri
 
 import java.util.List;
 
-public interface ScraperClientInterface {
+public interface IScraperClient {
     ScraperResultDto scrapeSavedAdsForUpdate(List<String> urls);
     ScraperResultDto scrapeAdsBySearchCriteria(AdvertisementSearchCriteria searchCriteria);
 }

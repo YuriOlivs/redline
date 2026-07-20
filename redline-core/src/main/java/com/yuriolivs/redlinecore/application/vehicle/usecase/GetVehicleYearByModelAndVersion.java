@@ -1,13 +1,13 @@
 package com.yuriolivs.redlinecore.application.vehicle.usecase;
 
-import com.yuriolivs.redlinecore.domain.repository.VehicleRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IVehicleRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 public class GetVehicleYearByModelAndVersion {
-    private final VehicleRepositoryInterface vehicleRepository;
+    private final IVehicleRepository vehicleRepository;
 
     public List<Integer> execute(
             String brand,

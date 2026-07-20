@@ -1,8 +1,8 @@
 package com.yuriolivs.redlinecore.application.advertisement.usecase;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.ISavedAdvertisementRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
@@ -10,8 +10,8 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class DeleteOutdatedAdsUseCase {
-    private final AdvertisementRepositoryInterface advertisementRepository;
-    private final SavedAdvertisementRepositoryInterface savedAdRepository;
+    private final IAdvertisementRepository advertisementRepository;
+    private final ISavedAdvertisementRepository savedAdRepository;
     private final Integer DAYS_THRESHOLD = 4;
 
     public void execute() {

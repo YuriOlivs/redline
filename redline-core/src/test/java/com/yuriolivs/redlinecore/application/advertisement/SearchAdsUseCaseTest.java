@@ -1,14 +1,12 @@
 package com.yuriolivs.redlinecore.application.advertisement;
 
-import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperAdvertisementDto;
 import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperResultDto;
 import com.yuriolivs.redlinecore.application.advertisement.usecase.SearchAdsUseCase;
 import com.yuriolivs.redlinecore.application.alert.usecase.TriggerAdsScrapedEventUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteria;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.service.EventPublisherInterface;
-import com.yuriolivs.redlinecore.domain.service.ScraperClientInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.service.IScraperClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,8 +17,8 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SearchAdsUseCaseTest {
-    private ScraperClientInterface scraperClient;
-    private AdvertisementRepositoryInterface advertisementRepository;
+    private IScraperClient scraperClient;
+    private IAdvertisementRepository advertisementRepository;
     private TriggerAdsScrapedEventUseCase triggerAdsScrapedEventUseCase;
     private SearchAdsUseCase useCase;
 
@@ -30,8 +28,8 @@ public class SearchAdsUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        scraperClient = Mockito.mock(ScraperClientInterface.class);
-        advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
+        scraperClient = Mockito.mock(IScraperClient.class);
+        advertisementRepository = Mockito.mock(IAdvertisementRepository.class);
         triggerAdsScrapedEventUseCase = Mockito.mock(TriggerAdsScrapedEventUseCase.class);
         useCase = new SearchAdsUseCase(scraperClient, advertisementRepository, triggerAdsScrapedEventUseCase);
 

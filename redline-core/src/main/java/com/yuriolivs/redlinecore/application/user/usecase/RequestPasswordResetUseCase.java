@@ -1,9 +1,9 @@
 package com.yuriolivs.redlinecore.application.user.usecase;
 
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.service.CacheServiceInterface;
-import com.yuriolivs.redlinecore.domain.service.CodeGeneratorInterface;
-import com.yuriolivs.redlinecore.domain.service.EmailSenderInterface;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.service.ICacheService;
+import com.yuriolivs.redlinecore.domain.service.ICodeGenerator;
+import com.yuriolivs.redlinecore.domain.service.IEmailSender;
 import com.yuriolivs.redlinecore.domain.user.User;
 import lombok.RequiredArgsConstructor;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class RequestPasswordResetUseCase {
-    private final UserRepositoryInterface userRepository;
-    private final EmailSenderInterface emailSender;
-    private final CodeGeneratorInterface codeGenerator;
-    private final CacheServiceInterface cacheService;
+    private final IUserRepository userRepository;
+    private final IEmailSender emailSender;
+    private final ICodeGenerator codeGenerator;
+    private final ICacheService cacheService;
 
     public String execute(String email) {
         Optional<User> userFound = userRepository.findByEmail(email);

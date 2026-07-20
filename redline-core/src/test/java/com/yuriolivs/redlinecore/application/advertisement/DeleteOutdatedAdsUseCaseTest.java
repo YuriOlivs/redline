@@ -3,8 +3,8 @@ package com.yuriolivs.redlinecore.application.advertisement;
 import com.yuriolivs.redlinecore.application.advertisement.usecase.DeleteOutdatedAdsUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.ISavedAdvertisementRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,8 +15,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteOutdatedAdsUseCaseTest {
-    private AdvertisementRepositoryInterface advertisementRepository;
-    private SavedAdvertisementRepositoryInterface savedAdRepository;
+    private IAdvertisementRepository advertisementRepository;
+    private ISavedAdvertisementRepository savedAdRepository;
     private DeleteOutdatedAdsUseCase useCase;
 
     private SavedAdvertisement savedAdvertisement;
@@ -24,8 +24,8 @@ public class DeleteOutdatedAdsUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
-        savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
+        advertisementRepository = Mockito.mock(IAdvertisementRepository.class);
+        savedAdRepository = Mockito.mock(ISavedAdvertisementRepository.class);
         useCase = new DeleteOutdatedAdsUseCase(advertisementRepository, savedAdRepository);
 
         savedAdId = "https://webmotors.com.br/anuncio/123";

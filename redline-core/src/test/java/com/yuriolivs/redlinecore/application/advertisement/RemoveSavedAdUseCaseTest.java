@@ -3,8 +3,8 @@ package com.yuriolivs.redlinecore.application.advertisement;
 import com.yuriolivs.redlinecore.application.advertisement.usecase.RemoveSavedAdUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.ISavedAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
 import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,8 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RemoveSavedAdUseCaseTest {
-    private SavedAdvertisementRepositoryInterface savedAdRepository;
-    private UserRepositoryInterface userRepository;
+    private ISavedAdvertisementRepository savedAdRepository;
+    private IUserRepository userRepository;
     private RemoveSavedAdUseCase useCase;
 
     private UUID userId;
@@ -26,9 +26,9 @@ public class RemoveSavedAdUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
-        userRepository = Mockito.mock(UserRepositoryInterface.class);
-        UserRepositoryInterface userRepository = Mockito.mock(UserRepositoryInterface.class);
+        savedAdRepository = Mockito.mock(ISavedAdvertisementRepository.class);
+        userRepository = Mockito.mock(IUserRepository.class);
+        IUserRepository userRepository = Mockito.mock(IUserRepository.class);
         useCase = new RemoveSavedAdUseCase(savedAdRepository, userRepository);
 
         userId = UUID.randomUUID();

@@ -4,7 +4,7 @@ import com.yuriolivs.redlinecore.domain.alert.AlertPreferences;
 
 import java.util.UUID;
 
-public interface AlertPreferencesRepository {
+public interface IAlertPreferencesRepository {
     AlertPreferences save(AlertPreferences preferences);
     AlertPreferences findByUser(UUID userId);
 }

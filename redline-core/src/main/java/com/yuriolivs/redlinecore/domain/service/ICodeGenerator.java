@@ -1,5 +1,5 @@
 package com.yuriolivs.redlinecore.domain.service;
 
-public interface CodeGeneratorInterface {
+public interface ICodeGenerator {
     String generate();
 }

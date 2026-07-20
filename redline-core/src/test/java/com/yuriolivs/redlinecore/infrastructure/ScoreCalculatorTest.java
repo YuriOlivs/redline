@@ -14,12 +14,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreCalculatorTest {
-    private ScoreCalculator scoreCalculator;
+    private IScoreCalculator scoreCalculator;
     private Advertisement advertisement;
 
     @BeforeEach
     void setUp() {
-        scoreCalculator = new ScoreCalculator();
+        scoreCalculator = new IScoreCalculator();
 
         advertisement = new Advertisement(
                 "https://webmotors.com.br/anuncio",

@@ -1,7 +1,7 @@
 package com.yuriolivs.redlinecore.application.user.usecase;
 
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.security.PasswordEncrypter;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.security.IPasswordEncrypter;
 import com.yuriolivs.redlinecore.domain.user.User;
 import lombok.RequiredArgsConstructor;
 
@@ -9,8 +9,8 @@ import java.time.LocalDate;
 
 @RequiredArgsConstructor
 public class CreateUserUseCase {
-    private final UserRepositoryInterface userRepository;
-    private final PasswordEncrypter encrypter;
+    private final IUserRepository userRepository;
+    private final IPasswordEncrypter encrypter;
     public static final String PASSW0RD_REGEX = "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){6,16}$";
 
     public User execute(

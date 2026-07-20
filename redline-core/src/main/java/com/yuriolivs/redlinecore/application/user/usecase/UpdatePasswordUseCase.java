@@ -1,8 +1,8 @@
 package com.yuriolivs.redlinecore.application.user.usecase;
 
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.security.PasswordEncrypter;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.security.IPasswordEncrypter;
 import com.yuriolivs.redlinecore.domain.user.User;
 import lombok.RequiredArgsConstructor;
 
@@ -11,8 +11,8 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 public class UpdatePasswordUseCase {
-    private final UserRepositoryInterface userRepository;
-    private final PasswordEncrypter encrypter;
+    private final IUserRepository userRepository;
+    private final IPasswordEncrypter encrypter;
 
     private static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,16}$";
 

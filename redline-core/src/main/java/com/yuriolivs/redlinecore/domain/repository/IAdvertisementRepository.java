@@ -6,9 +6,8 @@ import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteri
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-public interface AdvertisementRepositoryInterface {
+public interface IAdvertisementRepository {
     Advertisement save(Advertisement ad);
     List<Advertisement> saveAll(List<Advertisement> ads);
     Optional<Advertisement> findByUrl(String url);

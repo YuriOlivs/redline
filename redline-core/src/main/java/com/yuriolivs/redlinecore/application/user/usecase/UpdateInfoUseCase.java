@@ -1,7 +1,7 @@
 package com.yuriolivs.redlinecore.application.user.usecase;
 
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
 import com.yuriolivs.redlinecore.domain.user.User;
 import lombok.RequiredArgsConstructor;
 
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 public class UpdateInfoUseCase {
-    private final UserRepositoryInterface userRepository;
+    private final IUserRepository userRepository;
 
     public User execute(
             UUID id,

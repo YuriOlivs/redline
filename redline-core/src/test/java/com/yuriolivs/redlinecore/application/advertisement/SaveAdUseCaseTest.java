@@ -4,9 +4,9 @@ import com.yuriolivs.redlinecore.application.advertisement.usecase.SaveAdUseCase
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.ISavedAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
 import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,9 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SaveAdUseCaseTest {
-    private SavedAdvertisementRepositoryInterface savedAdRepository;
-    private AdvertisementRepositoryInterface advertisementRepository;
-    private UserRepositoryInterface userRepository;
+    private ISavedAdvertisementRepository savedAdRepository;
+    private IAdvertisementRepository advertisementRepository;
+    private IUserRepository userRepository;
     private SaveAdUseCase useCase;
 
     private UUID userId;
@@ -30,9 +30,9 @@ public class SaveAdUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        savedAdRepository = Mockito.mock(SavedAdvertisementRepositoryInterface.class);
-        advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
-        userRepository = Mockito.mock(UserRepositoryInterface.class);
+        savedAdRepository = Mockito.mock(ISavedAdvertisementRepository.class);
+        advertisementRepository = Mockito.mock(IAdvertisementRepository.class);
+        userRepository = Mockito.mock(IUserRepository.class);
         useCase = new SaveAdUseCase(savedAdRepository, advertisementRepository, userRepository);
 
         userId = UUID.randomUUID();

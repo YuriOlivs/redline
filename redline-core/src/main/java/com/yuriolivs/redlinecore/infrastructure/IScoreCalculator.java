@@ -2,12 +2,11 @@ package com.yuriolivs.redlinecore.infrastructure;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
-import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ScoreCalculator implements ScoreCalculatorInterface {
+public class IScoreCalculator implements com.yuriolivs.redlinecore.domain.service.IScoreCalculator {
     @Override
     public ScoreRecord calculate(Advertisement ad, double fipeValue, LocalDate referenceDate) {
         validateAdvertisement(ad);

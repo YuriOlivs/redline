@@ -1,10 +1,10 @@
 package com.yuriolivs.redlinecore.application.user;
 
 import com.yuriolivs.redlinecore.application.user.usecase.RequestPasswordResetUseCase;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.service.CacheServiceInterface;
-import com.yuriolivs.redlinecore.domain.service.CodeGeneratorInterface;
-import com.yuriolivs.redlinecore.domain.service.EmailSenderInterface;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.service.ICacheService;
+import com.yuriolivs.redlinecore.domain.service.ICodeGenerator;
+import com.yuriolivs.redlinecore.domain.service.IEmailSender;
 import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,18 +16,18 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RequestPasswordResetUseCaseTest {
-    private UserRepositoryInterface userRepository;
-    private EmailSenderInterface emailSender;
-    private CodeGeneratorInterface codeGenerator;
-    private CacheServiceInterface cacheService;
+    private IUserRepository userRepository;
+    private IEmailSender emailSender;
+    private ICodeGenerator codeGenerator;
+    private ICacheService cacheService;
     private RequestPasswordResetUseCase useCase;
 
     @BeforeEach
     void setUp() {
-        userRepository = Mockito.mock(UserRepositoryInterface.class);
-        emailSender = Mockito.mock(EmailSenderInterface.class);
-        codeGenerator = Mockito.mock(CodeGeneratorInterface.class);
-        cacheService = Mockito.mock(CacheServiceInterface.class);
+        userRepository = Mockito.mock(IUserRepository.class);
+        emailSender = Mockito.mock(IEmailSender.class);
+        codeGenerator = Mockito.mock(ICodeGenerator.class);
+        cacheService = Mockito.mock(ICacheService.class);
 
         useCase = new RequestPasswordResetUseCase(userRepository, emailSender, codeGenerator, cacheService);
     }

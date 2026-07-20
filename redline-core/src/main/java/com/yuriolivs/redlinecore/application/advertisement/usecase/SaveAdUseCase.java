@@ -3,9 +3,9 @@ package com.yuriolivs.redlinecore.application.advertisement.usecase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.SavedAdvertisement;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.SavedAdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.ISavedAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
 import com.yuriolivs.redlinecore.domain.user.User;
 import lombok.RequiredArgsConstructor;
 
@@ -15,9 +15,9 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 public class SaveAdUseCase {
-    private final SavedAdvertisementRepositoryInterface savedAdRepository;
-    private final AdvertisementRepositoryInterface advertisementRepository;
-    private final UserRepositoryInterface userRepository;
+    private final ISavedAdvertisementRepository savedAdRepository;
+    private final IAdvertisementRepository advertisementRepository;
+    private final IUserRepository userRepository;
 
     public SavedAdvertisement execute(
             String url,

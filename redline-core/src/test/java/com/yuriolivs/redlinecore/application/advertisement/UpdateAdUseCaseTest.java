@@ -5,9 +5,9 @@ import com.yuriolivs.redlinecore.application.alert.usecase.TriggerAdUpdatedEvent
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.service.FIPEClientInterface;
-import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.service.IFIPEClient;
+import com.yuriolivs.redlinecore.domain.service.IScoreCalculator;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +19,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdateAdUseCaseTest {
-    private AdvertisementRepositoryInterface advertisementRepository;
-    private ScoreCalculatorInterface scoreCalculator;
-    private FIPEClientInterface fipeClient;
+    private IAdvertisementRepository advertisementRepository;
+    private IScoreCalculator scoreCalculator;
+    private IFIPEClient fipeClient;
     private UpdateAdUseCase useCase;
     private TriggerAdUpdatedEventUseCase triggerAdUpdatedEvent;
 
@@ -31,9 +31,9 @@ public class UpdateAdUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
-        scoreCalculator = Mockito.mock(ScoreCalculatorInterface.class);
-        fipeClient = Mockito.mock(FIPEClientInterface.class);
+        advertisementRepository = Mockito.mock(IAdvertisementRepository.class);
+        scoreCalculator = Mockito.mock(IScoreCalculator.class);
+        fipeClient = Mockito.mock(IFIPEClient.class);
         triggerAdUpdatedEvent = Mockito.mock(TriggerAdUpdatedEventUseCase.class);
 
         useCase = new UpdateAdUseCase(

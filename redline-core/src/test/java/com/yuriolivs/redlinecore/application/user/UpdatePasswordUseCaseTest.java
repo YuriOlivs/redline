@@ -1,8 +1,8 @@
 package com.yuriolivs.redlinecore.application.user;
 
 import com.yuriolivs.redlinecore.application.user.usecase.UpdatePasswordUseCase;
-import com.yuriolivs.redlinecore.domain.repository.UserRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.security.PasswordEncrypter;
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.security.IPasswordEncrypter;
 import com.yuriolivs.redlinecore.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,14 +15,14 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdatePasswordUseCaseTest {
-    private UserRepositoryInterface userRepository;
-    private PasswordEncrypter encrypter;
+    private IUserRepository userRepository;
+    private IPasswordEncrypter encrypter;
     private UpdatePasswordUseCase useCase;
 
     @BeforeEach
     void setUp() {
-        userRepository = Mockito.mock(UserRepositoryInterface.class);
-        encrypter = Mockito.mock(PasswordEncrypter.class);
+        userRepository = Mockito.mock(IUserRepository.class);
+        encrypter = Mockito.mock(IPasswordEncrypter.class);
         useCase = new UpdatePasswordUseCase(userRepository, encrypter);
     }
 

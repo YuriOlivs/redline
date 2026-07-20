@@ -5,10 +5,8 @@ import com.yuriolivs.redlinecore.application.advertisement.mapper.AdvertisementM
 import com.yuriolivs.redlinecore.application.alert.usecase.TriggerAdsScrapedEventUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteria;
-import com.yuriolivs.redlinecore.domain.event.AdsScrapedEvent;
-import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.service.EventPublisherInterface;
-import com.yuriolivs.redlinecore.domain.service.ScraperClientInterface;
+import com.yuriolivs.redlinecore.domain.repository.IAdvertisementRepository;
+import com.yuriolivs.redlinecore.domain.service.IScraperClient;
 import lombok.RequiredArgsConstructor;
 
 import java.util.HashSet;
@@ -17,8 +15,8 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 public class SearchAdsUseCase {
-    private final ScraperClientInterface scraperClient;
-    private final AdvertisementRepositoryInterface advertisementRepository;
+    private final IScraperClient scraperClient;
+    private final IAdvertisementRepository advertisementRepository;
     private final TriggerAdsScrapedEventUseCase triggerAdsScrapedEventUseCase;
 
     public Set<Advertisement> execute(
