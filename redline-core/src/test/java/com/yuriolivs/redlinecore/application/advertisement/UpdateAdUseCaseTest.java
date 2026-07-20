@@ -1,12 +1,11 @@
 package com.yuriolivs.redlinecore.application.advertisement;
 
 import com.yuriolivs.redlinecore.application.advertisement.usecase.UpdateAdUseCase;
+import com.yuriolivs.redlinecore.application.alert.usecase.TriggerAdUpdatedEventUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.exceptions.NotFoundException;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
-import com.yuriolivs.redlinecore.domain.repository.AlertPreferencesRepository;
-import com.yuriolivs.redlinecore.domain.service.EventPublisherInterface;
 import com.yuriolivs.redlinecore.domain.service.FIPEClientInterface;
 import com.yuriolivs.redlinecore.domain.service.ScoreCalculatorInterface;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
@@ -21,11 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdateAdUseCaseTest {
     private AdvertisementRepositoryInterface advertisementRepository;
-    private AlertPreferencesRepository alertPreferencesRepository;
-    private EventPublisherInterface eventPublisher;
     private ScoreCalculatorInterface scoreCalculator;
     private FIPEClientInterface fipeClient;
     private UpdateAdUseCase useCase;
+    private TriggerAdUpdatedEventUseCase triggerAdUpdatedEvent;
 
     private Advertisement advertisement;
     private ScoreRecord scoreRecord;
@@ -34,15 +32,15 @@ public class UpdateAdUseCaseTest {
     @BeforeEach
     void setUp() {
         advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
-        alertPreferencesRepository = Mockito.mock(AlertPreferencesRepository.class);
-        eventPublisher = Mockito.mock(EventPublisherInterface.class);
         scoreCalculator = Mockito.mock(ScoreCalculatorInterface.class);
         fipeClient = Mockito.mock(FIPEClientInterface.class);
+        triggerAdUpdatedEvent = Mockito.mock(TriggerAdUpdatedEventUseCase.class);
 
         useCase = new UpdateAdUseCase(
                 advertisementRepository,
                 scoreCalculator,
-                fipeClient
+                fipeClient,
+                triggerAdUpdatedEvent
         );
 
         advertisement = Mockito.mock(Advertisement.class);

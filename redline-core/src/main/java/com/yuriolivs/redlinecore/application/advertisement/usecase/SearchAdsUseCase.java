@@ -2,6 +2,7 @@ package com.yuriolivs.redlinecore.application.advertisement.usecase;
 
 import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperResultDto;
 import com.yuriolivs.redlinecore.application.advertisement.mapper.AdvertisementMapper;
+import com.yuriolivs.redlinecore.application.alert.usecase.TriggerAdsScrapedEventUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteria;
 import com.yuriolivs.redlinecore.domain.event.AdsScrapedEvent;
@@ -18,7 +19,7 @@ import java.util.Set;
 public class SearchAdsUseCase {
     private final ScraperClientInterface scraperClient;
     private final AdvertisementRepositoryInterface advertisementRepository;
-    private final EventPublisherInterface eventPublisher;
+    private final TriggerAdsScrapedEventUseCase triggerAdsScrapedEventUseCase;
 
     public Set<Advertisement> execute(
             AdvertisementSearchCriteria searchCriteria
@@ -33,7 +34,7 @@ public class SearchAdsUseCase {
         ads.addAll(databaseAds);
         ads.addAll(scraperAds);
 
-        eventPublisher.publish(new AdsScrapedEvent(scraperAds));
+        triggerAdsScrapedEventUseCase.execute(scraperAds);
 
         return ads;
     }

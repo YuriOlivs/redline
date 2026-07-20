@@ -3,6 +3,7 @@ package com.yuriolivs.redlinecore.application.advertisement;
 import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperAdvertisementDto;
 import com.yuriolivs.redlinecore.application.advertisement.dto.ScraperResultDto;
 import com.yuriolivs.redlinecore.application.advertisement.usecase.SearchAdsUseCase;
+import com.yuriolivs.redlinecore.application.alert.usecase.TriggerAdsScrapedEventUseCase;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.AdvertisementSearchCriteria;
 import com.yuriolivs.redlinecore.domain.repository.AdvertisementRepositoryInterface;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SearchAdsUseCaseTest {
     private ScraperClientInterface scraperClient;
     private AdvertisementRepositoryInterface advertisementRepository;
-    private EventPublisherInterface eventPublisher;
+    private TriggerAdsScrapedEventUseCase triggerAdsScrapedEventUseCase;
     private SearchAdsUseCase useCase;
 
     private Advertisement advertisement;
@@ -31,8 +32,8 @@ public class SearchAdsUseCaseTest {
     void setUp() {
         scraperClient = Mockito.mock(ScraperClientInterface.class);
         advertisementRepository = Mockito.mock(AdvertisementRepositoryInterface.class);
-        eventPublisher = Mockito.mock(EventPublisherInterface.class);
-        useCase = new SearchAdsUseCase(scraperClient, advertisementRepository, eventPublisher);
+        triggerAdsScrapedEventUseCase = Mockito.mock(TriggerAdsScrapedEventUseCase.class);
+        useCase = new SearchAdsUseCase(scraperClient, advertisementRepository, triggerAdsScrapedEventUseCase);
 
         criteria = AdvertisementSearchCriteria.builder()
                 .brand("Toyota")
@@ -66,7 +67,7 @@ public class SearchAdsUseCaseTest {
 
         Mockito.verify(advertisementRepository).findBySearchCriteria(criteria);
         Mockito.verify(scraperClient).scrapeAdsBySearchCriteria(criteria);
-        Mockito.verify(eventPublisher).publish(Mockito.any());
+        Mockito.verify(triggerAdsScrapedEventUseCase).execute(Mockito.any());
     }
 
     @Test
