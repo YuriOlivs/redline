@@ -4,20 +4,27 @@ import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.alert.AlertType;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Getter
-public class UpdatedAdvertisementEvent {
+public class AdUpdatedEvent {
     private final Advertisement advertisement;
     private final AlertType type;
+    private final LocalDateTime triggeredAt;
 
-    public UpdatedAdvertisementEvent(
+    public AdUpdatedEvent(
             Advertisement advertisement,
-            AlertType type
+            AlertType type,
+            UUID targetUser,
+            LocalDateTime triggeredAt
     ) {
         validateAdvertisement(advertisement);
         validateType(type);
 
         this.advertisement = advertisement;
         this.type = type;
+        this.triggeredAt = triggeredAt;
     }
 
     private void validateAdvertisement(Advertisement ad) {
