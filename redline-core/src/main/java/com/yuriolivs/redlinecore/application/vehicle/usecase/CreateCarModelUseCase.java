@@ -4,6 +4,8 @@ import com.yuriolivs.redlinecore.domain.repository.IVehicleRepository;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 public class CreateCarModelUseCase {
     private final IVehicleRepository vehicleRepository;
@@ -21,6 +23,7 @@ public class CreateCarModelUseCase {
                 year
         );
 
-        return vehicleRepository.save(vehicle);
+        Optional<Vehicle> vehicleFound = vehicleRepository.findVehicle(vehicle);
+        return vehicleFound.orElseGet(() -> vehicleRepository.save(vehicle));
     }
 }
