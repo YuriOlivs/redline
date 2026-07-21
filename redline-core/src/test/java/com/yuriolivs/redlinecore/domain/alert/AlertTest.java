@@ -5,6 +5,7 @@ import com.yuriolivs.redlinecore.domain.user.UserTest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,8 +17,8 @@ public class AlertTest {
         assertDoesNotThrow(() -> {
             new Alert(
                     AlertType.PRICE_REDUCTION,
-                    AdvertisementTest.VALID_ADVERTISEMENT,
-                    UserTest.VALID_USER,
+                    UUID.randomUUID(),
+                    UUID.randomUUID(),
                     LocalDateTime.now()
             );
         });
@@ -28,8 +29,8 @@ public class AlertTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Alert(
                     AlertType.PRICE_REDUCTION,
-                    AdvertisementTest.VALID_ADVERTISEMENT,
-                    UserTest.VALID_USER,
+                    UUID.randomUUID(),
+                    UUID.randomUUID(),
                     LocalDateTime.parse("2030-06-15T10:30:00")
             );
         });
@@ -41,7 +42,7 @@ public class AlertTest {
             new Alert(
                     AlertType.PRICE_REDUCTION,
                     null,
-                    UserTest.VALID_USER,
+                    UUID.randomUUID(),
                     LocalDateTime.now()
             );
         });
@@ -52,7 +53,7 @@ public class AlertTest {
         assertThrows(IllegalArgumentException.class, () -> {
             new Alert(
                     AlertType.PRICE_REDUCTION,
-                    AdvertisementTest.VALID_ADVERTISEMENT,
+                    UUID.randomUUID(),
                     null,
                     LocalDateTime.now()
             );

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 public class Alert {
@@ -13,23 +14,23 @@ public class Alert {
     @Setter
     private AlertType type;
     @Setter
-    private Advertisement advertisement;
+    private UUID advertisementId;
     @Setter
-    private User user;
+    private UUID userId;
 
     public Alert(
             AlertType type,
-            Advertisement advertisement,
-            User user,
+            UUID advertisementId,
+            UUID userId,
             LocalDateTime dateTime
     ) {
         validateDateTime(dateTime);
-        validateAdvertisement(advertisement);
-        validateUser(user);
+        validateAdvertisement(advertisementId);
+        validateUser(userId);
 
         this.type = type;
-        this.advertisement = advertisement;
-        this.user = user;
+        this.advertisementId = advertisementId;
+        this.userId = userId;
         this.dateTime = dateTime;
     }
 
@@ -38,12 +39,12 @@ public class Alert {
             throw new IllegalArgumentException("Date Time must be past or present");
     }
 
-    private void validateAdvertisement(Advertisement advertisement) {
+    private void validateAdvertisement(UUID advertisement) {
         if (advertisement == null)
             throw new IllegalArgumentException("Advertisement can't be null");
     }
 
-    private void validateUser(User user) {
+    private void validateUser(UUID user) {
         if (user == null)
             throw new IllegalArgumentException("User can't be null");
     }

@@ -10,9 +10,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class Advertisement {
+    @Getter
+    private final UUID id;
     private String url;
     private String website;
     private String location;
@@ -39,6 +42,7 @@ public class Advertisement {
         validateMileage(mileage);
         validateVehicle(vehicle);
 
+        this.id = UUID.randomUUID();
         this.url = url;
         this.website = website;
         this.location = location;
@@ -52,6 +56,7 @@ public class Advertisement {
     }
 
     public Advertisement(
+            UUID id,
             String url,
             String website,
             String location,
@@ -71,6 +76,7 @@ public class Advertisement {
         validateLastUpdate(lastUpdate);
         validateScoreHistory(scoreHistory);
 
+        this.id = id;
         this.url = url;
         this.website = website;
         this.location = location;
