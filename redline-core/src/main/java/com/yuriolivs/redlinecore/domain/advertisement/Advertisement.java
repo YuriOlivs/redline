@@ -10,9 +10,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 public class Advertisement {
+    @Getter
+    private final UUID id;
     private String url;
     private String website;
     private String location;
@@ -20,40 +23,39 @@ public class Advertisement {
     private final List<PriceRecord> priceHistory;
     @Setter
     private boolean active;
-    @Setter
-    private Vehicle vehicle;
+    private final Vehicle vehicle;
     private LocalDate lastUpdate;
     private final List<ScoreRecord> scoreHistory;
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
 
     public Advertisement(
             String url,
             String website,
             String location,
             Integer mileage,
-            Vehicle vehicle,
-            LocalDate lastUpdate
+            Vehicle vehicle
     ) {
         validateUrl(url);
         validateWebsite(website);
         validateLocation(location);
         validateMileage(mileage);
         validateVehicle(vehicle);
-        validateLastUpdate(lastUpdate);
 
+        this.id = UUID.randomUUID();
         this.url = url;
         this.website = website;
         this.location = location;
         this.active = true;
         this.mileage = mileage;
         this.vehicle = vehicle;
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = LocalDate.now();
         this.priceHistory = new ArrayList<>();
         this.scoreHistory = new ArrayList<>();
         this.createdAt = LocalDateTime.now();
     }
 
     public Advertisement(
+            UUID id,
             String url,
             String website,
             String location,
@@ -73,6 +75,7 @@ public class Advertisement {
         validateLastUpdate(lastUpdate);
         validateScoreHistory(scoreHistory);
 
+        this.id = id;
         this.url = url;
         this.website = website;
         this.location = location;
@@ -80,8 +83,8 @@ public class Advertisement {
         this.mileage = mileage;
         this.vehicle = vehicle;
         this.lastUpdate = lastUpdate;
-        this.priceHistory = priceHistory;
-        this.scoreHistory = scoreHistory;
+        this.priceHistory = new ArrayList<>(priceHistory);
+        this.scoreHistory = new ArrayList<>(scoreHistory);
         this.createdAt = createdAt;
     }
 

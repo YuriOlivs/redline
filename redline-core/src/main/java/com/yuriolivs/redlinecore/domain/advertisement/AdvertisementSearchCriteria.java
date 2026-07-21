@@ -26,6 +26,7 @@ public class AdvertisementSearchCriteria {
             Integer page,
             Integer size
     ) {
+        validateMinimumCriteria(brand, model);
         validateYear(year);
         validateMileage(mileage);
 
@@ -36,6 +37,11 @@ public class AdvertisementSearchCriteria {
         this.mileage = mileage;
         this.page = page;
         this.size = size;
+    }
+
+    private void validateMinimumCriteria(String brand, String model) {
+        if (brand == null || brand.isEmpty() && model == null || model.isEmpty())
+            throw new IllegalArgumentException("At least brand or model must be filled");
     }
 
     private void validateYear(Integer year) {

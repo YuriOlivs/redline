@@ -1,0 +1,44 @@
+package com.yuriolivs.redlinecore.infrastructure.persistence.user.repository;
+
+import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.user.User;
+import com.yuriolivs.redlinecore.infrastructure.persistence.user.entity.UserEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.user.mapper.UserPersistenceMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+@Repository
+@RequiredArgsConstructor
+public class UserRepository implements IUserRepository {
+    private final UserJpaRepository jpaRepository;
+    private final UserPersistenceMapper mapper;
+
+    @Override
+    public User save(User user) {
+        UserEntity entitySaved = jpaRepository.save(mapper.toEntity(user));
+        return mapper.toDomain(entitySaved);
+    }
+
+    @Override
+    public Optional<User> findById(UUID id) {
+        return jpaRepository.findById(id).map(mapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return jpaRepository.findByEmail(email).map(mapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> findByNameAndLastName(String name, String lastName) {
+        return jpaRepository.findByNameAndLast(name, lastName).map(mapper::toDomain);
+    }
+
+    @Override
+    public void remove(User user) {
+        jpaRepository.delete(mapper.toEntity(user));
+    }
+}
