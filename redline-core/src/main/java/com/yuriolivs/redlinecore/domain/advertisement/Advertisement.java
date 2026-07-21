@@ -23,8 +23,7 @@ public class Advertisement {
     private final List<PriceRecord> priceHistory;
     @Setter
     private boolean active;
-    @Setter
-    private Vehicle vehicle;
+    private final Vehicle vehicle;
     private LocalDate lastUpdate;
     private final List<ScoreRecord> scoreHistory;
     private final LocalDateTime createdAt;
@@ -84,8 +83,8 @@ public class Advertisement {
         this.mileage = mileage;
         this.vehicle = vehicle;
         this.lastUpdate = lastUpdate;
-        this.priceHistory = priceHistory;
-        this.scoreHistory = scoreHistory;
+        this.priceHistory = new ArrayList<>(priceHistory);
+        this.scoreHistory = new ArrayList<>(scoreHistory);
         this.createdAt = createdAt;
     }
 

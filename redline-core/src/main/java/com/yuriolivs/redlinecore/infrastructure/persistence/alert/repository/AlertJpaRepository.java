@@ -1,7 +1,7 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.alert.repository;
+package com.yuriolivs.redlinecore.infrastructure.persistence.alert.repository;
 
 import com.yuriolivs.redlinecore.domain.alert.AlertType;
-import com.yuriolivs.redlinecore.infrastructure.persistance.alert.entity.AlertEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.alert.entity.AlertEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

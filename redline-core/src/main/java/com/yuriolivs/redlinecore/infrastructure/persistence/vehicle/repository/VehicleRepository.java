@@ -1,9 +1,9 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.vehicle.repository;
+package com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.repository;
 
 import com.yuriolivs.redlinecore.domain.repository.IVehicleRepository;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
-import com.yuriolivs.redlinecore.infrastructure.persistance.vehicle.entity.VehicleEntity;
-import com.yuriolivs.redlinecore.infrastructure.persistance.vehicle.mapper.VehiclePersistanceMapper;
+import com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.entity.VehicleEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.mapper.VehiclePersistenceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VehicleRepository implements IVehicleRepository {
     private final VehicleJpaRepository jpaRepository;
-    private final VehiclePersistanceMapper mapper;
+    private final VehiclePersistenceMapper mapper;
 
     @Override
     public Vehicle save(Vehicle vehicle) {

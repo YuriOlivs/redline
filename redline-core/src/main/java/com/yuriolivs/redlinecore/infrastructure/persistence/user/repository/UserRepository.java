@@ -1,9 +1,9 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.user.repository;
+package com.yuriolivs.redlinecore.infrastructure.persistence.user.repository;
 
 import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
 import com.yuriolivs.redlinecore.domain.user.User;
-import com.yuriolivs.redlinecore.infrastructure.persistance.user.entity.UserEntity;
-import com.yuriolivs.redlinecore.infrastructure.persistance.user.mapper.UserPersistanceMapper;
+import com.yuriolivs.redlinecore.infrastructure.persistence.user.entity.UserEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.user.mapper.UserPersistenceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserRepository implements IUserRepository {
     private final UserJpaRepository jpaRepository;
-    private final UserPersistanceMapper mapper;
+    private final UserPersistenceMapper mapper;
 
     @Override
     public User save(User user) {

@@ -1,4 +1,4 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.user.entity;
+package com.yuriolivs.redlinecore.infrastructure.persistence.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

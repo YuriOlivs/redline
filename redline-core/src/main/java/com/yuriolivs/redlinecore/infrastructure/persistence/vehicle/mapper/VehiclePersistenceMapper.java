@@ -1,11 +1,11 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.vehicle.mapper;
+package com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.mapper;
 
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
-import com.yuriolivs.redlinecore.infrastructure.persistance.vehicle.entity.VehicleEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.entity.VehicleEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VehiclePersistanceMapper {
+public class VehiclePersistenceMapper {
     public VehicleEntity toEntity(Vehicle vehicle) {
         return VehicleEntity
                 .builder()

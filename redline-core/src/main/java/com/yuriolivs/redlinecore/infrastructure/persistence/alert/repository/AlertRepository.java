@@ -1,10 +1,10 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.alert.repository;
+package com.yuriolivs.redlinecore.infrastructure.persistence.alert.repository;
 
 import com.yuriolivs.redlinecore.domain.alert.Alert;
 import com.yuriolivs.redlinecore.domain.alert.AlertSearchCriteria;
 import com.yuriolivs.redlinecore.domain.repository.IAlertRepository;
-import com.yuriolivs.redlinecore.infrastructure.persistance.alert.entity.AlertEntity;
-import com.yuriolivs.redlinecore.infrastructure.persistance.alert.mapper.AlertPersistanceMapper;
+import com.yuriolivs.redlinecore.infrastructure.persistence.alert.entity.AlertEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.alert.mapper.AlertPersistenceMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AlertRepository implements IAlertRepository {
     private final AlertJpaRepository jpaRepository;
-    private final AlertPersistanceMapper mapper;
+    private final AlertPersistenceMapper mapper;
 
     @Override
     public Alert save(Alert alert) {

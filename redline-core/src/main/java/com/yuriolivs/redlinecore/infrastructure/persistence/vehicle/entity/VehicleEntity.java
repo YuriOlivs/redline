@@ -1,33 +1,31 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.alert.entity;
+package com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.entity;
 
-import com.yuriolivs.redlinecore.domain.alert.AlertType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Builder
-@Table(name = "alerts")
+@Table(name = "vehicles")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class AlertEntity {
+public class VehicleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
-    private LocalDateTime dateTime;
+    private String brand;
 
     @Column(nullable = false)
-    private AlertType type;
+    private String model;
 
     @Column(nullable = false)
-    private UUID advertisementId;
+    private String version;
 
     @Column(nullable = false)
-    private UUID userId;
+    private Integer year;
 }

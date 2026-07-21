@@ -1,6 +1,6 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.user.repository;
+package com.yuriolivs.redlinecore.infrastructure.persistence.user.repository;
 
-import com.yuriolivs.redlinecore.infrastructure.persistance.user.entity.UserEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,11 +1,11 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.alert.mapper;
+package com.yuriolivs.redlinecore.infrastructure.persistence.alert.mapper;
 
 import com.yuriolivs.redlinecore.domain.alert.Alert;
-import com.yuriolivs.redlinecore.infrastructure.persistance.alert.entity.AlertEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.alert.entity.AlertEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AlertPersistanceMapper {
+public class AlertPersistenceMapper {
     public AlertEntity toEntity(Alert alert) {
         return AlertEntity
                 .builder()

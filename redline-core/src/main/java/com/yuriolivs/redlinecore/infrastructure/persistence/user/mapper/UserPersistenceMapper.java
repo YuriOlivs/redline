@@ -1,11 +1,11 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.user.mapper;
+package com.yuriolivs.redlinecore.infrastructure.persistence.user.mapper;
 
 import com.yuriolivs.redlinecore.domain.user.User;
-import com.yuriolivs.redlinecore.infrastructure.persistance.user.entity.UserEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.user.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserPersistanceMapper {
+public class UserPersistenceMapper {
     public UserEntity toEntity(User user) {
         return UserEntity
                 .builder()

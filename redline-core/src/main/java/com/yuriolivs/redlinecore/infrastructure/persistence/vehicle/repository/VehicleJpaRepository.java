@@ -1,7 +1,7 @@
-package com.yuriolivs.redlinecore.infrastructure.persistance.vehicle.repository;
+package com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.repository;
 
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
-import com.yuriolivs.redlinecore.infrastructure.persistance.vehicle.entity.VehicleEntity;
+import com.yuriolivs.redlinecore.infrastructure.persistence.vehicle.entity.VehicleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
