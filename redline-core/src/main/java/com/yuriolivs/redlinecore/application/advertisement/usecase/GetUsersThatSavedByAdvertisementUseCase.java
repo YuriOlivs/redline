@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-public class GetUsersThatSavedByAdvertisement {
+public class GetUsersThatSavedByAdvertisementUseCase {
     private final ISavedAdvertisementRepository savedAdvertisementRepository;
     private final IAdvertisementRepository advertisementRepository;
 
