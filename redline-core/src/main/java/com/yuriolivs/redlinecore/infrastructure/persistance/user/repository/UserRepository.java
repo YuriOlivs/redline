@@ -5,10 +5,12 @@ import com.yuriolivs.redlinecore.domain.user.User;
 import com.yuriolivs.redlinecore.infrastructure.persistance.user.entity.UserEntity;
 import com.yuriolivs.redlinecore.infrastructure.persistance.user.mapper.UserPersistanceMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 @RequiredArgsConstructor
 public class UserRepository implements IUserRepository {
     private final UserJpaRepository jpaRepository;
