@@ -1,7 +1,7 @@
 package com.yuriolivs.redlinecore.domain.service;
 
-import com.yuriolivs.redlinecore.domain.event.IDomainEvent;
+import com.yuriolivs.redlinecore.domain.event.DomainEvent;
 
 public interface IEventPublisher {
-    void publish(IDomainEvent event);
+    void publish(DomainEvent event);
 }

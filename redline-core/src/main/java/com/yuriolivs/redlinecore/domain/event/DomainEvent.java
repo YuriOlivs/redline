@@ -2,10 +2,10 @@ package com.yuriolivs.redlinecore.domain.event;
 
 import java.time.LocalDateTime;
 
-public abstract class IDomainEvent {
+public abstract class DomainEvent {
     private final LocalDateTime triggeredAt;
 
-    protected IDomainEvent() {
+    protected DomainEvent() {
         this.triggeredAt = LocalDateTime.now();
     }
 

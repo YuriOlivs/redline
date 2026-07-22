@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
 @Builder
 @ToString
-public class AdAlertTriggeredEvent extends IDomainEvent{
+public class AdAlertTriggeredEvent extends DomainEvent {
     private final UUID advertisement;
     private final AlertType type;
     private final UUID targetUser;

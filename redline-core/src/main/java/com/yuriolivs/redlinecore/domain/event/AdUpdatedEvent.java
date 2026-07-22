@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @ToString
 @Builder
-public class AdUpdatedEvent extends IDomainEvent{
+public class AdUpdatedEvent extends DomainEvent {
     private final Advertisement ad;
     private final AlertType type;
 

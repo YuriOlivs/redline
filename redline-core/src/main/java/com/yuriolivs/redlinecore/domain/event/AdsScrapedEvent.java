@@ -6,12 +6,11 @@ import lombok.Getter;
 import lombok.ToString;
 
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Builder
 @ToString
-public class AdsScrapedEvent extends IDomainEvent {
+public class AdsScrapedEvent extends DomainEvent {
 
     private final List<Advertisement> advertisements;
 
