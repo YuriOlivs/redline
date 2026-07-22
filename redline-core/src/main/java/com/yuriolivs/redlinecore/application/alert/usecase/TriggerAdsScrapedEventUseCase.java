@@ -5,6 +5,7 @@ import com.yuriolivs.redlinecore.domain.event.AdsScrapedEvent;
 import com.yuriolivs.redlinecore.domain.service.IEventPublisher;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -14,7 +15,9 @@ public class TriggerAdsScrapedEventUseCase {
     public void execute(
             List<Advertisement> scrapedAds
     ) {
-        AdsScrapedEvent event = new AdsScrapedEvent(scrapedAds);
+        AdsScrapedEvent event = new AdsScrapedEvent(
+                scrapedAds
+        );
         eventPublisher.publish(event);
     }
 }

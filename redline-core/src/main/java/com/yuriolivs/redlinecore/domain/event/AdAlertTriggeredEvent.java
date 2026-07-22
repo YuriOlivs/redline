@@ -1,22 +1,33 @@
 package com.yuriolivs.redlinecore.domain.event;
 
-import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.alert.AlertType;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record AdAlertTriggeredEvent(
-        UUID advertisement,
-        AlertType type,
-        UUID targetUser,
-        LocalDateTime triggeredAt
-) {
-    public AdAlertTriggeredEvent {
+@Getter
+@Builder
+@ToString
+public class AdAlertTriggeredEvent extends IDomainEvent{
+    private final UUID advertisement;
+    private final AlertType type;
+    private final UUID targetUser;
+
+    public AdAlertTriggeredEvent(
+            UUID advertisement,
+            AlertType type,
+            UUID targetUser
+    ) {
         validateAdvertisement(advertisement);
         validateTargetUser(targetUser);
         validateType(type);
 
+        this.advertisement = advertisement;
+        this.type = type;
+        this.targetUser = targetUser;
     }
 
     private void validateAdvertisement(UUID ad) {

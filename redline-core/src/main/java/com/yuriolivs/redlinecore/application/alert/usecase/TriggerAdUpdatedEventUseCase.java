@@ -6,21 +6,17 @@ import com.yuriolivs.redlinecore.domain.event.AdUpdatedEvent;
 import com.yuriolivs.redlinecore.domain.service.IEventPublisher;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @RequiredArgsConstructor
 public class TriggerAdUpdatedEventUseCase {
     private final IEventPublisher eventPublisher;
 
     public void execute(
             Advertisement ad,
-            AlertType type,
-            LocalDateTime triggeredAt
+            AlertType type
     ) {
         AdUpdatedEvent event = new AdUpdatedEvent(
                 ad,
-                type,
-                triggeredAt
+                type
         );
 
         eventPublisher.publish(event);

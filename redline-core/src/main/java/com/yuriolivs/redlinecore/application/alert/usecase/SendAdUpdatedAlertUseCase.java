@@ -5,7 +5,6 @@ import com.yuriolivs.redlinecore.domain.event.AdAlertTriggeredEvent;
 import com.yuriolivs.redlinecore.domain.service.IEventPublisher;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -19,8 +18,7 @@ public class SendAdUpdatedAlertUseCase {
         AdAlertTriggeredEvent event = new AdAlertTriggeredEvent(
                 alert.getAdvertisementId(),
                 alert.getType(),
-                targetUser,
-                LocalDateTime.now()
+                targetUser
         );
 
         eventPublisher.publish(event);

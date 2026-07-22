@@ -2,29 +2,36 @@ package com.yuriolivs.redlinecore.domain.event;
 
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.alert.AlertType;
+import lombok.*;
 
-import java.time.LocalDateTime;
+@Getter
+@ToString
+@Builder
+public class AdUpdatedEvent extends IDomainEvent{
+    private final Advertisement ad;
+    private final AlertType type;
 
-public record AdUpdatedEvent(
-        Advertisement ad,
-        AlertType type,
-        LocalDateTime triggeredAt
-) {
-    public AdUpdatedEvent {
+    public AdUpdatedEvent(Advertisement ad, AlertType type) {
         validateAdvertisement(ad);
         validateType(type);
+
+        this.ad = ad;
+        this.type = type;
     }
 
     private void validateAdvertisement(Advertisement ad) {
-        if (ad == null)
+        if (ad == null) {
             throw new IllegalArgumentException("Advertisement can't be null");
+        }
 
-        if (!ad.isActive())
+        if (!ad.isActive()) {
             throw new IllegalArgumentException("Advertisement can't be inactive");
+        }
     }
 
     private void validateType(AlertType type) {
-        if (type == null)
+        if (type == null) {
             throw new IllegalArgumentException("Alert type can't be null");
+        }
     }
 }
