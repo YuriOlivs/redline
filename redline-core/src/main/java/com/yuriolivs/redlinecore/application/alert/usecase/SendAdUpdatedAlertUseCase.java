@@ -17,7 +17,7 @@ public class SendAdUpdatedAlertUseCase {
             UUID targetUser
     ) {
         AdAlertTriggeredEvent event = new AdAlertTriggeredEvent(
-                alert.getAdvertisement(),
+                alert.getAdvertisementId(),
                 alert.getType(),
                 targetUser,
                 LocalDateTime.now()

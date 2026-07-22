@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record AdAlertTriggeredEvent(
-        Advertisement advertisement,
+        UUID advertisement,
         AlertType type,
         UUID targetUser,
         LocalDateTime triggeredAt
@@ -19,12 +19,9 @@ public record AdAlertTriggeredEvent(
 
     }
 
-    private void validateAdvertisement(Advertisement ad) {
+    private void validateAdvertisement(UUID ad) {
         if (ad == null)
             throw new IllegalArgumentException("Advertisement can't be null");
-
-        if (!ad.isActive())
-            throw new IllegalArgumentException("Advertisement can't be inactive");
     }
 
     private void validateType(AlertType type) {

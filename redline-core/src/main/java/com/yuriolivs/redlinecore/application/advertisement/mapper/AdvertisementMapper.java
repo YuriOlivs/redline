@@ -12,10 +12,8 @@ public class AdvertisementMapper {
     ) {
         Vehicle vehicle = new Vehicle(
                 extractBrand(dto.brandModel()),
-                String.join(" ",
-                        extractModel(dto.brandModel()),
-                        dto.version()
-                ),
+                extractModel(dto.brandModel()),
+                dto.version(),
                 dto.year()
         );
 
