@@ -47,12 +47,15 @@ public class AdvertisementRepository implements IAdvertisementRepository, ISaved
 
     @Override
     public Optional<Advertisement> findByUrl(String url) {
-        return Optional.empty();
+        return adJpaRepository.findByUrl(url).map(mapper::toDomain);
     }
 
     @Override
-    public List<Advertisement> findUnsavedOlderThan(LocalDate date) {
-        return List.of();
+    public List<Advertisement> findUnsavedOlderThan(LocalDate threshold) {
+        return adJpaRepository.findUnsavedOlderThen(threshold)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 
     @Override

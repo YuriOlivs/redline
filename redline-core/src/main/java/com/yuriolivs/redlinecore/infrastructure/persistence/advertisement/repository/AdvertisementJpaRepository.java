@@ -13,7 +13,16 @@ import java.util.UUID;
 
 public interface AdvertisementJpaRepository extends JpaRepository<AdvertisementEntity, UUID> {
     Optional<AdvertisementEntity> findByUrl(String url);
-    List<AdvertisementEntity> findUnsavedOlderThen(LocalDate threshold);
+
+    @Query("""
+        SELECT a FROM AdvertisementEntity a
+        WHERE a.lastUpdate < :threshold
+        AND a.id NOT IN (
+            SELECT sa.advertisement.id FROM SavedAdvertisementEntity sa
+        )
+    """)
+    List<AdvertisementEntity> findUnsavedOlderThen(@Param("threshold") LocalDate threshold);
+
     @Query("""
         SELECT DISTINCT a
         FROM AdvertisementEntity a
