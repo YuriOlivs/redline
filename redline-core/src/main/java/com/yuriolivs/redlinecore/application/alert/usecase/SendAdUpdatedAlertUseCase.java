@@ -12,13 +12,12 @@ public class SendAdUpdatedAlertUseCase {
     private final IEventPublisher eventPublisher;
 
     public void execute(
-            Alert alert,
-            UUID targetUser
+            Alert alert
     ) {
         AdAlertTriggeredEvent event = new AdAlertTriggeredEvent(
                 alert.getAdvertisementId(),
                 alert.getType(),
-                targetUser
+                alert.getUserId()
         );
 
         eventPublisher.publish(event);
