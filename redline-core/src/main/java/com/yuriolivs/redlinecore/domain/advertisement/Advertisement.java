@@ -149,8 +149,13 @@ public class Advertisement {
         return priceHistory.get(priceHistory.size() - 1).getPrice();
     }
 
-    public boolean isOutdated() {
-        return lastUpdate.isBefore(LocalDate.now().minusWeeks(1));
+    public String getTitle() {
+        return "%s %s %s %d".formatted(
+                this.vehicle.getBrand(),
+                this.vehicle.getModel(),
+                this.vehicle.getVersion(),
+                this.vehicle.getYear()
+        );
     }
 
     public void registerPriceChange(Double price, LocalDate changedDate) {
