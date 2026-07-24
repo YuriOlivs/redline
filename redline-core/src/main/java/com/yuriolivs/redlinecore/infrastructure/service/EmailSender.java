@@ -2,7 +2,7 @@ package com.yuriolivs.redlinecore.infrastructure.service;
 
 import com.yuriolivs.redlinecore.domain.service.IEmailSender;
 import com.yuriolivs.redlinecore.domain.service.Email;
-import com.yuriolivs.redlinecore.infrastructure.properties.EmailFromProperties;
+import com.yuriolivs.redlinecore.infrastructure.service.properties.EmailFromProperties;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

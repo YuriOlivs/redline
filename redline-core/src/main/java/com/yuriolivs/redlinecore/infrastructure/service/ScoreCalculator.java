@@ -3,10 +3,12 @@ package com.yuriolivs.redlinecore.infrastructure.service;
 import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.service.IScoreCalculator;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+@Component
 public class ScoreCalculator implements IScoreCalculator {
     @Override
     public ScoreRecord calculate(Advertisement ad, double fipeValue, LocalDate referenceDate) {

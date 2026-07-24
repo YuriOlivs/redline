@@ -52,8 +52,7 @@ public class UpdateAdUseCase {
 
         triggerAdUpdatedEventUseCase.execute(
                 ad,
-                alertType,
-                LocalDateTime.now()
+                alertType
         );
 
         return advertisementRepository.save(ad);

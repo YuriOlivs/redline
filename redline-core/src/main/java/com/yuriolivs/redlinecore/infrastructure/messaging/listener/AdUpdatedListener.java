@@ -1,6 +1,6 @@
 package com.yuriolivs.redlinecore.infrastructure.messaging.listener;
 
-import com.yuriolivs.redlinecore.application.advertisement.usecase.GetUsersThatSavedByAdvertisementUseCase;
+import com.yuriolivs.redlinecore.application.advertisement.usecase.GetUsersThatSavedAdUseCase;
 import com.yuriolivs.redlinecore.application.alert.usecase.SendAdUpdatedAlertUseCase;
 import com.yuriolivs.redlinecore.domain.alert.Alert;
 import com.yuriolivs.redlinecore.domain.event.AdUpdatedEvent;
@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class AdUpdatedListener {
-    private final GetUsersThatSavedByAdvertisementUseCase getUsersUseCase;
+    private final GetUsersThatSavedAdUseCase getUsersUseCase;
     private final SendAdUpdatedAlertUseCase sendAlertUseCase;
 
     @RabbitListener(queues = RabbitMqConfig.AD_UPDATED_QUEUE)

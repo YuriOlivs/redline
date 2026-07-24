@@ -11,7 +11,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DeleteOutdatedAdsUseCase {
     private final IAdvertisementRepository advertisementRepository;
-    private final ISavedAdvertisementRepository savedAdRepository;
     private final Integer DAYS_THRESHOLD = 4;
 
     public void execute() {

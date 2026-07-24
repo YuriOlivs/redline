@@ -1,4 +1,4 @@
-package com.yuriolivs.redlinecore.infrastructure.properties;
+package com.yuriolivs.redlinecore.infrastructure.service.properties;
 
 import lombok.Getter;
 import lombok.Setter;
