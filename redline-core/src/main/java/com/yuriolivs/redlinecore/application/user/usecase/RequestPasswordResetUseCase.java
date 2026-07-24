@@ -1,6 +1,7 @@
 package com.yuriolivs.redlinecore.application.user.usecase;
 
 import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.service.Email;
 import com.yuriolivs.redlinecore.domain.service.ICacheService;
 import com.yuriolivs.redlinecore.domain.service.ICodeGenerator;
 import com.yuriolivs.redlinecore.domain.service.IEmailSender;
@@ -16,7 +17,7 @@ public class RequestPasswordResetUseCase {
     private final ICodeGenerator codeGenerator;
     private final ICacheService cacheService;
 
-    public String execute(String email) {
+    public String execute(String email) throws Exception {
         Optional<User> userFound = userRepository.findByEmail(email);
 
         if (userFound.isEmpty())
@@ -28,7 +29,7 @@ public class RequestPasswordResetUseCase {
 
         String savedCode = cacheService.put(code, user.getId().toString(), duration);
 
-        emailSender.send(user.getEmail(), "Forgot Password", savedCode);
+        emailSender.send(new Email(user.getEmail(), "Forgot Password", savedCode));
 
         return savedCode;
     }

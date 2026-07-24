@@ -4,6 +4,7 @@ import com.yuriolivs.redlinecore.domain.advertisement.Advertisement;
 import com.yuriolivs.redlinecore.domain.advertisement.PriceRecord;
 import com.yuriolivs.redlinecore.domain.advertisement.ScoreRecord;
 import com.yuriolivs.redlinecore.domain.vehicle.Vehicle;
+import com.yuriolivs.redlinecore.infrastructure.service.ScoreCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,12 +15,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ScoreCalculatorTest {
-    private IScoreCalculator scoreCalculator;
+    private ScoreCalculator scoreCalculator;
     private Advertisement advertisement;
 
     @BeforeEach
     void setUp() {
-        scoreCalculator = new IScoreCalculator();
+        scoreCalculator = new ScoreCalculator();
 
         advertisement = new Advertisement(
                 "https://webmotors.com.br/anuncio",

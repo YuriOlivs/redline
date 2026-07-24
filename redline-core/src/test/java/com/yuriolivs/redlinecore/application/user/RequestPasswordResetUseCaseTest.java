@@ -2,6 +2,7 @@ package com.yuriolivs.redlinecore.application.user;
 
 import com.yuriolivs.redlinecore.application.user.usecase.RequestPasswordResetUseCase;
 import com.yuriolivs.redlinecore.domain.repository.IUserRepository;
+import com.yuriolivs.redlinecore.domain.service.Email;
 import com.yuriolivs.redlinecore.domain.service.ICacheService;
 import com.yuriolivs.redlinecore.domain.service.ICodeGenerator;
 import com.yuriolivs.redlinecore.domain.service.IEmailSender;
@@ -33,7 +34,7 @@ public class RequestPasswordResetUseCaseTest {
     }
 
     @Test
-    void assertRequestsPasswordResetSuccessfully() {
+    void assertRequestsPasswordResetSuccessfully() throws Exception {
         String code = "123-456";
         String email = "yuri@email.com";
 
@@ -64,14 +65,14 @@ public class RequestPasswordResetUseCaseTest {
     }
 
     @Test
-    void assertDoesNothingWhenUserDoesNotExist() {
+    void assertDoesNothingWhenUserDoesNotExist() throws Exception {
         Mockito.when(userRepository.findByEmail("inexistente@email.com"))
                 .thenReturn(Optional.empty());
 
         assertDoesNotThrow(() -> useCase.execute("inexistente@email.com"));
 
         Mockito.verify(codeGenerator, Mockito.never()).generate();
-        Mockito.verify(emailSender, Mockito.never()).send(Mockito.any(), Mockito.any(), Mockito.any());
+        Mockito.verify(emailSender, Mockito.never()).send(new Email(Mockito.any(), Mockito.any(), Mockito.any()));
         Mockito.verify(cacheService, Mockito.never()).put(Mockito.any(), Mockito.any(), Mockito.any());
     }
 }

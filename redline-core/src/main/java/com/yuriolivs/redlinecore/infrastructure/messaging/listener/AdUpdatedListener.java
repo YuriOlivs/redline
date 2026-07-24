@@ -5,6 +5,7 @@ import com.yuriolivs.redlinecore.application.alert.usecase.SendAdUpdatedAlertUse
 import com.yuriolivs.redlinecore.domain.alert.Alert;
 import com.yuriolivs.redlinecore.domain.event.AdUpdatedEvent;
 import com.yuriolivs.redlinecore.domain.user.User;
+import com.yuriolivs.redlinecore.infrastructure.messaging.config.RabbitMqConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -19,7 +20,7 @@ public class AdUpdatedListener {
     private final GetUsersThatSavedByAdvertisementUseCase getUsersUseCase;
     private final SendAdUpdatedAlertUseCase sendAlertUseCase;
 
-    @RabbitListener
+    @RabbitListener(queues = RabbitMqConfig.AD_UPDATED_QUEUE)
     public void consume(AdUpdatedEvent event) {
         List<Alert> alertsToBeSent = getUsersUseCase.execute(event.getAd()
                 .getUrl())
