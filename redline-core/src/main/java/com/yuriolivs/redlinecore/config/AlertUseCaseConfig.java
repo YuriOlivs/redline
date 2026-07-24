@@ -2,7 +2,9 @@ package com.yuriolivs.redlinecore.config;
 
 import com.yuriolivs.redlinecore.application.alert.usecase.*;
 import com.yuriolivs.redlinecore.infrastructure.messaging.producer.EventPublisher;
+import com.yuriolivs.redlinecore.infrastructure.persistence.alert.repository.AlertPreferencesRepository;
 import com.yuriolivs.redlinecore.infrastructure.persistence.alert.repository.AlertRepository;
+import com.yuriolivs.redlinecore.infrastructure.persistence.user.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -36,12 +38,32 @@ public class AlertUseCaseConfig {
         return new TriggerAdUpdatedEventUseCase(eventPublisher);
     }
 
-    //@Bean
-    //public UpdateAlertPreferencesUseCase updateAlertPreferencesUseCase() {}
+    @Bean
+    public UpdateAlertPreferencesUseCase updateAlertPreferencesUseCase(
+            AlertPreferencesRepository alertPreferencesRepository,
+            UserRepository userRepository
+    ) {
+        return new UpdateAlertPreferencesUseCase(
+                alertPreferencesRepository,
+                userRepository
+        );
+    }
 
-    //@Bean
-    //public CreateAlertPreferencesUseCase createAlertPreferencesUseCase() {}
+    @Bean
+    public CreateAlertPreferencesUseCase createAlertPreferencesUseCase(
+            AlertPreferencesRepository alertPreferencesRepository
+    ) {
+        return new CreateAlertPreferencesUseCase(alertPreferencesRepository);
+    }
 
-    //@Bean
-    //public ResetAlertPreferencesToDefaultUseCase resetAlertPreferencesToDefaultUseCase() {}
+    @Bean
+    public ResetAlertPreferencesToDefaultUseCase resetAlertPreferencesToDefaultUseCase(
+            UserRepository userRepository,
+            AlertPreferencesRepository alertPreferencesRepository
+    ) {
+        return new ResetAlertPreferencesToDefaultUseCase(
+                userRepository,
+                alertPreferencesRepository
+        );
+    }
 }
