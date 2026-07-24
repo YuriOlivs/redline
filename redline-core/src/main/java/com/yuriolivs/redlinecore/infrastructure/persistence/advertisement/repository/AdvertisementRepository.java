@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor
@@ -29,6 +30,11 @@ public class AdvertisementRepository implements IAdvertisementRepository, ISaved
     private final AdvertisementPersistenceMapper mapper;
     private final SavedAdvertisementPersistenceMapper savedAdMapper;
     private final UserPersistenceMapper userMapper;
+
+    @Override
+    public Optional<Advertisement> findById(UUID id) {
+        return adJpaRepository.findById(id).map(mapper::toDomain);
+    }
 
     @Override
     public Advertisement save(Advertisement ad) {
